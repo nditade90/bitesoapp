@@ -22,11 +22,7 @@
             </li>
 
             <li class="nav-item">
-                <a href="#" class="nav-link"><i class="fas fa-search"></i>Chercher</a>
-            </li>
-
-            <li class="nav-item">
-                <a href="#" class="nav-link"><i class="fas fa-search"></i>Chercher</a>
+                <a href="<?=base_url().'search/Search'?>" class="nav-link"><i class="fas fa-search"></i>Chercher</a>
             </li>
 
 
