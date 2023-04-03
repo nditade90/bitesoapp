@@ -116,20 +116,21 @@
             <span class="badge badge-danger navbar-badge"></span>            
           </a>
           <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
-            <a href="#" class="dropdown-item">
-              <!-- Message Start -->
+             
+            <a href="#" class="dropdown-item"> 
               <div class="media">
                 <img src="<?=base_url()?>assets/img/user1-128x128.jpg" class="img-size-50 mr-3 img-circle">
-                <div class="media-body">
-                  <h3 class="dropdown-item-title">
-                    <span class="float-left text-sm text-danger"><?=$this->auth_library->get()->usr_lname?></span>
-                    <span class="float-right "><a class="text-sm text-danger" href="<?=base_url('Authentification/logout')?>"?><i class="fas fa-close"></i>Logout</a></span>
-                  </h3>
-                </div>
               </div>
               <!-- Message End -->
             </a>
             <div class="dropdown-divider"></div>
+
+            <div class="dropdown-item">
+                  <h3 class="row">
+                      <a href="#" class='col-md-8 text-md'><?=$this->auth_library->get()->usr_lname.' '.$this->auth_library->get()->usr_fname?></a>
+                      <a class="col-md-4 text-md text-danger" href="<?=base_url('Authentification/logout')?>"?><i class="fas fa-close"></i>Logout</a>
+                  </h3>
+              </div>
 
           </div>
         </li>      
