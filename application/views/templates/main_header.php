@@ -13,15 +13,16 @@
       <div class="collapse navbar-collapse order-3" id="navbarCollapse">
         <!-- Left navbar links -->
         <ul class="navbar-nav">
-            <li class="nav-item dropdown">
-              <a href="<?=base_url().'gr/Fiche_identification'?>" class="dropdown-item"><i class="fas fa-file"></i><?=$this->lang->line('app_menu_renseignement')?></a> 
+           
+            <li class="nav-item <?php if($this->router->class =='Fiche_identification') echo "active";?>">
+                <a href="<?=base_url().'gr/Fiche_identification'?>" class="nav-link"><i class="fas fa-file"></i><?=$this->lang->line('app_menu_renseignement')?></a>
             </li>
 
             <li class="nav-item">
                 <a href="#" class="nav-link"><i class="fas fa-edit"></i>Modifications</a>
             </li>
 
-            <li class="nav-item">
+            <li class="nav-item <?php if($this->router->class =='Search') echo "active";?>">
                 <a href="<?=base_url().'search/Search'?>" class="nav-link"><i class="fas fa-search"></i>Chercher</a>
             </li>
 
