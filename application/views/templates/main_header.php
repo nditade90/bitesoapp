@@ -122,7 +122,7 @@
                 <img src="<?=base_url()?>assets/img/user1-128x128.jpg" class="img-size-50 mr-3 img-circle">
                 <div class="media-body">
                   <h3 class="dropdown-item-title">
-                    <?=$this->auth_library->get()->usr_fname." ".$this->auth_library->get()->usr_lname?>
+                    <?=$this->auth_library->get()->usr_lname?>
                     <span class="float-right text-sm text-danger"><a href="<?=base_url('Authentification/logout')?>"?><i class="fas fa-close"></i>Logout</a></span>
                   </h3>
                 </div>
