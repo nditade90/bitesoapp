@@ -8,7 +8,12 @@
 
             <div class="card-body">
 
+               <?php 
                
+            //    echo "<pre>";
+            //    print_r($this->auth_library->get());
+            //    echo "</pre>";
+               ?>
                 <div class="col-md-12">
                     <?=form_open('search/Search/index')?>            
                         <div class="row">
