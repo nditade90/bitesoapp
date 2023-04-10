@@ -3,7 +3,7 @@
     <section class="content">
         <div class="card card-info card-outline">
             <div class="card-header">
-                <h3 class="card-title text-bold"></h3>
+                <h3 class="card-title text-bold">Ajouter un état civil</h3>
 
                 <span class="float-right">
                     <?php include_once "menu_etat_civil.php";?>
@@ -14,7 +14,6 @@
 		<div class="card-body">
 		<div class="row">
 		<div class="col-md-4">
-		<h3 class="card-title text-bold">Ajouter un état civil</h3><br>
 		<?=form_open('datas/Etat_civil/index')?>
 		
 
@@ -42,9 +41,10 @@
 				<tr>
 					<td><?=$data->id_etat_civil?></td>
 					<td><?=$data->nom_etat_civil?></td>
-					<td><a href='<?=base_url('datas/Etat_civil/view/'.$data->id_etat_civil);?>'><span class="fa fa-eye"></span></a>
-					<a href='<?=base_url('datas/Etat_civil/edit/0/'.$data->id_etat_civil);?>'><span class="fa fa-edit"></span></a>
-					<a href='<?=base_url('datas/Etat_civil/delete/'.$data->id_etat_civil);?>' class='text-danger'><span class="fa fa-trash"></span></a></td>
+					<td>
+						<a href='<?=base_url('datas/Etat_civil/edit/0/'.$data->id_etat_civil);?>'><span class="fa fa-edit"></span></a>
+						<a href='<?=base_url('datas/Etat_civil/delete/'.$data->id_etat_civil);?>' class='text-danger'><span class="fa fa-trash"></span></a>
+					</td>
 				</tr>
 			<?php endforeach;?>
 		</tbody>

@@ -2,7 +2,7 @@
 		<section class="content">
 			<div class="card card-info card-outline">
 				<div class="card-header">
-					<h3 class="card-title text-bold"></h3>
+					<h3 class="card-title text-bold">Editer un groupe sanguin: <?=$data->nom_gpe_sanguin?></h3>
 	
 					<span class="float-right">
 						<?php include_once "menu_groupes_sanguin.php";?>
@@ -13,7 +13,6 @@
 			<div class="card-body">
 			<div class="row">
 			<div class="col-md-4">
-			<h3 class="card-title text-bold">Editer un groupe sanguin: <?=$data->nom_gpe_sanguin?></h3><br>
 		<?=form_open('gr/Groupes_sanguin/edit/',NULL, ['id_gpe_sanguin'=>$data->id_gpe_sanguin])?>
 
 			<div class='form-group'><label>Nom du groupe sanguin</label><?php echo form_error('nom_gpe_sanguin'); ?>
@@ -40,9 +39,10 @@
 				<tr>
 					<td><?=$data->id_gpe_sanguin?></td>
 					<td><?=$data->nom_gpe_sanguin?></td>
-					<td><a href='<?=base_url('gr/Groupes_sanguin/view/'.$data->id_gpe_sanguin);?>'><span class="fa fa-eye"></span></a>
-					<a href='<?=base_url('gr/Groupes_sanguin/edit/0/'.$data->id_gpe_sanguin);?>'><span class="fa fa-edit"></span></a>
-					<a href='<?=base_url('gr/Groupes_sanguin/delete/'.$data->id_gpe_sanguin);?>' class='text-danger'><span class="fa fa-trash"></span></a></td>
+					<td>
+						<a href='<?=base_url('gr/Groupes_sanguin/edit/0/'.$data->id_gpe_sanguin);?>'><span class="fa fa-edit"></span></a>
+						<a href='<?=base_url('gr/Groupes_sanguin/delete/'.$data->id_gpe_sanguin);?>' class='text-danger'><span class="fa fa-trash"></span></a>
+					</td>
 				</tr>
 			<?php endforeach;?>
 		</tbody>

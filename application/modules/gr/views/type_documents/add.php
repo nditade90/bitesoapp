@@ -3,7 +3,7 @@
     <section class="content">
         <div class="card card-info card-outline">
             <div class="card-header">
-                <h3 class="card-title text-bold"></h3>
+                <h3 class="card-title text-bold">Ajouter d'un type document</h3>
 
                 <span class="float-right">
                     <?php include_once "menu_type_documents.php";?>
@@ -14,7 +14,6 @@
 		<div class="card-body">
 		<div class="row">
 		<div class="col-md-4">
-		<h3 class="card-title text-bold">Ajouter d'un type_documents</h3><br>
 		<?=form_open('gr/Type_documents/index')?>
 		
 
@@ -44,7 +43,8 @@
 			<th>#</th>
 			<th>Code</th>
 			<th>Nom du type</th>
-			<th>Description</th><th>Options</th>
+			<th>Description</th>
+			<th>Options</th>
 		</thead>
 		<tbody>
 			<?php foreach ( $datas as $data ): ?>
@@ -53,9 +53,10 @@
 					<td><?=$data->code_type_document?></td>
 					<td><?=$data->nom_type_document?></td>
 					<td><?=$data->description?></td>
-					<td><a href='<?=base_url('gr/Type_documents/view/'.$data->id_type_document);?>'><span class="fa fa-eye"></span></a>
-					<a href='<?=base_url('gr/Type_documents/edit/0/'.$data->id_type_document);?>'><span class="fa fa-edit"></span></a>
-					<a href='<?=base_url('gr/Type_documents/delete/'.$data->id_type_document);?>' class='text-danger'><span class="fa fa-trash"></span></a></td>
+					<td>
+						<a href='<?=base_url('gr/Type_documents/edit/0/'.$data->id_type_document);?>'><span class="fa fa-edit"></span></a>
+						<a href='<?=base_url('gr/Type_documents/delete/'.$data->id_type_document);?>' class='text-danger'><span class="fa fa-trash"></span></a>
+					</td>
 				</tr>
 			<?php endforeach;?>
 		</tbody>

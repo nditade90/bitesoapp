@@ -2,7 +2,7 @@
 		<section class="content">
 			<div class="card card-info card-outline">
 				<div class="card-header">
-					<h3 class="card-title text-bold"></h3>
+					<h3 class="card-title text-bold">Editer une Sexe: <?=$data->nom_sexe?></h3>
 	
 					<span class="float-right">
 						<?php include_once "menu_sexes.php";?>
@@ -13,7 +13,6 @@
 			<div class="card-body">
 			<div class="row">
 			<div class="col-md-4">
-			<h3 class="card-title text-bold">Editer une Sexe: <?=$data->nom_sexe?></h3><br>
 		<?=form_open('datas/Sexes/edit/', NULL, ['id_sexe'=>$data->id_sexe])?>
 		    <div class='form-group'><label>code</label>
 			<?=form_input('code_sexe',set_value('code_sexe', $data->code_sexe),"class='form-control' ,placeholder='Code '")?>
@@ -45,9 +44,10 @@
 					<td><?=$data->id_sexe?></td>
 					<td><?=$data->code_sexe?></td>
 					<td><?=$data->nom_sexe?></td>
-					<td><a href='<?=base_url('datas/Sexes/view/'.$data->id_sexe);?>'><span class="fa fa-eye"></span></a>
-					<a href='<?=base_url('datas/Sexes/edit/0/'.$data->id_sexe);?>'><span class="fa fa-edit"></span></a>
-					<a href='<?=base_url('datas/Sexes/delete/'.$data->id_sexe);?>' class='text-danger'><span class="fa fa-trash"></span></a></td>
+					<td>
+						<a href='<?=base_url('datas/Sexes/edit/0/'.$data->id_sexe);?>'><span class="fa fa-edit"></span></a>
+						<a href='<?=base_url('datas/Sexes/delete/'.$data->id_sexe);?>' class='text-danger'><span class="fa fa-trash"></span></a>
+					</td>
 				</tr>
 			<?php endforeach;?>
 		</tbody>

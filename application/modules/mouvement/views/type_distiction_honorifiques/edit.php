@@ -2,7 +2,7 @@
 		<section class="content">
 			<div class="card card-info card-outline">
 				<div class="card-header">
-					<h3 class="card-title text-bold"></h3>
+					<h3 class="card-title text-bold">Modifier un type distiction de honorifique </h3>
 	
 					<span class="float-right">
 						<?php include_once "menu_type_distiction_honorifiques.php";?>
@@ -13,7 +13,6 @@
 			<div class="card-body">
 			<div class="row">
 			<div class="col-md-4">
-			<h3 class="card-title text-bold">Modifier un type distiction de honorifique </h3><br>
 		<?=form_open('mouvement/Type_distiction_honorifiques/edit/',NULL, ['id_type_distiction'=>$data->id_type_distiction])?>
 
 			<div class='form-group'><label>Type de distiction</label><?php echo form_error('type_distiction'); ?>
@@ -39,9 +38,10 @@
 				<tr>
 					<td><?=$data->id_type_distiction?></td>
 					<td><?=$data->type_distiction?></td>
-					<td><a href='<?=base_url('mouvement/Type_distiction_honorifiques/view/'.$data->id_type_distiction);?>'><span class="fa fa-eye"></span></a>
-					<a href='<?=base_url('mouvement/Type_distiction_honorifiques/edit/0/'.$data->id_type_distiction);?>'><span class="fa fa-edit"></span></a>
-					<a href='<?=base_url('mouvement/Type_distiction_honorifiques/delete/'.$data->id_type_distiction);?>' class='text-danger'><span class="fa fa-trash"></span></a></td>
+					<td>
+						<a href='<?=base_url('mouvement/Type_distiction_honorifiques/edit/0/'.$data->id_type_distiction);?>'><span class="fa fa-edit"></span></a>
+						<a href='<?=base_url('mouvement/Type_distiction_honorifiques/delete/'.$data->id_type_distiction);?>' class='text-danger'><span class="fa fa-trash"></span></a>
+					</td>
 				</tr>
 			<?php endforeach;?>
 		</tbody>

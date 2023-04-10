@@ -2,7 +2,7 @@
 		<section class="content">
 			<div class="card card-info card-outline">
 				<div class="card-header">
-					<h3 class="card-title text-bold"></h3>
+					<h3 class="card-title text-bold">Editer d'un type peine: <?=$data->nom_type_peine?></h3>
 	
 					<span class="float-right">
 						<?php include_once "menu_types_peine.php";?>
@@ -13,7 +13,6 @@
 			<div class="card-body">
 			<div class="row">
 			<div class="col-md-4">
-			<h3 class="card-title text-bold">Editer d'un type peine: <?=$data->nom_type_peine?></h3><br>
 		<?=form_open('mouvement/Types_peine/edit/',NULL, ['id_type_peine'=>$data->id_type_peine])?>
 
 			<div class='form-group'><label>Code</label><?php echo form_error('code_type_peine'); ?>
@@ -46,9 +45,10 @@
 					<td><?=$data->id_type_peine?></td>
 					<td><?=$data->code_type_peine?></td>
 					<td><?=$data->nom_type_peine?></td>
-					<td><a href='<?=base_url('mouvement/Types_peine/view/'.$data->id_type_peine);?>'><span class="fa fa-eye"></span></a>
-					<a href='<?=base_url('mouvement/Types_peine/edit/0/'.$data->id_type_peine);?>'><span class="fa fa-edit"></span></a>
-					<a href='<?=base_url('mouvement/Types_peine/delete/'.$data->id_type_peine);?>' class='text-danger'><span class="fa fa-trash"></span></a></td>
+					<td>
+						<a href='<?=base_url('mouvement/Types_peine/edit/0/'.$data->id_type_peine);?>'><span class="fa fa-edit"></span></a>
+						<a href='<?=base_url('mouvement/Types_peine/delete/'.$data->id_type_peine);?>' class='text-danger'><span class="fa fa-trash"></span></a>
+					</td>
 				</tr>
 			<?php endforeach;?>
 		</tbody>

@@ -49,7 +49,7 @@
                       <ul aria-labelledby="dropdownSubMenu2" class="dropdown-menu border-0 shadow">
                         <li><a href="<?=base_url().'datas/Religions'?>" class="dropdown-item"><?=$this->lang->line('app_menu_renseignement_rl')?></a></li>             
                         <li><a href="<?=base_url().'gr/Corps_origine'?>" class="dropdown-item"><?=$this->lang->line('app_menu_renseignement_crp')?></a></li>
-                        <li><a href="<?=base_url().'gr/Sexes'?>" class="dropdown-item"><?=$this->lang->line('app_menu_renseignement_sx')?></a></li>
+                        <li><a href="<?=base_url().'datas/Sexes'?>" class="dropdown-item"><?=$this->lang->line('app_menu_renseignement_sx')?></a></li>
                         <li><a href="<?=base_url().'datas/Etat_civil'?>" class="dropdown-item"><?=$this->lang->line('app_menu_renseignement_matri')?></a></li>
                         <li><a href="<?=base_url().'datas/Ethnies'?>" class="dropdown-item"><?=$this->lang->line('app_menu_renseignement_eth')?></a></li>
                       
@@ -64,7 +64,7 @@
                         <li><a href="<?=base_url().'mouvement/Type_distiction_honorifiques'?>" class="dropdown-item"><?=$this->lang->line('app_menu_mvmnt_disthon')?></a></li>             
                         <li><a href="<?=base_url().'mouvement/Types_conges'?>" class="dropdown-item"><?=$this->lang->line('app_menu_mvmnt_tpcong')?></a></li>             
                         <li><a href="<?=base_url().'mouvement/Types_cote'?>" class="dropdown-item"><?=$this->lang->line('app_menu_mvmnt_tpct')?></a></li>             
-                        <li><a href="<?=base_url().'mouvement/mouvement/Types_punition'?>" class="dropdown-item"><?=$this->lang->line('app_menu_mvmnt_tppnt')?></a></li>             
+                        <li><a href="<?=base_url().'mouvement/Types_punition'?>" class="dropdown-item"><?=$this->lang->line('app_menu_mvmnt_tppnt')?></a></li>             
                         <li><a href="<?=base_url().'mouvement/Types_etudes'?>" class="dropdown-item"><?=$this->lang->line('app_menu_mvmnt_tppet')?></a></li>             
                         <li><a href="<?=base_url().'mouvement/Types_infraction'?>" class="dropdown-item"><?=$this->lang->line('app_menu_mvmnt_tpinfra')?></a></li>             
                         <li><a href="<?=base_url().'mouvement/Types_missions'?>" class="dropdown-item"><?=$this->lang->line('app_menu_mvmnt_tpmsn')?></a></li>             

@@ -2,7 +2,7 @@
 		<section class="content">
 			<div class="card card-info card-outline">
 				<div class="card-header">
-					<h3 class="card-title text-bold"></h3>
+					<h3 class="card-title text-bold">Editer d'une Unites: <?=$data->nom_unite?></h3>
 	
 					<span class="float-right">
 						<?php include_once "menu_unites.php";?>
@@ -13,7 +13,7 @@
 			<div class="card-body">
 			<div class="row">
 			<div class="col-md-4">
-			<h3 class="card-title text-bold">Editer d'une Unites: <?=$data->nom_unite?></h3><br>
+
 		<?=form_open('gr/Unites/edit/',NULL, ['id_unite'=>$data->id_unite])?>
 
 			<div class='form-group'><label>Code</label><?php echo form_error('code_unite'); ?>
@@ -46,9 +46,10 @@
 					<td><?=$data->id_unite?></td>
 					<td><?=$data->code_unite?></td>
 					<td><?=$data->nom_unite?></td>
-					<td><a href='<?=base_url('gr/Unites/view/'.$data->id_unite);?>'><span class="fa fa-eye"></span></a>
-					<a href='<?=base_url('gr/Unites/edit/0/'.$data->id_unite);?>'><span class="fa fa-edit"></span></a>
-					<a href='<?=base_url('gr/Unites/delete/'.$data->id_unite);?>' class='text-danger'><span class="fa fa-trash"></span></a></td>
+					<td>
+						<a href='<?=base_url('gr/Unites/edit/0/'.$data->id_unite);?>'><span class="fa fa-edit"></span></a>
+						<a href='<?=base_url('gr/Unites/delete/'.$data->id_unite);?>' class='text-danger'><span class="fa fa-trash"></span></a>
+					</td>
 				</tr>
 			<?php endforeach;?>
 		</tbody>

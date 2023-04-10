@@ -2,7 +2,7 @@
 		<section class="content">
 			<div class="card card-info card-outline">
 				<div class="card-header">
-					<h3 class="card-title text-bold"></h3>
+					<h3 class="card-title text-bold">Editer une catégorie des ayant droits: <?=$data->nom_categorie?></h3>
 	
 					<span class="float-right">
 						<?php include_once "menu_categorie_ayant_droits.php";?>
@@ -13,7 +13,7 @@
 			<div class="card-body">
 			<div class="row">
 			<div class="col-md-4">
-			<h3 class="card-title text-bold">Editer une catégorie des ayant droits: <?=$data->nom_categorie?></h3><br>
+
 		<?=form_open('gr/Categorie_ayant_droits/edit/',NULL, ['id_categorie_ayant_droit'=>$data->id_categorie_ayant_droit])?>
 
 			<div class='form-group'><label>Catégorie</label><?php echo form_error('nom_categorie'); ?>
@@ -40,9 +40,10 @@
 				<tr>
 					<td><?=$data->id_categorie_ayant_droit?></td>
 					<td><?=$data->nom_categorie?></td>
-					<td><a href='<?=base_url('gr/Categorie_ayant_droits/view/'.$data->id_categorie_ayant_droit);?>'><span class="fa fa-eye"></span></a>
-					<a href='<?=base_url('gr/Categorie_ayant_droits/edit/0/'.$data->id_categorie_ayant_droit);?>'><span class="fa fa-edit"></span></a>
-					<a href='<?=base_url('gr/Categorie_ayant_droits/delete/'.$data->id_categorie_ayant_droit);?>' class='text-danger'><span class="fa fa-trash"></span></a></td>
+					<td>
+						<a href='<?=base_url('gr/Categorie_ayant_droits/edit/0/'.$data->id_categorie_ayant_droit);?>'><span class="fa fa-edit"></span></a>
+						<a href='<?=base_url('gr/Categorie_ayant_droits/delete/'.$data->id_categorie_ayant_droit);?>' class='text-danger'><span class="fa fa-trash"></span></a>
+					</td>
 				</tr>
 			<?php endforeach;?>
 		</tbody>

@@ -3,7 +3,7 @@
     <section class="content">
         <div class="card card-info card-outline">
             <div class="card-header">
-                <h3 class="card-title text-bold"></h3>
+                <h3 class="card-title text-bold">Ajouter un type de mission</h3>
 
                 <span class="float-right">
                     <?php include_once "menu_types_missions.php";?>
@@ -14,7 +14,6 @@
 		<div class="card-body">
 		<div class="row">
 		<div class="col-md-4">
-		<h3 class="card-title text-bold">Ajouter un type de mission</h3><br>
 		<?=form_open('mouvement/Types_missions/index')?>
 		
 
@@ -42,9 +41,10 @@
 				<tr>
 					<td><?=$data->id_type_mission?></td>
 					<td><?=$data->type_mission?></td>
-					<td><a href='<?=base_url('mouvement/Types_missions/view/'.$data->id_type_mission);?>'><span class="fa fa-eye"></span></a>
-					<a href='<?=base_url('mouvement/Types_missions/edit/0/'.$data->id_type_mission);?>'><span class="fa fa-edit"></span></a>
-					<a href='<?=base_url('mouvement/Types_missions/delete/'.$data->id_type_mission);?>' class='text-danger'><span class="fa fa-trash"></span></a></td>
+					<td>
+						<a href='<?=base_url('mouvement/Types_missions/edit/0/'.$data->id_type_mission);?>'><span class="fa fa-edit"></span></a>
+						<a href='<?=base_url('mouvement/Types_missions/delete/'.$data->id_type_mission);?>' class='text-danger'><span class="fa fa-trash"></span></a>
+					</td>
 				</tr>
 			<?php endforeach;?>
 		</tbody>

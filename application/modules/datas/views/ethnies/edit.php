@@ -2,7 +2,7 @@
 		<section class="content">
 			<div class="card card-info card-outline">
 				<div class="card-header">
-					<h3 class="card-title text-bold"></h3>
+					<h3 class="card-title text-bold">Editer de l'éthnie:<?=$data->nom_ethnie?></h3>
 	
 					<span class="float-right">
 						<?php include_once "menu_ethnies.php";?>
@@ -13,7 +13,6 @@
 			<div class="card-body">
 			<div class="row">
 			<div class="col-md-4">
-			<h3 class="card-title text-bold">Editer de l'éthnie:<?=$data->nom_ethnie?></h3><br>
 			<?=form_open('datas/Ethnies/edit/', null, ['id_ethnie'=>$data->id_ethnie])?>
 
 			<div class='form-group'><label>Code</label>
@@ -46,9 +45,10 @@
 					<td><?=$data->id_ethnie?></td>
 					<td><?=$data->code_ethnie?></td>
 					<td><?=$data->nom_ethnie?></td>
-					<td><a href='<?=base_url('datas/Ethnies/view/'.$data->id_ethnie);?>'><span class="fa fa-eye"></span></a>
-					<a href='<?=base_url('datas/Ethnies/edit/0/'.$data->id_ethnie);?>'><span class="fa fa-edit"></span></a>
-					<a href='<?=base_url('datas/Ethnies/delete/'.$data->id_ethnie);?>' class='text-danger'><span class="fa fa-trash"></span></a></td>
+					<td>
+						<a href='<?=base_url('datas/Ethnies/edit/0/'.$data->id_ethnie);?>'><span class="fa fa-edit"></span></a>
+						<a href='<?=base_url('datas/Ethnies/delete/'.$data->id_ethnie);?>' class='text-danger'><span class="fa fa-trash"></span></a>
+					</td>
 				</tr>
 			<?php endforeach;?>
 		</tbody>

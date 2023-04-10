@@ -3,7 +3,7 @@
     <section class="content">
         <div class="card card-info card-outline">
             <div class="card-header">
-                <h3 class="card-title text-bold"></h3>
+                <h3 class="card-title text-bold">Ajouter une sous-catégorie</h3>
 
                 <span class="float-right">
                     <?php include_once "menu_sous_categories.php";?>
@@ -14,7 +14,6 @@
 		<div class="card-body">
 		<div class="row">
 		<div class="col-md-4">
-		<h3 class="card-title text-bold">Ajouter une sous-catégorie</h3><br>
 		<?=form_open('gr/Sous_categories/index')?>
 		
 
@@ -54,9 +53,10 @@
 					<td><?=$data->nom_categorie?></td>
 					<td><?=$data->code_sous_categorie?></td>
 					<td><?=$data->nom_sous_categorie?></td>
-					<td><a href='<?=base_url('gr/Sous_categories/view/'.$data->id_sous_categorie);?>'><span class="fa fa-eye"></span></a>
-					<a href='<?=base_url('gr/Sous_categories/edit/0/'.$data->id_sous_categorie);?>'><span class="fa fa-edit"></span></a>
-					<a href='<?=base_url('gr/Sous_categories/delete/'.$data->id_sous_categorie);?>' class='text-danger'><span class="fa fa-trash"></span></a></td>
+					<td>
+						<a href='<?=base_url('gr/Sous_categories/edit/0/'.$data->id_sous_categorie);?>'><span class="fa fa-edit"></span></a>
+						<a href='<?=base_url('gr/Sous_categories/delete/'.$data->id_sous_categorie);?>' class='text-danger'><span class="fa fa-trash"></span></a>
+					</td>
 				</tr>
 			<?php endforeach;?>
 		</tbody>

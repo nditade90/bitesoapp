@@ -3,7 +3,7 @@
     <section class="content">
         <div class="card card-info card-outline">
             <div class="card-header">
-                <h3 class="card-title text-bold"></h3>
+                <h3 class="card-title text-bold">Ajouter un type de sortie de service</h3>
 
                 <span class="float-right">
                     <?php include_once "menu_types_sortie_service.php";?>
@@ -14,7 +14,6 @@
 		<div class="card-body">
 		<div class="row">
 		<div class="col-md-4">
-		<h3 class="card-title text-bold">Ajouter un type de sortie de service</h3><br>
 		<?=form_open('mouvement/Types_sortie_service/index')?>
 		
 
@@ -42,9 +41,10 @@
 				<tr>
 					<td><?=$data->id_type_sortie?></td>
 					<td><?=$data->type_sortie_service?></td>
-					<td><a href='<?=base_url('mouvement/Types_sortie_service/view/'.$data->id_type_sortie);?>'><span class="fa fa-eye"></span></a>
-					<a href='<?=base_url('mouvement/Types_sortie_service/edit/0/'.$data->id_type_sortie);?>'><span class="fa fa-edit"></span></a>
-					<a href='<?=base_url('mouvement/Types_sortie_service/delete/'.$data->id_type_sortie);?>' class='text-danger'><span class="fa fa-trash"></span></a></td>
+					<td>
+						<a href='<?=base_url('mouvement/Types_sortie_service/edit/0/'.$data->id_type_sortie);?>'><span class="fa fa-edit"></span></a>
+						<a href='<?=base_url('mouvement/Types_sortie_service/delete/'.$data->id_type_sortie);?>' class='text-danger'><span class="fa fa-trash"></span></a>
+					</td>
 				</tr>
 			<?php endforeach;?>
 		</tbody>

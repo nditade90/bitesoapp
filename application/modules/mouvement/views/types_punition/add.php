@@ -3,7 +3,7 @@
     <section class="content">
         <div class="card card-info card-outline">
             <div class="card-header">
-                <h3 class="card-title text-bold"></h3>
+                <h3 class="card-title text-bold">Ajouter un type punition</h3>
 
                 <span class="float-right">
                     <?php include_once "menu_types_punition.php";?>
@@ -14,7 +14,7 @@
 		<div class="card-body">
 		<div class="row">
 		<div class="col-md-4">
-		<h3 class="card-title text-bold">Ajouter un type punition</h3><br>
+		
 		<?=form_open('mouvement/Types_punition/index')?>
 		
 
@@ -48,9 +48,10 @@
 					<td><?=$data->id_type_punition?></td>
 					<td><?=$data->code_type_punition?></td>
 					<td><?=$data->nom_type_punition?></td>
-					<td><a href='<?=base_url('mouvement/Types_punition/view/'.$data->id_type_punition);?>'><span class="fa fa-eye"></span></a>
-					<a href='<?=base_url('mouvement/Types_punition/edit/0/'.$data->id_type_punition);?>'><span class="fa fa-edit"></span></a>
-					<a href='<?=base_url('mouvement/Types_punition/delete/'.$data->id_type_punition);?>' class='text-danger'><span class="fa fa-trash"></span></a></td>
+					<td>
+						<a href='<?=base_url('mouvement/Types_punition/edit/0/'.$data->id_type_punition);?>'><span class="fa fa-edit"></span></a>
+						<a href='<?=base_url('mouvement/Types_punition/delete/'.$data->id_type_punition);?>' class='text-danger'><span class="fa fa-trash"></span></a>
+					</td>
 				</tr>
 			<?php endforeach;?>
 		</tbody>

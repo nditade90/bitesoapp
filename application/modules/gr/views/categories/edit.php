@@ -2,7 +2,7 @@
 		<section class="content">
 			<div class="card card-info card-outline">
 				<div class="card-header">
-					<h3 class="card-title text-bold"></h3>
+					<h3 class="card-title text-bold">Editer de la catégorie: <?=$data->nom_categorie?></h3>
 	
 					<span class="float-right">
 						<?php include_once "menu_categories.php";?>
@@ -13,7 +13,6 @@
 			<div class="card-body">
 			<div class="row">
 			<div class="col-md-4">
-			<h3 class="card-title text-bold">Editer de la catégorie: <?=$data->nom_categorie?></h3><br>
 		
 			<?=form_open('gr/Categories/edit/'.$data->id_categorie, null, ['id_categorie'=>$data->id_categorie])?>
 
@@ -47,9 +46,10 @@
 					<td><?=$data->id_categorie?></td>
 					<td><?=$data->code_categorie?></td>
 					<td><?=$data->nom_categorie?></td>
-					<td><a href='<?=base_url('gr/Categories/view/'.$data->id_categorie);?>'><span class="fa fa-eye"></span></a>
-					<a href='<?=base_url('gr/Categories/edit/0/'.$data->id_categorie);?>'><span class="fa fa-edit"></span></a>
-					<a href='<?=base_url('gr/Categories/delete/'.$data->id_categorie);?>' class='text-danger'><span class="fa fa-trash"></span></a></td>
+					<td>
+						<a href='<?=base_url('gr/Categories/edit/0/'.$data->id_categorie);?>'><span class="fa fa-edit"></span></a>
+						<a href='<?=base_url('gr/Categories/delete/'.$data->id_categorie);?>' class='text-danger'><span class="fa fa-trash"></span></a>
+					</td>
 				</tr>
 			<?php endforeach;?>
 		</tbody>
