@@ -370,7 +370,7 @@ class " . ucfirst($getcontroller->controller) . " extends Admin_Controller{
     <section class=\"content\">
         <div class=\"card card-info card-outline\">
             <div class=\"card-header\">
-                <h3 class=\"card-title text-bold\"></h3>
+                <h3 class=\"card-title text-bold\">Ajouter un/une " . $getcontroller->controller . "</h3>
 
                 <span class=\"float-right\">
                     <?php include_once \"menu_".strtolower($getcontroller->controller).".php\";?>
@@ -381,7 +381,7 @@ class " . ucfirst($getcontroller->controller) . " extends Admin_Controller{
 		<div class=\"card-body\">
 		<div class=\"row\">
 		<div class=\"col-md-4\">
-		<h3 class=\"card-title text-bold\">Ajouter un/une " . $getcontroller->controller . "</h3><br>
+		<h3 class=\"card-title text-bold\"></h3><br>
 		<?=form_open('" . $getcontroller->module."/".$getcontroller->controller. "/index')?>
 		\n\n";
 		foreach ($fields as $field) {
@@ -461,7 +461,7 @@ class " . ucfirst($getcontroller->controller) . " extends Admin_Controller{
 		<section class=\"content\">
 			<div class=\"card card-info card-outline\">
 				<div class=\"card-header\">
-					<h3 class=\"card-title text-bold\"></h3>
+					<h3 class=\"card-title text-bold\">Editer un/une " . $getcontroller->controller . ": </h3>
 	
 					<span class=\"float-right\">
 						<?php include_once \"menu_".strtolower($getcontroller->controller).".php\";?>
@@ -472,7 +472,7 @@ class " . ucfirst($getcontroller->controller) . " extends Admin_Controller{
 			<div class=\"card-body\">
 			<div class=\"row\">
 			<div class=\"col-md-4\">
-			<h3 class=\"card-title text-bold\">Editer un/une " . $getcontroller->controller . ": </h3><br>
+			<h3 class=\"card-title text-bold\"></h3><br>
 		<?=form_open('" . $getcontroller->module."/".$getcontroller->controller. "/edit/',NULL, [''=>\$data->$primary_key])?>\n\n";
 
 		foreach ($fields as $field) {

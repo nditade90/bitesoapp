@@ -1,22 +1,27 @@
 <div class="content-wrapper" style="min-height: 357.039px;">
+    
     <section class="content">
-        <div class="card card-info card-outline">
-            <div class="card-header">
-                <h3 class="card-title text-bold"><?=$title?></h3>
+    
+        <?php include VIEWPATH."menu_secondary/menu_reseignement.php"; ?>
+
+        <div class="card card-info card-outline">           
+
+            <div class="card-header">                
+               <h3 class="card-title text-bold"><?=$title?></h3>
 
                 <span class="float-right">
-                    <a href='<?=base_url('gr/Fiche_identification/add')?>' class="btn btn-info btn-sm"><i
+                    <a href='<?=base_url('gr/Fiche_identifications/add')?>' class="btn btn-info btn-sm"><i
                             class="fa fa-plus"></i> <span class="d-none d-sm-inline">&nbsp;<?=$this->lang->line('identity_menu_new')?></span></a>
-                    <a class="btn btn-primary btn-sm" href="<?=base_url('gr/Fiche_identification')?>"><i
+                    <a class="btn btn-primary btn-sm" href="<?=base_url('gr/Fiche_identifications')?>"><i
                             class="fa fa-list"></i>
                         <span class="d-none d-sm-inline">&nbsp;<?=$this->lang->line('identity_menu_list')?></span>
                     </a>
                 </span>
-
             </div>
+
             <div class="card-body">
 
-                <?=form_open_multipart('gr/Fiche_identification/add')?>
+                <?=form_open_multipart('gr/Fiche_identifications/add')?>
 
                 <div class="row">
                     <div class='form-group col-md-3'><label><?=$this->lang->line('identity_form_matricule')?></label>

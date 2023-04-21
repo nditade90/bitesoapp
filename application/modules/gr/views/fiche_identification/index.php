@@ -1,13 +1,16 @@
 <div class="content-wrapper" style="min-height: 357.039px;">
     <section class="content">
+        
+    <?php include VIEWPATH."menu_secondary/menu_reseignement.php"; ?>
+
         <div class="card card-info card-outline">
             <div class="card-header">
                 <h3 class="card-title text-bold"><?=$title?></h3>
 
                 <span class="float-right">
-                    <a href='<?=base_url('gr/Fiche_identification/add')?>' class="btn btn-info btn-sm"><i
+                    <a href='<?=base_url('gr/Fiche_identifications/add')?>' class="btn btn-info btn-sm"><i
                             class="fa fa-plus"></i> <span class="d-none d-sm-inline">&nbsp;<?=$this->lang->line('identity_menu_new')?></span></a>
-                    <a class="btn btn-primary btn-sm" href="<?=base_url('gr/Fiche_identification')?>"><i
+                    <a class="btn btn-primary btn-sm" href="<?=base_url('gr/Fiche_identifications')?>"><i
                             class="fa fa-list"></i>
                         <span class="d-none d-sm-inline">&nbsp;<?=$this->lang->line('identity_menu_list')?></span>
                     </a>
@@ -62,11 +65,11 @@
 
                                 <td><?=get_db_value("gr_promotions","nom_promotion",array("id_promotion",$data->id_promotion))?></td>
                                 <td><a
-                                        href='<?=base_url('gr/Fiche_identification/view/'.$data->id_identification);?>'><span class="fa fa-eye"></span></a>
+                                        href='<?=base_url('gr/Fiche_identifications/view/'.$data->id_identification);?>'><span class="fa fa-eye"></span></a>
                                     &nbsp; <a
-                                        href='<?=base_url('gr/Fiche_identification/edit/'.$data->id_identification);?>'><span class="fa fa-edit"></span></a>
+                                        href='<?=base_url('gr/Fiche_identifications/edit/'.$data->id_identification);?>'><span class="fa fa-edit"></span></a>
                                     &nbsp;<a
-                                        data-url='<?=base_url('gr/Fiche_identification/delete/'.$data->id_identification);?>'
+                                        data-url='<?=base_url('gr/Fiche_identifications/delete/'.$data->id_identification);?>'
                                         href='javascript:void(0)' class='delete'><span class="fa fa-trash text-danger"></span></a></td>
                             </tr>
                             <?php endforeach;?>

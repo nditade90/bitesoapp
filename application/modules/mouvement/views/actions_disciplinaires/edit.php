@@ -1,17 +1,18 @@
 <div class="content-wrapper" style="min-height: 357.039px;">
 		<section class="content">
+		<?php include VIEWPATH."menu_secondary/menu_mouvement.php"; ?>
 			<div class="card card-info card-outline">
 				<div class="card-header">
 					<h3 class="card-title text-uppercase">Editer une action disciplinaire</h3>
 					<span class="float-right"> 
-						<a class='btn btn-info btn-sm' href="<?php echo base_url('gr/Fiche_identification/view/'.$id_identification)?>"><i class='fa fa-file'></i>
-							<span class='d-none d-sm-inline'>&nbsp;Retour sur détail</span>
-						</a>
+					<a class='btn btn-info btn-sm' href="<?php echo base_url('mouvement/Actions_disciplinaires/add')?>"><i class='fa fa-file'></i>
+						<span class='d-none d-sm-inline'>&nbsp;Nouveau</span>
+					</a>
 
-						<a class='btn btn-primary btn-sm' href="<?php echo base_url('gr/Fiche_identification/index')?>"><i class='fa fa-list'></i>
-							<span class='d-none d-sm-inline'>&nbsp;Liste des fiches</span>
-						</a>     
-					</span>
+					<a class='btn btn-primary btn-sm' href="<?php echo base_url('mouvement/Actions_disciplinaires/index')?>"><i class='fa fa-list'></i>
+						<span class='d-none d-sm-inline'>&nbsp;Liste</span>
+					</a>     
+				</span>
 				</div>
 	
 			<div class="card-body">

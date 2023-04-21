@@ -1,16 +1,18 @@
 
-		<div class="content-wrapper" style="min-height: 357.039px;">
+<div class="content-wrapper" style="min-height: 357.039px;">
     <section class="content">
+	<?php include VIEWPATH."menu_secondary/menu_mouvement.php"; ?>
+
         <div class="card card-info card-outline">
 			<div class="card-header">
 				<h3 class="card-title text-uppercase">Enregistrement d'un accident de travail</h3>
 				<span class="float-right"> 
-					<a class='btn btn-info btn-sm' href="<?php echo base_url('gr/Fiche_identification/view/'.$id_identification)?>"><i class='fa fa-file'></i>
-						<span class='d-none d-sm-inline'>&nbsp;Retour sur détail</span>
+					<a class='btn btn-info btn-sm' href="<?php echo base_url('mouvement/Accidents_travail/add')?>"><i class='fa fa-file'></i>
+						<span class='d-none d-sm-inline'>&nbsp;Nouveau</span>
 					</a>
 
-					<a class='btn btn-primary btn-sm' href="<?php echo base_url('gr/Fiche_identification/index')?>"><i class='fa fa-list'></i>
-						<span class='d-none d-sm-inline'>&nbsp;Liste des fiches</span>
+					<a class='btn btn-primary btn-sm' href="<?php echo base_url('mouvement/Accidents_travail/index')?>"><i class='fa fa-list'></i>
+						<span class='d-none d-sm-inline'>&nbsp;Liste</span>
 					</a>     
 				</span>
 			</div>

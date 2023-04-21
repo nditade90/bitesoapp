@@ -14,8 +14,15 @@
         <!-- Left navbar links -->
         <ul class="navbar-nav">
            
-            <li class="nav-item <?php if($this->router->class =='Fiche_identification') echo "active";?>">
-                <a href="<?=base_url().'gr/Fiche_identification'?>" class="nav-link"><i class="fas fa-file"></i><?=$this->lang->line('app_menu_renseignement')?></a>
+            <li class="nav-item <?php if(in_array($this->router->class, ['Fiche_identifications','Fiche_carrieres','Ayants_droits'])) echo "active";?>">
+                <a href="<?=base_url().'gr/Fiche_identifications/add'?>" class="nav-link"><i class="fas fa-file"></i><?=$this->lang->line('app_menu_renseignement')?></a>
+            </li>
+
+            <?php 
+              $mouvement_array= ['Historique_situations', 'Cotations','Formations_stages', 'Etudes_faites','Avancement_grades','Fiche_mutations','Actions_disciplinaires'];
+            ?>
+            <li class="nav-item <?php if(in_array($this->router->class ,$mouvement_array)) echo "active";?>">
+                <a href="<?=base_url().'gr/Historique_situations/add'?>" class="nav-link"><i class="fas fa-file"></i>Mouvements</a>
             </li>
 
             <li class="nav-item">

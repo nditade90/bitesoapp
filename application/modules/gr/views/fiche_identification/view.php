@@ -3,6 +3,7 @@
 
 <div class="content-wrapper" style="min-height: 357.039px;">
     <section class="content">
+    <?php include VIEWPATH."menu_secondary/menu_reseignement.php"; ?>
 
         <div class="card card-info card-outline card-tabs">
             <div class="card-header p-0 pt-1">

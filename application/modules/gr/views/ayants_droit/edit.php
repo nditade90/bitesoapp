@@ -1,5 +1,7 @@
 <div class="content-wrapper" style="min-height: 357.039px;">
 		<section class="content">
+			<?php include VIEWPATH."menu_secondary/menu_reseignement.php"; ?>
+
 			<div class="card card-info card-outline">
 				<div class="card-header">
 					<h3 class="card-title text-uppercase">Editer un ayant droit:<b><?=$data->nom .' '.$data->prenoms?></h3>
