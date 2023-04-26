@@ -3,7 +3,7 @@
 		
 		<?php include VIEWPATH."menu_secondary/menu_reseignement.php"; ?>
 
-        <div class="card card-info card-outline">
+        <div class="card card-info-cust card-outline">
 			<div class="card-header">
 				<h3 class="card-title text-uppercase">Ajout d'une fiche de carriere</h3>
 
