@@ -4,17 +4,17 @@
 	 	
 	 	<?php include VIEWPATH."menu_secondary/menu_reseignement.php"; ?>
 
-        <div class="card card-info card-outline">
+        <div class="card card-info-cust card-outline">
         	<div class="card-header">
 				<h3 class="card-title text-uppercase">Ajouter un ayant droit</h3>
 				
 				<?=form_open('gr/Ayants_droit/add')?>
 
 				<span class="float-right"> 
-					<a class='btn btn-info btn-sm' href="<?php echo base_url('gr/Ayants_droits/add')?>"><i class='fa fa-file'></i>
+					<a class='btn btn-info-cust btn-sm' href="<?php echo base_url('gr/Ayants_droits/add')?>"><i class='fa fa-file'></i>
 						<span class='d-none d-sm-inline'>&nbsp;Nouveau</span>
 					</a> 
-					<a class='btn btn-primary btn-sm' href="<?php echo base_url('gr/Ayants_droits/index')?>"><i class='fa fa-list'></i>
+					<a class='btn btn-primary-cust btn-sm' href="<?php echo base_url('gr/Ayants_droits/index')?>"><i class='fa fa-list'></i>
 						<span class='d-none d-sm-inline'>&nbsp;Liste</span>
 					</a>     
 				</span>
@@ -113,7 +113,7 @@
 		</div>
 	
 		<div class='row' style="margin:6px">
-			<?=form_submit('','Enregistrer','class="btn btn-sm btn-primary", style="margin-top:20px"')?><?=form_close()?>
+			<?=form_submit('','Enregistrer','class="btn btn-sm btn-primary-cust", style="margin-top:20px"')?><?=form_close()?>
 		</div>
 	</section>
 </div>
