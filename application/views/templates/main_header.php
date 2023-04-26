@@ -88,4 +88,40 @@
                 </ul>
             </li>
       </ul>
+
+      <!-- Right navbar links -->
+      <ul class="order-1 order-md-3 navbar-nav navbar-no-expand ml-auto">
+        <!-- Messages Dropdown Menu -->  
+        <li class="nav-item">
+          <a class="nav-link" data-widget="control-sidebar" data-slide="true" href="#" role="button">
+            <i class="fas fa-th-large"></i>
+          </a>
+        </li>
+        
+        <li class="nav-item dropdown">
+          <a class="nav-link" data-toggle="dropdown" href="#">
+            <i class="fas fa-user"></i>
+            <span class="badge badge-danger navbar-badge"></span>            
+          </a>
+          <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+             
+            <a href="#" class="dropdown-item"> 
+              <div class="media">
+                <img src="<?=base_url()?>assets/img/user1-128x128.jpg" class="img-size-50 mr-3 img-circle">
+              </div>
+              <!-- Message End -->
+            </a>
+            <div class="dropdown-divider"></div>
+
+            <div class="dropdown-item">
+                  <h3 class="row">
+                      <a href="#" class='col-md-8 text-md'><?=$this->auth_library->get()->usr_lname.' '.$this->auth_library->get()->usr_fname?></a>
+                      <a class="col-md-4 text-md text-danger" href="<?=base_url('Authentification/logout')?>"?><i class="fas fa-close"></i>Logout</a>
+                  </h3>
+              </div>
+
+          </div>
+        </li>      
+        
+      </ul>
     </header>
