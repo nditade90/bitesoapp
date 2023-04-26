@@ -5,17 +5,17 @@
     <section class="content">
     <?php include VIEWPATH."menu_secondary/menu_reseignement.php"; ?>
 
-        <div class="card card-info card-outline card-tabs">
+        <div class="card card-info-cust card-outline card-tabs">
             <div class="card-header p-0 pt-1">
 
                 <span class="float-right">
                     <?php if($this->router->method !== 'view'){ ?>
-                        <a href='<?=base_url('gr/Fiche_identification/add')?>' class="btn btn-info btn-sm"><i
+                        <a href='<?=base_url('gr/Fiche_identification/add')?>' class="btn btn-info-cust btn-sm"><i
                                 class="fa fa-plus"></i> <span class="d-none d-sm-inline">&nbsp;Nouvelle Fiche</span>
                         </a>
                     <?php } ?>
 
-                    <a class="btn btn-primary btn-sm" href="<?=base_url('gr/Fiche_identification')?>"><i
+                    <a class="btn btn-primary-cust btn-sm" href="<?=base_url('gr/Fiche_identification')?>"><i
                             class="fa fa-list"></i>
                         <span class="d-none d-sm-inline">&nbsp;Liste des Fiches</span>
                     </a>
@@ -148,7 +148,7 @@
                                             </div>
 
                                             <div class='form-group col-md-6'>
-                                                <?=form_submit('','Enregistrer','class="btn btn-sm btn-primary"')?>
+                                                <?=form_submit('','Enregistrer','class="btn btn-sm btn-primary-cust"')?>
                                             </div>
                                         </div>  
                                     <?=form_close()?>                                  
@@ -179,7 +179,7 @@
                                         <br>
 
                                         <div class='row'>
-                                            <?=form_submit('','Enregistrer','class="btn btn-sm btn-primary"')?>
+                                            <?=form_submit('','Enregistrer','class="btn btn-sm btn-primary-cust"')?>
                                         </div>
                                     <?=form_close()?>   
 

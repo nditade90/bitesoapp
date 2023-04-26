@@ -3,14 +3,14 @@
         
         <?php include VIEWPATH."menu_secondary/menu_reseignement.php"; ?>
 
-        <div class="card card-info card-outline">
+        <div class="card card-info-cust card-outline">
             <div class="card-header">
                 <h3 class="card-title text-bold"><?=$title?></h3>
 
                 <span class="float-right">
-                    <a href='<?=base_url('gr/Fiche_identifications/add')?>' class="btn btn-info btn-sm"><i
+                    <a href='<?=base_url('gr/Fiche_identifications/add')?>' class="btn btn-primary-cust btn-sm"><i
                             class="fa fa-plus"></i> <span class="d-none d-sm-inline">&nbsp;<?=$this->lang->line('identity_menu_new')?></span></a>
-                    <a class="btn btn-primary btn-sm" href="<?=base_url('gr/Fiche_identifications')?>"><i
+                    <a class="btn btn-default btn-sm" href="<?=base_url('gr/Fiche_identifications')?>"><i
                             class="fa fa-list"></i>
                         <span class="d-none d-sm-inline">&nbsp;<?=$this->lang->line('identity_menu_list')?></span>
                     </a>
@@ -172,7 +172,7 @@
                 </div>
 
                 <div class='row'>
-                    <?=form_submit('',$this->lang->line('identity_form_updt_btn'),'class="btn btn-primary"')?>
+                    <?=form_submit('',$this->lang->line('identity_form_updt_btn'),'class="btn btn-primary-cust"')?>
                 </div>
 
             </div>

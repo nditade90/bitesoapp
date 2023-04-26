@@ -1,0 +1,179 @@
+:root {
+    --primary-cust: #596643 ;
+}
+
+.bg-primary-cust {
+    background-color: #596643  !important;
+}
+
+
+.btn-primary-cust {
+    color: #fff;
+    background-color: #596643;
+    border-color: #596643;
+    box-shadow: none;
+  }
+
+ .btn-primary-cust:hover {
+    color: #fff;
+    background-color: #596643;
+    border-color: #596643;
+  }
+
+  .btn-primary-cust:focus, .btn-primary.focus {
+    color: #fff;
+    background-color: #596643;
+    border-color: #596643;
+    box-shadow: 0 0 0 0 rgba(59, 66, 43, 0.5);
+  }
+  
+  .btn-primary-cust.disabled, .btn-primary-cust:disabled {
+    color: #fff;
+    background-color: #596643;
+    border-color: #596643;
+  }
+
+  .btn-primary-cust:not(:disabled):not(.disabled):active:focus, .btn-primary-cust:not(:disabled):not(.disabled).active:focus,
+.show > .btn-primary-cust.dropdown-toggle:focus {
+  box-shadow: 0 0 0 0 rgba(59, 66, 43, 0.5);
+}
+
+
+.bg-primary-cust {
+    background-color: #596643 !important;
+  }
+  
+  .bg-primary-cust,
+  .bg-primary-cust > a {
+    color: #fff !important;
+  }
+  
+  .bg-primary-cust.btn:hover {
+    border-color: #596643;
+    color: #ececec;
+  }
+  
+  .bg-primary-cust.btn:not(:disabled):not(.disabled):active, .bg-primary-cust.btn:not(:disabled):not(.disabled).active, .bg-primary-cust.btn:active, .bg-primary-cust.btn.active {
+    background-color: #596643 !important;
+    border-color: #596643;
+    color: #fff;
+  }
+
+
+  
+.table-primary-cust,
+.table-primary-cust > th,
+.table-primary-cust > td {
+  background-color: 0 0 0 0 rgba(119, 135, 82, 0.99);
+}
+
+.table-primary-cust th,
+.table-primary-cust td,
+.table-primary-cust thead th,
+.table-primary-cust tbody + tbody {
+  border-color: 0 0 0 0 rgba(119, 135, 82, 0.99);
+}
+
+.table-hover .table-primary-cust:hover {
+  background-color: 0 0 0 0 rgba(119, 135, 82, 0.99);
+}
+
+.table-hover .table-primary-cust:hover > td,
+.table-hover .table-primary-cust:hover > th {
+  background-color: 0 0 0 0 rgba(119, 135, 82, 0.99);
+}
+
+
+
+.card-info-cust:not(.card-outline) > .card-header {
+    background-color: #596643;
+}
+  
+.card-info-cust:not(.card-outline) > .card-header,
+.card-info-cust:not(.card-outline) > .card-header a {
+color: #fff;
+}
+
+.card-info-cust:not(.card-outline) > .card-header a.active {
+color: rgba(59, 66, 43, 0.5);
+}
+
+.card-info-cust.card-outline {
+border-top: 3px solid #596643;
+}
+
+.card-info-cust.card-outline-tabs > .card-header a:hover {
+border-top: 3px solid #dee2e6;
+}
+
+.dropdown-item.active, .dropdown-item:active {
+    color: #fff;
+    text-decoration: none;
+    background-color: #596643;
+}
+.nav-pills .nav-link.active-cust,
+.nav-pills .show > .nav-link {
+  color: #fff;
+  background-color: #596643;
+}
+
+.card-primary:not(.card-outline) > .card-header a.active-cust {
+    color: #596643;
+}
+
+.card-primary:not(.card-outline) > .card-header a.active-cust {
+    color: #596643;
+}
+
+.card-primary-cust.card-outline-tabs > .card-header a.active-cust,
+.card-primary-cust.card-outline-tabs > .card-header a.active-cust:hover {
+  border-top: 3px solid #596643;
+}
+
+.accent-primary-cust .btn-link:hover,
+.accent-primary-cust a:not(.dropdown-item):not(.btn-app):not(.nav-link):not(.brand-link):not(.page-link):not(.badge):not(.btn):hover,
+.accent-primary-cust .nav-tabs .nav-link:hover {
+  color: #596643;
+}
+
+a:hover {
+    color: #596643;
+    text-decoration: none;
+}
+
+.nav-pills .nav-link.active,
+.nav-pills .show > .nav-link {
+  color: #fff;
+  background-color: #596643;
+}
+
+a {
+  color: #596643;
+  text-decoration: none;
+  background-color: transparent;
+}
+
+a:hover {
+  color: #3c4827;
+  text-decoration: none;
+}
+
+a:not([href]):not([class]) {
+  color: inherit;
+  text-decoration: none;
+}
+
+a:not([href]):not([class]):hover {
+  color: inherit;
+  text-decoration: none;
+}
+a.nav-link:hover{
+  color: #3c4827;
+}
+
+.page-item.active .page-link {
+  z-index: 3;
+  color: #fff;
+  background-color: #3c4827;
+  border-color: #3c4827;
+}

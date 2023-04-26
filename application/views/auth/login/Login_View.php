@@ -16,6 +16,7 @@
   <link rel="stylesheet" href="<?php echo base_url('assets');?>/plugins/icheck-bootstrap/icheck-bootstrap.min.css">
   <!-- Theme style -->
   <link rel="stylesheet" href="<?php echo base_url('assets');?>/css/adminlte.min.css">
+  <link rel="stylesheet" href="<?php echo base_url('assets');?>/css/my_custom_css.css">
   <!-- Google Font: Source Sans Pro -->
   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
  
@@ -38,8 +39,9 @@
   <meta name="theme-color" content="#ffffff">
   <style>
 body {
-	overflow-y: hidden;
-	background: url('<?=base_url('assets/img/fdnb/main_bg.jpeg');?>') no-repeat center center fixed !important;
+	overflow-y: hidden; 
+	/* background: url('<?php //base_url('assets/img/fdnb/main_bg.jpeg');?>') no-repeat center center fixed !important; */
+	/* background: #596643; */
 	-webkit-background-size: cover !important;
 	-moz-background-size: cover !important;
 	background-size: cover !important;
@@ -47,10 +49,10 @@ body {
 }
 </style>
 </head>
-<body class="hold-transition login-page">
+<body class="hold-transition login-page bg-primary-cust">
 <div class="login-box">
   <div class="login-logo">
-  <!--  <a href="<?php echo base_url('Authentification/login');?>/"><b>FDNB - Human Ressources System
+  <!--  <a href="<?php //echo base_url('Authentification/login');?>/"><b>FDNB - Human Ressources System
     <img
 			src="<?=base_url('assets/img/fdnb/logo2.png');?>"
 			style="max-width: 100%; height: auto; display: block;"
@@ -126,7 +128,7 @@ body {
           <?php 
                $data = array(
                               'name'          => 'button',
-                              'class'         => 'btn btn-primary btn-block',
+                              'class'         => 'btn btn-primary-cust btn-block',
                               'value'         => 'true',
                               'type'          => 'submit',
                               'content'       => 'Se connecter'

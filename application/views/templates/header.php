@@ -16,6 +16,7 @@
             <link rel="stylesheet" href="<?=base_url('assets/');?>plugins/fontawesome-free/css/all.min.css">
             <!-- Theme style -->
             <link rel="stylesheet" href="<?=base_url('assets/');?>css/adminlte.min.css">
+            <link rel="stylesheet" href="<?=base_url('assets/');?>css/my_custom_css.css">
 
             <!-- daterange picker -->
             <link rel="stylesheet" href="<?=base_url('assets/');?>plugins/daterangepicker/daterangepicker.css">
@@ -69,4 +70,8 @@
         </head>
 
             <body class="hold-transition layout-top-nav">
+                <div class="row bg-primary-cust text-center" style="height:80px">
+                    <legend>Gestion des carrieres</legend><br />
+                    <legend>Cellule Administration</legend>
+                </div>        
                 <div class="wrapper">
