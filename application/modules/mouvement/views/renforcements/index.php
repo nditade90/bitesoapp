@@ -1,7 +1,7 @@
 
 		<div class="content-wrapper" style="min-height: 357.039px;">
     <section class="content">
-        <div class="card card-info card-outline">
+        <div class="card card-info-cust card-outline">
             <div class="card-header">
                 <h3 class="card-title text-bold"></h3>
 

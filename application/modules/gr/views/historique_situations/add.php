@@ -4,16 +4,16 @@
 		
 		<?php include VIEWPATH."menu_secondary/menu_mouvement.php"; ?>
 
-        <div class="card card-info card-outline">
+        <div class="card card-info-cust card-outline">
 			<div class="card-header">
 				<h3 class="card-title text-uppercase">Ajouter un historique de situation</h3>  
 				
 				<span class="float-right"> 
-					<a class='btn btn-info btn-sm' href="<?php echo base_url('gr/Historique_situations/add/')?>"><i class='fa fa-file'></i>
+					<a class='btn btn-info-cust btn-sm' href="<?php echo base_url('gr/Historique_situations/add/')?>"><i class='fa fa-file'></i>
 						<span class='d-none d-sm-inline'>&nbsp;Nouveau</span>
 					</a>
 
-					<a class='btn btn-primary btn-sm' href="<?php echo base_url('gr/Historique_situations/index')?>"><i class='fa fa-list'></i>
+					<a class='btn btn-primary-cust btn-sm' href="<?php echo base_url('gr/Historique_situations/index')?>"><i class='fa fa-list'></i>
 						<span class='d-none d-sm-inline'>&nbsp;Liste</span>
 					</a>     
 				</span>
@@ -52,7 +52,7 @@
 			</div>			
 		</div>
 			<div class='row' style="margin:6px">
-				<?=form_submit('','Enregistrer','class="btn btn-sm btn-primary"')?><?=form_close()?>
+				<?=form_submit('','Enregistrer','class="btn btn-sm btn-primary-cust"')?><?=form_close()?>
 			</div>
 	</section>
 </div>

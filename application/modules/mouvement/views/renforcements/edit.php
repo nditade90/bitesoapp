@@ -1,15 +1,15 @@
 <div class="content-wrapper" style="min-height: 357.039px;">
 		<section class="content">
 		<?php include VIEWPATH."menu_secondary/menu_mouvement.php"; ?>
-			<div class="card card-info card-outline">
+			<div class="card card-info-cust card-outline">
 			<div class="card-header">
 				<h3 class="card-title text-uppercase">Editer une fiche de renforcement</h3>
 				<span class="float-right"> 
-					<a class='btn btn-info btn-sm' href="<?php echo base_url('mouvement/Renforcements/add')?>"><i class='fa fa-file'></i>
+					<a class='btn btn-info-cust btn-sm' href="<?php echo base_url('mouvement/Renforcements/add')?>"><i class='fa fa-file'></i>
 						<span class='d-none d-sm-inline'>&nbsp;Nouveau</span>
 					</a>
 
-					<a class='btn btn-primary btn-sm' href="<?php echo base_url('mouvement/Renforcements/index')?>"><i class='fa fa-list'></i>
+					<a class='btn btn-primary-cust btn-sm' href="<?php echo base_url('mouvement/Renforcements/index')?>"><i class='fa fa-list'></i>
 						<span class='d-none d-sm-inline'>&nbsp;Liste</span>
 					</a>     
 				</span>
@@ -78,7 +78,7 @@
 
 		</div>
 		<div class='row' style='margin:6px'>
-			<?=form_submit('','Enregistrer les changements','class="btn btn-primary"')?><?=form_close()?>
+			<?=form_submit('','Enregistrer les changements','class="btn btn-primary-cust"')?><?=form_close()?>
 		</div>
 	</section>
 </div>
