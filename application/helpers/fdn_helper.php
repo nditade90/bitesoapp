@@ -4,7 +4,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 if ( ! function_exists('render_fragment'))
 {
-    function render_fragment($viewFragment,$data,$id_identification = 0, $title){
+    function render_fragment($viewFragment,$data,$id_identification = 0, $title=""){
         $ci = & get_instance();        
         $datas["fragmentTitle"]= $title;
         $datas["datas"]= $data;
@@ -47,7 +47,7 @@ if ( ! function_exists('get_db_soldat_titre'))
         $query = $ci->db->query("SELECT * FROM gr_fiche_identification WHERE id_identification = $id_identification")->row();
         $categorie = $ci->db->query("SELECT * FROM gr_categories WHERE id_categorie = $query->id_categorie")->row();
 
-        $link = "<a href='".base_url('gr/Fiche_identification/view/'.$id_identification)."' class='nav-link'>".$categorie->nom_categorie." ".$query->nom ." ".$query->prenom."| Matricule : ".$query->matricule.(!empty($query->telephone)?" | Telephone:".$query->telephone:" ")."</a>";
+        $link = "<a href='".base_url('gr/Fiche_identification/view/'.$id_identification)."' class='nav-link'>Soldat :".$categorie->nom_categorie." ".$query->nom ." ".$query->prenom."| Matricule : ".$query->matricule.(!empty($query->telephone)?" | Telephone:".$query->telephone:" ")."</a>";
         return !empty($query) ? $link : ""; 
     }
 }

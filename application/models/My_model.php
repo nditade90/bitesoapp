@@ -202,4 +202,59 @@ class My_model extends CI_Model {
 			return $select;
 		}
 	}
+
+	public function make_query($table, $primary, $orders, $searchs, $selects, $criteres = []){
+		$this->db->select($selects);
+		$this->db->from($table);
+
+		if(!empty($criteres)){
+			$this->db->where($criteres);
+		}
+
+		if(trim($_POST['search']['value']) != ""){
+			for ($i=0; $i < count($searchs); $i++) { 
+				if($i == 0){
+					$this->db->like($searchs[$i], $_POST['search']['value']);
+				}else{
+					$this->db->or_like($searchs[$i], $_POST['search']['value']);
+				}
+			}			
+		}		
+
+		if(isset($_POST['order'])){			
+			$this->db->order_by($orders[$_POST['order']['0']['column']], $_POST['order']['0']['dir']);
+		}else{
+			$this->db->order_by($primary, "DESC");
+		}
+	}
+
+	public function make_datatables($table, $primary, $orders, $searchs, $selects, $criteres = []){
+		$this->make_query($table, $primary, $orders, $searchs, $selects, $criteres);
+
+		if($_POST['length'] != -1){
+			$this->db->limit($_POST["length"], $_POST["start"]);
+		}
+		$query = $this->db->get();
+
+		// echo $this->db->last_query();
+		return $query->result();
+	}
+
+	public function get_filtered_data($table, $primary, $orders, $searchs, $selects, $criteres = [])
+	{
+		$this->make_query($table, $primary, $orders, $searchs, $selects, $criteres);
+		$query = $this->db->get();
+
+		return $query->num_rows();
+	} 
+
+	public function get_all_data($table, $criteres = [])
+	{
+		$this->db->select("*");
+		if(!empty($criteres)){
+			$this->db->where($criteres);
+		}
+		$this->db->from($table);
+		return $this->db->count_all_results();
+	}
 }

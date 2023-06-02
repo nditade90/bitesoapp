@@ -103,7 +103,7 @@ $autoload['helper'] = array('url', 'form','file', 'fdn');
 | config files.  Otherwise, leave it blank.
 |
 */
-$autoload['config'] = array();
+$autoload['config'] = array('pdf_tables');
 
 /*
 | -------------------------------------------------------------------
