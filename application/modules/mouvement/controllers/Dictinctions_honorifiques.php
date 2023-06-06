@@ -28,7 +28,7 @@ class Dictinctions_honorifiques extends Admin_Controller{
 				redirect(base_url('gr/Fiche_identification/view/'.$id_identification));
 			}
 			$this->data[ 'title' ] = 'Dictinctions_honorifiques';
-			$this->data['title_top_bar'] = get_db_soldat_titre($id_identification);
+			$this->data['title_top_bar'] = $this->session->userdata('id_identification') > 0?get_db_soldat_titre($this->session->userdata('id_identification')):"";
 			$this->data['id_identification'] = $id_identification;
 			$this->render_template('dictinctions_honorifiques/add', $this->data);
 
@@ -57,7 +57,7 @@ class Dictinctions_honorifiques extends Admin_Controller{
 					redirect(base_url('gr/Fiche_identification/view/'.$id_identification));
 				}
 			$this->data[ 'title' ] = 'Edit Dictinctions_honorifiques';
-			$this->data['title_top_bar'] = get_db_soldat_titre($id_identification);
+			$this->data['title_top_bar'] = $this->session->userdata('id_identification') > 0?get_db_soldat_titre($this->session->userdata('id_identification')):"";
 			$this->data['id_identification'] = $id_identification;
 			$this->render_template('dictinctions_honorifiques/edit', $this->data);
 		

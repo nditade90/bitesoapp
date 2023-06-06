@@ -68,7 +68,7 @@ class Fiche_carrieres extends Admin_Controller{
 		}
 
 		$this->data[ 'title' ] = 'Gestion de carriere';
-		$this->data['title_top_bar'] = get_db_soldat_titre($id_identification);
+		$this->data['title_top_bar'] = $this->session->userdata('id_identification') > 0?get_db_soldat_titre($this->session->userdata('id_identification')):"";
 		$this->data['id_identification'] = $id_identification;
 		$this->render_template('fiche_carriere/add', $this->data);
 	}
@@ -126,7 +126,7 @@ class Fiche_carrieres extends Admin_Controller{
 
 		$this->data['id_identification'] = $id_identification;
 		$this->data[ 'title' ] = 'Modification d\'une fiche de carriere';
-		$this->data['title_top_bar'] = get_db_soldat_titre($id_identification);
+		$this->data['title_top_bar'] = $this->session->userdata('id_identification') > 0?get_db_soldat_titre($this->session->userdata('id_identification')):"";
 		$this->render_template('fiche_carriere/edit', $this->data);
 	
 	}

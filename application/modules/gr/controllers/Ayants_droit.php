@@ -46,7 +46,7 @@ class Ayants_droit extends Admin_Controller{
 		}
 
 		$this->data[ 'title' ] = 'Ayants_droit';
-		$this->data['title_top_bar'] = get_db_soldat_titre($id_identification);
+		$this->data['title_top_bar'] = $this->session->userdata('id_identification') > 0?get_db_soldat_titre($this->session->userdata('id_identification')):"";
 		$this->data['id_identification'] = $id_identification;
 		
 		$this->render_template('ayants_droit/add', $this->data);
@@ -92,7 +92,7 @@ class Ayants_droit extends Admin_Controller{
 		}
 		redirect(base_url('gr/Fiche_identification/view/'.$id_identification));
 		}
-		$this->data['title_top_bar'] = get_db_soldat_titre($id_identification);
+		$this->data['title_top_bar'] = $this->session->userdata('id_identification') > 0?get_db_soldat_titre($this->session->userdata('id_identification')):"";
 		$this->data['id_identification'] = $id_identification;		
 		$this->data[ 'title' ] = 'Edit Ayants_droit';
 		$this->render_template('ayants_droit/edit', $this->data);

@@ -3,7 +3,7 @@
     <section class="content">
     
         <?php include VIEWPATH."menu_secondary/menu_reseignement.php"; ?>
-
+        
         <div class="card card-info-cust card-outline">           
 
             <div class="card-header">                
@@ -20,8 +20,33 @@
             </div>
 
             <div class="card-body">
+                <?=form_open_multipart('gr/Fiche_identification/search')?>
+                    <div class="col-md-12">
+                        <div class="row">                        
+                            <div class='form-group col-md-3'><label><?=$this->lang->line('identity_form_matricule')?></label>
+                                <?=form_input('matricule',set_value('matricule'),"class='form-control' placeholder='matricule'")?>
+                                <?php echo form_error('matricule','<span class="text-danger">', '</span>'); ?>
+                            </div>
 
-                <?=form_open_multipart('gr/Fiche_identifications/add')?>
+                            <div class='form-group col-md-3'><label><?=$this->lang->line('identity_form_new_matricule')?></label> 
+                                <?=form_input('nouveau_matricule',set_value('nouveau_matricule'),"class='form-control' placeholder='nouveau_matricule'")?>
+                                <?php echo form_error('nouveau_matricule','<span class="text-danger">', '</span>'); ?>
+                            </div>
+
+                            <div class='form-group col-md-3'><label><?=$this->lang->line('identity_form_old_matricule')?></label>
+                                <?=form_input('ancien_matricule',set_value('ancien_matricule'),"class='form-control' placeholder='ancien_matricule'")?>
+                                <?php echo form_error('ancien_matricule','<span class="text-danger">', '</span>'); ?>
+                            </div>  
+                            
+                            <div class='form-group col-md-3'>
+                                <?=form_submit('',"Chercher",'class="btn btn-sm btn-primary-cust" style="margin-top:35px"')?>
+                            </div>                      
+                        </div>
+                    </div>
+                <?=form_close()?>
+                <hr />
+
+                <?=form_open_multipart('gr/Fiche_identification/add')?>
 
                 <div class="col-md-12">
                     <div class="col-md-8">
@@ -165,7 +190,7 @@
                             <?php echo form_error('id_groupe_sanguin','<span class="text-danger">', '</span>'); ?></div>
 
                         <div class='form-group col-md-3'>
-                            <?=form_submit('',$this->lang->line('identity_form_save_btn'),'class="btn btn-sm btn-primary-cust"')?>
+                            <?=form_submit('',$this->lang->line('identity_form_save_btn'),'class="btn btn-sm btn-primary-cust" style="margin-top:35px"')?>
                         </div>
 
                       </div>

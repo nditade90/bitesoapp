@@ -37,7 +37,7 @@ class Avancement_grades extends Admin_Controller{
 			}	
 
 			$this->data[ 'title' ] = 'Avancement_grades';
-			$this->data['title_top_bar'] = get_db_soldat_titre($id_identification);
+			$this->data['title_top_bar'] = $this->session->userdata('id_identification') > 0?get_db_soldat_titre($this->session->userdata('id_identification')):"";
 			$this->data['id_identification'] = $id_identification;
 			$this->render_template('avancement_grades/add', $this->data);
 
@@ -71,7 +71,7 @@ class Avancement_grades extends Admin_Controller{
 
 				}
 			$this->data[ 'title' ] = 'Edit Avancement_grades';
-			$this->data['title_top_bar'] = get_db_soldat_titre($id_identification);
+			$this->data['title_top_bar'] = $this->session->userdata('id_identification') > 0?get_db_soldat_titre($this->session->userdata('id_identification')):"";
 			$this->data['id_identification'] = $id_identification;
 			$this->render_template('avancement_grades/edit', $this->data);
 		

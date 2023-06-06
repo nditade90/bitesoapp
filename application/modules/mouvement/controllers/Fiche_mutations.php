@@ -41,7 +41,7 @@ class Fiche_mutations extends Admin_Controller{
 				redirect(base_url('gr/Fiche_identification/view/'.$id_identification));
 			}
 			$this->data[ 'title' ] = 'Fiche_mutations';
-			$this->data['title_top_bar'] = get_db_soldat_titre($id_identification);
+			$this->data['title_top_bar'] = $this->session->userdata('id_identification') > 0?get_db_soldat_titre($this->session->userdata('id_identification')):"";
 			$this->data['id_identification'] = $id_identification;
 			$this->render_template('fiche_mutations/add', $this->data);
 
@@ -50,7 +50,7 @@ class Fiche_mutations extends Admin_Controller{
 		public function view($id){
 			$this->data['data'] = $this->db->get_where('mv_fiche_mutations',array('id_mutation'=>$id))->row();
 			$this->data[ 'title' ] = 'AddFiche_mutations';
-			$this->data['title_top_bar'] = get_db_soldat_titre($id_identification);
+			$this->data['title_top_bar'] = $this->session->userdata('id_identification') > 0?get_db_soldat_titre($this->session->userdata('id_identification')):"";
 			$this->data['id_identification'] = $id_identification;
 			$this->render_template('fiche_mutations/view', $this->data);
 		}
@@ -84,7 +84,7 @@ class Fiche_mutations extends Admin_Controller{
 					redirect(base_url('gr/Fiche_identification/view/'.$id_identification));
 				}
 			$this->data[ 'title' ] = 'Edit Fiche_mutations';
-			$this->data['title_top_bar'] = get_db_soldat_titre($id_identification);
+			$this->data['title_top_bar'] = $this->session->userdata('id_identification') > 0?get_db_soldat_titre($this->session->userdata('id_identification')):"";
 			$this->data['id_identification'] = $id_identification;
 			$this->render_template('fiche_mutations/edit', $this->data);
 		

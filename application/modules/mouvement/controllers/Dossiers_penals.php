@@ -31,7 +31,7 @@ class Dossiers_penals extends Admin_Controller{
 				redirect(base_url('gr/Fiche_identification/view/'.$id_identification));
 			}
 			$this->data[ 'title' ] = 'Dossiers_penals';
-			$this->data['title_top_bar'] = get_db_soldat_titre($id_identification);
+			$this->data['title_top_bar'] = $this->session->userdata('id_identification') > 0?get_db_soldat_titre($this->session->userdata('id_identification')):"";
 			$this->data['id_identification'] = $id_identification;
 			$this->render_template('dossiers_penals/add', $this->data);
 
@@ -66,7 +66,7 @@ class Dossiers_penals extends Admin_Controller{
 
 				}
 			$this->data[ 'title' ] = 'Edit Dossiers_penals';
-			$this->data['title_top_bar'] = get_db_soldat_titre($id_identification);
+			$this->data['title_top_bar'] = $this->session->userdata('id_identification') > 0?get_db_soldat_titre($this->session->userdata('id_identification')):"";
 			$this->data['id_identification'] = $id_identification;
 			$this->render_template('dossiers_penals/edit', $this->data);
 		

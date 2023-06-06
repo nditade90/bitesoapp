@@ -32,7 +32,7 @@ class Renforcements extends Admin_Controller{
 
 			}
 			$this->data[ 'title' ] = 'Renforcements';
-			$this->data['title_top_bar'] = get_db_soldat_titre($id_identification);
+			$this->data['title_top_bar'] = $this->session->userdata('id_identification') > 0?get_db_soldat_titre($this->session->userdata('id_identification')):"";
 			$this->data['id_identification'] = $id_identification;
 			$this->render_template('renforcements/add', $this->data);
 
@@ -66,7 +66,7 @@ class Renforcements extends Admin_Controller{
 
 				}
 			$this->data[ 'title' ] = 'Edit Renforcements';
-			$this->data['title_top_bar'] = get_db_soldat_titre($id_identification);
+			$this->data['title_top_bar'] = $this->session->userdata('id_identification') > 0?get_db_soldat_titre($this->session->userdata('id_identification')):"";
 			$this->data['id_identification'] = $id_identification;
 			$this->render_template('renforcements/edit', $this->data);
 		

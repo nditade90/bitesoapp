@@ -17,7 +17,7 @@ class Fiche_identification extends Admin_Controller{
 			$this->data[ 'listing' ] = true;
 			$this->data[ 'datas' ]   = $this->db->order_by( 'id_identification', 'DESC' )->get( 'gr_fiche_identification', $config[ 'per_page' ],$this->uri->segment( 4 ));
 			$this->data[ 'title' ] = $this->lang->line('identity_title');
-			$this->data[ 'title_top_bar' ] = 'Liste des fiches';
+			//$this->data[ 'title_top_bar' ] = 'Liste des fiches';
 			$this->render_template('fiche_identification/index', $this->data);
 		}
 
@@ -74,6 +74,7 @@ class Fiche_identification extends Admin_Controller{
 				}
 			redirect(base_url('gr/Fiche_identification/index'));
 			}
+			$this->data['title_top_bar'] = $this->session->userdata('id_identification') > 0?get_db_soldat_titre($this->session->userdata('id_identification')):"";
 			$this->data[ 'title' ] = 'Fiche Identification';
 			$this->render_template('fiche_identification/add', $this->data);
 
@@ -152,6 +153,7 @@ class Fiche_identification extends Admin_Controller{
 
 				redirect(base_url('gr/Fiche_identification/index'));
 			}
+			$this->data['title_top_bar'] = $this->session->userdata('id_identification') > 0?get_db_soldat_titre($this->session->userdata('id_identification')):"";
 			$this->data[ 'title' ] = 'Edit Fiche Identification';
 			$this->render_template('fiche_identification/edit', $this->data);		
 		}
@@ -253,6 +255,29 @@ class Fiche_identification extends Admin_Controller{
 		}		
 		
 		redirect(base_url('gr/Fiche_identification/view/'.$id));
+	}
+
+	public function search(){
+		$this->form_validation->set_rules('matricule', 'Matricule', 'required');
+		// $this->form_validation->set_rules('nouveau_matricule', 'Nouveau_matricule', 'required');
+		// $this->form_validation->set_rules('ancien_matricule', 'Ancien_matricule', 'required');
+
+		if($this->form_validation->run()){
+			$result = $this->db->where(['matricule'=>$this->input->post('matricule')])
+							   ->or_where(['nouveau_matricule'=>$this->input->post('nouveau_matricule')])
+							   ->or_where(['ancien_matricule'=>$this->input->post('ancien_matricule')])
+							   ->get('gr_fiche_identification')
+							   ->row();
+
+			if(!empty($result)){
+				$this->session->set_userdata(['id_identification'=>$result->id_identification]);
+			}else{
+				$this->session->set_userdata(['id_identification'=>0]);
+			}		
+			
+		}
+
+		redirect(base_url('gr/Fiche_identification/add'));
 	}
 
 	
