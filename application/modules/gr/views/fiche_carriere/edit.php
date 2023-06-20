@@ -7,18 +7,18 @@
 				<h3 class="card-title text-uppercase">Editer une fiche de carriere</h3>
 
 				<span class="float-right"> 
-					<a class='btn btn-info-cust btn-sm' href="<?php echo base_url('gr/Fiche_identification/view/'.$id_identification)?>"><i class='fa fa-file'></i>
-						<span class='d-none d-sm-inline'>&nbsp;Retour sur détail</span>
+					<a class='btn btn-info-cust btn-sm' href="<?php echo base_url('gr/Fiche_carrieres/add')?>"><i class='fa fa-file'></i>
+						<span class='d-none d-sm-inline'>&nbsp;Nouvelle</span>
 					</a>
 
-					<a class='btn btn-primary-cust btn-sm' href="<?php echo base_url('gr/Fiche_identification/index')?>"><i class='fa fa-list'></i>
+					<a class='btn btn-primary-cust btn-sm' href="<?php echo base_url('gr/Fiche_carrieres/index')?>"><i class='fa fa-list'></i>
 						<span class='d-none d-sm-inline'>&nbsp;Liste des fiches</span>
 					</a>     
 				</span>
 			</div>
 		<div class="card-body">
 		    <div class="col-md-12">
-		 	 	<?=form_open('gr/Fiche_carriere/edit', null, ['id_fiche_carriere'=>$data->id_fiche_carriere])?>
+		 	 	<?=form_open('gr/Fiche_carrieres/edit', null, ['id_fiche_carriere'=>$data->id_fiche_carriere])?>
 				<div class="row mb-4">
 					<div class='form-group col-md-3'>
 						<label>Recensée</label>

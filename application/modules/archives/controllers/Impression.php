@@ -6,6 +6,7 @@ class Impression extends Admin_Controller{
         $this->data['page_title'] = 'Impression';
         $this->data['js'] = "";
         $this->load->library('Pdf');
+        $this->load->library('Excel');
         // include APPPATH.'third_party/fpdf/fpdf.php';
 	}
 
@@ -35,53 +36,68 @@ class Impression extends Admin_Controller{
         $function = 'data_'.$table;
         $this->imprimer(
             $titles[$table],
-            $this->config->item($table)['sizes'], 
             $this->config->item($table)['columns'], 
-            $this->$function(),
-            $this->config->item($table)['orientation']
+            $this->$function()
         );
 	}
 
-    public function imprimer($title = "", $tsize = array(), $thead = array(),$tbody = array(), $orientation = "P")
+    public function imprimer($title = "", $thead = array(),$tbody = array())
     {
-        $pdf = new PDF($orientation);
-        $pdf->AddPage();
-       
-        $pdf->Ln(13);
+        // Create new PHPExcel object
+        $objPHPExcel = new PHPExcel();
 
-        $pdf->SetFont('Times','B',14);
-        $pdf->Cell(110,5,$title,0,0,'L');
-        $pdf->SetFont('Times','',10);
-        $pdf->Cell(80,5,date('d/m/Y'),0,1,'R');
-
-        $pdf->Ln(5);
-        $pdf->SetFont('Times','B',10);
-        for ($i=0; $i < sizeof($tsize); $i++) { 
-            $align = $i == 0?"R":"L";
-            $return = $i ==  (sizeof($tsize)-1)?1:0;
-
-            $pdf->Cell($tsize[$i],5,utf8_decode($thead[$i]),1,$return, $align);           
-            // $pdf->MultiCell($tsize[$i],5,utf8_decode($thead[$i]),'B','J',false);           
-        }
+        // Set document properties
+        $objPHPExcel->getProperties()->setCreator("Maarten Balliauw")
+							 ->setLastModifiedBy("Maarten Balliauw")
+							 ->setTitle($title)
+							 ->setSubject($title)
+							 ->setDescription($title)
+							 ->setKeywords("office 2007 openxml php")
+							 ->setCategory("Test result file");
         
-        $pdf->SetFont('Times','',10);
-        $indice = 1;
-        foreach ($tbody as $data) {
-            $pdf->Cell($tsize[0],5,$indice,1,0, 'R');   
-           
-            for ($i=0; $i < sizeof($data); $i++) { 
-               // $align = $i == 0?"R":"L";
-                $return = $i ==  (sizeof($data)-1)?1:0;
-
-                $pdf->Cell($tsize[$i+1],5,utf8_decode($data[$i]),1,$return, "L");           
-                // $pdf->MultiCell($tsize[$i],5,utf8_decode($data[$i]),'B','J',false);           
-            }
-
-            $indice ++;
+       $lettres = array('A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','AA');
+       
+        //Add head
+        $number = 3;
+        for ($j=0; $j < count($thead) ; $j++) { 
+            $objPHPExcel->setActiveSheetIndex(0)->setCellValue($lettres[$j].$number, utf8_encode($thead[$j]));   
         }
 
-        $pdf->Output('I', $title.'_'.date('YmdHi').'.pdf');
+        //Add data from tbody
+        $index = 4;
+        foreach ($tbody as $data) {
+            for ($i=0; $i < count($data) ; $i++) { 
+                $objPHPExcel->setActiveSheetIndex(0)->setCellValue($lettres[$i].$index, utf8_decode($data[$i]));   
+            }
+            // echo "<br >";
+
+            $index ++;
+        }
+
+        // $objPHPExcel->setActiveSheetIndex(0).$string;
+
+        // Set active sheet index to the first sheet, so Excel opens this as the first sheet
+        $objPHPExcel->setActiveSheetIndex(0);
+
+
+        // Redirect output to a client’s web browser (Excel2007)
+        header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+        header('Content-Disposition: attachment;filename="'.$title.'.xlsx"');
+        header('Cache-Control: max-age=0');
+        // If you're serving to IE 9, then the following may be needed
+        header('Cache-Control: max-age=1');
+
+        // If you're serving to IE over SSL, then the following may be needed
+        header ('Expires: Mon, 26 Jul 1997 05:00:00 GMT'); // Date in the past
+        header ('Last-Modified: '.gmdate('D, d M Y H:i:s').' GMT'); // always modified
+        header ('Cache-Control: cache, must-revalidate'); // HTTP/1.1
+        header ('Pragma: public'); // HTTP/1.0
+
+        $objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel2007');
+        $objWriter->save('php://output');
+        exit;
     }
+   
 
     public function data_gr_fiche_identification($criteres=[])
     {
@@ -89,9 +105,11 @@ class Impression extends Admin_Controller{
 
         $retours = [];
         if(!empty($datas)){
+            $i = 1;
             foreach($datas as $data){
                 
                 $sub_array = array();
+                $sub_array[] = $i;
                 $sub_array[] = $data->nouveau_matricule;
                 $sub_array[] = $data->nom;
                 $sub_array[] = $data->prenom;
@@ -103,6 +121,7 @@ class Impression extends Admin_Controller{
                 $sub_array[] = get_db_value("gr_etat_civil","nom_etat_civil",array("id_etat_civil",$data->id_etat_civil));
 
                 $retours[] = $sub_array;
+                $i ++;
             }
         }
 
@@ -115,9 +134,11 @@ class Impression extends Admin_Controller{
 
         $retours = [];
         if(!empty($datas)){
+            $i = 1;
             foreach($datas as $data){
                 
                 $sub_array = array();
+                $sub_array[] = $i;
                 $sub_array[] = get_db_value("gr_fiche_identification","nom",array("id_identification",$data->id_identification))." ".get_db_value("gr_fiche_identification","prenom",array("id_identification",$data->id_identification))." ".get_db_value("gr_fiche_identification","matricule",array("id_identification",$data->id_identification));
                 $sub_array[] = $data->id_departement >0 ? get_db_value("gr_departements","nom_departement",array("id_departement",$data->id_departement)):"";                
                 $sub_array[] = $data->id_service > 0? get_db_value("gr_services","nom_service",array("id_service",$data->id_service)):" ";
@@ -126,6 +147,7 @@ class Impression extends Admin_Controller{
                 $sub_array[] = $data->id_niveau_formation > 0 ?get_db_value("gr_niveaux_formation","nom_niveau_formation",array("id_niveau_formation",$data->id_niveau_formation)):" ";
                 
                 $retours[] = $sub_array;
+                $i ++;
             }
         }
 
@@ -138,9 +160,11 @@ class Impression extends Admin_Controller{
 
         $retours = [];
         if(!empty($datas)){
+            $i = 1;
             foreach($datas as $data){
                 
                 $sub_array = array();
+                $sub_array[] = $i;
                 $sub_array[] = get_db_value("gr_fiche_identification","nom",array("id_identification",$data->id_identification))." ".get_db_value("gr_fiche_identification","prenom",array("id_identification",$data->id_identification))." ".get_db_value("gr_fiche_identification","matricule",array("id_identification",$data->id_identification));
                 $sub_array[] = $data->id_categorie_ayant_droit > 0?get_db_value("gr_categorie_ayant_droits","nom_categorie",array("id_categorie_ayant_droit ",$data->id_categorie_ayant_droit)):"";
                 $sub_array[] = $data->nom." ".$data->prenoms;
@@ -148,6 +172,7 @@ class Impression extends Admin_Controller{
                 $sub_array[] = $data->prise_en_charge;
 
                 $retours[] = $sub_array;
+                $i ++;
             }
         }
 
@@ -160,12 +185,14 @@ class Impression extends Admin_Controller{
 
         $retours = [];
         if(!empty($datas)){
+            $i =1;
             foreach($datas as $data){
                 
                 $date_d = new DateTime($data->date_debut);
                 $date_f = new DateTime($data->date_fin);
 
                 $sub_array = array();
+                $sub_array[] = $i;
                 $sub_array[] = get_db_value("gr_fiche_identification","nom",array("id_identification",$data->id_identification))." ".get_db_value("gr_fiche_identification","prenom",array("id_identification",$data->id_identification))." ".get_db_value("gr_fiche_identification","matricule",array("id_identification",$data->id_identification));
                 $sub_array[] = $data->id_situation  > 0?get_db_value("gr_situations","nom_situation",array("id_situation",$data->id_situation)):"";
                 $sub_array[] = $date_d->format('Y-m-d');
@@ -173,6 +200,7 @@ class Impression extends Admin_Controller{
                 $sub_array[] = $data->observation;
 
                 $retours[] = $sub_array;
+                $i ++;
             }
         }
 
@@ -185,9 +213,11 @@ class Impression extends Admin_Controller{
 
         $retours = [];
         if(!empty($datas)){
+            $i = 1;
             foreach($datas as $data){
                 
                 $sub_array = array();
+                $sub_array[] = $i;
                 $sub_array[] = get_db_value("gr_fiche_identification","nom",array("id_identification",$data->id_identification))." ".get_db_value("gr_fiche_identification","prenom",array("id_identification",$data->id_identification))." ".get_db_value("gr_fiche_identification","matricule",array("id_identification",$data->id_identification));
                 $sub_array[] = $data->id_type_cote  > 0?get_db_value("mv_types_cote","type_cote",array("id_type_cote",$data->id_type_cote)):"";
                 $sub_array[] = $data->code;
@@ -197,6 +227,7 @@ class Impression extends Admin_Controller{
                 $sub_array[] = $data->note_obtenue;
 
                 $retours[] = $sub_array;
+                $i ++;
             }
         }
 
@@ -209,9 +240,11 @@ class Impression extends Admin_Controller{
 
         $retours = [];
         if(!empty($datas)){
+            $i = 1;
             foreach($datas as $data){
                 
                 $sub_array = array();
+                $sub_array[] = $i;
                 $sub_array[] = get_db_value("gr_fiche_identification","nom",array("id_identification",$data->id_identification))." ".get_db_value("gr_fiche_identification","prenom",array("id_identification",$data->id_identification))." ".get_db_value("gr_fiche_identification","matricule",array("id_identification",$data->id_identification));
                 $sub_array[] = $data->id_type_etudes  > 0?get_db_value("mv_types_etudes","type_etudes",array("id_types_etudes",$data->id_type_etudes)):"";
                 $sub_array[] = $data->etablissement;
@@ -222,6 +255,7 @@ class Impression extends Admin_Controller{
                 $sub_array[] = $data->id_pays  > 0?get_db_value("gr_pays","nom_pays",array("id_pays",$data->id_pays)):"";
 
                 $retours[] = $sub_array;
+                $i ++;
             }
         }
 
@@ -234,9 +268,11 @@ class Impression extends Admin_Controller{
 
         $retours = [];
         if(!empty($datas)){
+            $i = 1;
             foreach($datas as $data){
                 
                 $sub_array = array();
+                $sub_array[] = $i;
                 $sub_array[] = get_db_value("gr_fiche_identification","nom",array("id_identification",$data->id_identification))." ".get_db_value("gr_fiche_identification","prenom",array("id_identification",$data->id_identification))." ".get_db_value("gr_fiche_identification","matricule",array("id_identification",$data->id_identification));
                 $sub_array[] = $data->id_stage  > 0?get_db_value("mv_stages","titre_stage",array("id_stage",$data->id_stage)):"";
                 $sub_array[] = $data->id_specialite  > 0?get_db_value("gr_specialites","nom_specialite",array("id_specialite",$data->id_specialite)):"";
@@ -248,6 +284,7 @@ class Impression extends Admin_Controller{
                 
 
                 $retours[] = $sub_array;
+                $i ++;
             }
         }
 
@@ -260,9 +297,11 @@ class Impression extends Admin_Controller{
 
         $retours = [];
         if(!empty($datas)){
+            $i = 1;
             foreach($datas as $data){
                 
                 $sub_array = array();
+                $sub_array[] = $i;
                 $sub_array[] = get_db_value("gr_fiche_identification","nom",array("id_identification",$data->id_identification))." ".get_db_value("gr_fiche_identification","prenom",array("id_identification",$data->id_identification))." ".get_db_value("gr_fiche_identification","matricule",array("id_identification",$data->id_identification));
                 $sub_array[] = $data->id_categorie  > 0?get_db_value("gr_categories","nom_categorie",array("id_categorie",$data->id_categorie)):"";
                 $sub_array[] = $data->id_ancien_grade  > 0?get_db_value("gr_grades","code_grade",array("id_grade",$data->id_ancien_grade)):"";
@@ -272,6 +311,7 @@ class Impression extends Admin_Controller{
                 $sub_array[] = $data->nouveau_salaire_base;                
 
                 $retours[] = $sub_array;
+                $i ++;
             }
         }
 
@@ -286,9 +326,11 @@ class Impression extends Admin_Controller{
 
         $retours = [];
         if(!empty($datas)){
+            $i = 1;
             foreach($datas as $data){
                 
                 $sub_array = array();
+                $sub_array[] = $i;
                 $sub_array[] = get_db_value("gr_fiche_identification","nom",array("id_identification",$data->id_identification))." ".get_db_value("gr_fiche_identification","prenom",array("id_identification",$data->id_identification))." ".get_db_value("gr_fiche_identification","matricule",array("id_identification",$data->id_identification));
                 $sub_array[] = $data->date_mutation;
                 $sub_array[] = $data->id_ancien_service  > 0?get_db_value("gr_services","nom_service",array("id_service",$data->id_ancien_service)):"";
@@ -298,6 +340,7 @@ class Impression extends Admin_Controller{
             
 
                 $retours[] = $sub_array;
+                $i ++;
             }
         }
 
@@ -311,9 +354,11 @@ class Impression extends Admin_Controller{
 
         $retours = [];
         if(!empty($datas)){
+            $i = 1;
             foreach($datas as $data){
                 
                 $sub_array = array();
+                $sub_array[] = $i;
                 $sub_array[] = get_db_value("gr_fiche_identification","nom",array("id_identification",$data->id_identification))." ".get_db_value("gr_fiche_identification","prenom",array("id_identification",$data->id_identification))." ".get_db_value("gr_fiche_identification","matricule",array("id_identification",$data->id_identification));
                 $sub_array[] = $data->date_ouverture;
                 $sub_array[] = $data->date_cloture;
@@ -323,6 +368,7 @@ class Impression extends Admin_Controller{
                 $sub_array[] = $data->autorite_decision;               
 
                 $retours[] = $sub_array;
+                $i ++;
             }
         }
 
@@ -335,9 +381,11 @@ class Impression extends Admin_Controller{
 
         $retours = [];
         if(!empty($datas)){
+            $i = 1;
             foreach($datas as $data){
                 
                 $sub_array = array();
+                $sub_array[] = $i;
                 $sub_array[] = get_db_value("gr_fiche_identification","nom",array("id_identification",$data->id_identification))." ".get_db_value("gr_fiche_identification","prenom",array("id_identification",$data->id_identification))." ".get_db_value("gr_fiche_identification","matricule",array("id_identification",$data->id_identification));
                 $sub_array[] = $data->date_debut;
                 $sub_array[] = $data->date_fin;
@@ -347,6 +395,7 @@ class Impression extends Admin_Controller{
                 $sub_array[] = $data->nbre;             
 
                 $retours[] = $sub_array;
+                $i ++;
             }
         }
 
@@ -359,9 +408,11 @@ class Impression extends Admin_Controller{
 
         $retours = [];
         if(!empty($datas)){
+            $i = 1;
             foreach($datas as $data){
                 
                 $sub_array = array();
+                $sub_array[] = $i;
                 $sub_array[] = get_db_value("gr_fiche_identification","nom",array("id_identification",$data->id_identification))." ".get_db_value("gr_fiche_identification","prenom",array("id_identification",$data->id_identification))." ".get_db_value("gr_fiche_identification","matricule",array("id_identification",$data->id_identification));
                 $sub_array[] = $data->date_debut;
                 $sub_array[] = $data->date_fin;
@@ -370,6 +421,7 @@ class Impression extends Admin_Controller{
                 $sub_array[] = $data->est_justifie;             
 
                 $retours[] = $sub_array;
+                $i ++;
             }
         }
 
@@ -382,9 +434,11 @@ class Impression extends Admin_Controller{
 
         $retours = [];
         if(!empty($datas)){
+            $i = 1;
             foreach($datas as $data){
                 
                 $sub_array = array();
+                $sub_array[] = $i;
                 $sub_array[] = get_db_value("gr_fiche_identification","nom",array("id_identification",$data->id_identification))." ".get_db_value("gr_fiche_identification","prenom",array("id_identification",$data->id_identification))." ".get_db_value("gr_fiche_identification","matricule",array("id_identification",$data->id_identification));
                 $sub_array[] = $data->id_type_renforcement > 0?get_db_value("mv_types_renforcement","type_renforcement",array("id_type_renforcement",$data->id_type_renforcement)):"";
                 $sub_array[] = $data->titre_obtenu;                
@@ -394,6 +448,7 @@ class Impression extends Admin_Controller{
                 $sub_array[] = $data->nb_jours;          
 
                 $retours[] = $sub_array;
+                $i ++;
             }
         }
 
@@ -406,16 +461,19 @@ class Impression extends Admin_Controller{
 
         $retours = [];
         if(!empty($datas)){
+            $i = 1;
             foreach($datas as $data){
                 
                 $sub_array = array();
+                $sub_array[] = $i;
                 $sub_array[] = get_db_value("gr_fiche_identification","nom",array("id_identification",$data->id_identification))." ".get_db_value("gr_fiche_identification","prenom",array("id_identification",$data->id_identification))." ".get_db_value("gr_fiche_identification","matricule",array("id_identification",$data->id_identification));
                 $sub_array[] = $data->id_type_distiction > 0?get_db_value("mv_type_distiction_honorifiques","type_distiction",array("id_type_distiction",$data->id_type_distiction)):"";
                 $sub_array[] = $data->date_distiction;                
-                 $sub_array[] = $data->ref_distiction;         
-                 $sub_array[] = $data->observations;         
+                $sub_array[] = $data->ref_distiction;         
+                $sub_array[] = $data->observations;         
 
                 $retours[] = $sub_array;
+                $i ++;
             }
         }
 
@@ -428,9 +486,11 @@ class Impression extends Admin_Controller{
 
         $retours = [];
         if(!empty($datas)){
+            $i = 1;
             foreach($datas as $data){
                 
                 $sub_array = array();
+                $sub_array[] = $i;
                 $sub_array[] = get_db_value("gr_fiche_identification","nom",array("id_identification",$data->id_identification))." ".get_db_value("gr_fiche_identification","prenom",array("id_identification",$data->id_identification))." ".get_db_value("gr_fiche_identification","matricule",array("id_identification",$data->id_identification));
                 $sub_array[] = $data->date_accident;
                 $sub_array[] = $data->degat_charge;                
@@ -438,6 +498,7 @@ class Impression extends Admin_Controller{
                  $sub_array[] = $data->responsable;         
 
                 $retours[] = $sub_array;
+                $i ++;
             }
         }
 
@@ -450,20 +511,24 @@ class Impression extends Admin_Controller{
 
         $retours = [];
         if(!empty($datas)){
+            $i = 1;
             foreach($datas as $data){
                 
                 $sub_array = array();
+                $sub_array[] = $i;
                 $sub_array[] = get_db_value("gr_fiche_identification","nom",array("id_identification",$data->id_identification))." ".get_db_value("gr_fiche_identification","prenom",array("id_identification",$data->id_identification))." ".get_db_value("gr_fiche_identification","matricule",array("id_identification",$data->id_identification));
                 $sub_array[] = $data->date_accident;
                 $sub_array[] = $data->nature;                
                  $sub_array[] = $data->decision;          
 
                 $retours[] = $sub_array;
+                $i ++;
             }
         }
 
         return $retours;
     }
+
 
     public function data_mv_exemptions_service($criteres = [])
     {
@@ -471,16 +536,21 @@ class Impression extends Admin_Controller{
 
         $retours = [];
         if(!empty($datas)){
+            $i = 1;
             foreach($datas as $data){
                 
                 $sub_array = array();
+                $sub_array[] = $i;
                 $sub_array[] = get_db_value("gr_fiche_identification","nom",array("id_identification",$data->id_identification))." ".get_db_value("gr_fiche_identification","prenom",array("id_identification",$data->id_identification))." ".get_db_value("gr_fiche_identification","matricule",array("id_identification",$data->id_identification));
                 $sub_array[] = $data->annee;
                 $sub_array[] = $data->date_debut;                
-                 $sub_array[] = $data->date_fin;          
-                 $sub_array[] = $data->nb_jours;          
+                $sub_array[] = $data->date_fin;          
+                $sub_array[] = $data->nb_jours;          
 
                 $retours[] = $sub_array;
+
+                
+                $i ++;
             }
         }
 

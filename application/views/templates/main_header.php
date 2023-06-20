@@ -1,7 +1,7 @@
 <!-- Navbar -->
 <nav class="main-header navbar navbar-expand-md navbar-light navbar-white">
     <div class="container-fluid">
-    <a href="<?=base_url('assets/');?>index3.html" class="navbar-brand">
+    <a href="<?=base_url();?>" class="navbar-brand">
         <img src="<?=base_url('assets/');?>img/fdnb/logo2.png" alt="AdminLTE Logo" class="brand-image elevation-3" style="opacity: .8">
         <span class="brand-text font-weight-light">FDNB</span>
       </a>
@@ -14,15 +14,15 @@
         <!-- Left navbar links -->
         <ul class="navbar-nav">
            
-            <li class="nav-item <?php if(in_array($this->router->class, ['Fiche_identifications','Fiche_carrieres','Ayants_droits'])) echo "active";?>">
-                <a href="<?=base_url().'gr/Fiche_identifications/add'?>" class="nav-link"><i class="fas fa-file"></i><?=$this->lang->line('app_menu_renseignement')?></a>
+            <li class="nav-item <?php if(in_array($this->router->class, ['Fiche_identification','Fiche_carrieres','Ayants_droit'])) echo "active";?>">
+                <a href="<?=base_url().'gr/Fiche_identification/add'?>" class="nav-link"><i class="fas fa-file"></i><?=$this->lang->line('app_menu_renseignement')?></a>
             </li>
 
             <?php 
               $mouvement_array= ['Historique_situations', 'Cotations','Formations_stages', 'Etudes_faites','Avancement_grades','Fiche_mutations','Actions_disciplinaires'];
             ?>
             <li class="nav-item <?php if(in_array($this->router->class ,$mouvement_array)) echo "active";?>">
-                <a href="<?=base_url().'gr/Historique_situations/add'?>" class="nav-link"><i class="fas fa-file"></i>Mouvements</a>
+                <a href="<?=base_url().'mouvement/Cotations/add'?>" class="nav-link"><i class="fas fa-file"></i>Mouvements</a>
             </li>
 
             <li class="nav-item dropdown <?php if($this->router->class =='Modifications') echo "active";?>">

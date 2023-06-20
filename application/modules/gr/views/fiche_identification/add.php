@@ -10,9 +10,9 @@
                <h3 class="card-title text-bold"><?=$title?></h3>
 
                 <span class="float-right">
-                    <a href='<?=base_url('gr/Fiche_identifications/add')?>' class="btn btn-primary-cust btn-sm"><i
+                    <a href='<?=base_url('gr/Fiche_identification/add')?>' class="btn btn-primary-cust btn-sm"><i
                             class="fa fa-plus"></i> <span class="d-none d-sm-inline">&nbsp;<?=$this->lang->line('identity_menu_new')?></span></a>
-                    <a class="btn btn-default btn-sm" href="<?=base_url('gr/Fiche_identifications')?>"><i
+                    <a class="btn btn-default btn-sm" href="<?=base_url('gr/Fiche_identification')?>"><i
                             class="fa fa-list"></i>
                         <span class="d-none d-sm-inline">&nbsp;<?=$this->lang->line('identity_menu_list')?></span>
                     </a>
@@ -24,17 +24,17 @@
                     <div class="col-md-12">
                         <div class="row">                        
                             <div class='form-group col-md-3'><label><?=$this->lang->line('identity_form_matricule')?></label>
-                                <?=form_input('matricule',set_value('matricule'),"class='form-control' placeholder='matricule'")?>
-                                <?php echo form_error('matricule','<span class="text-danger">', '</span>'); ?>
+                                <?=form_input('s_matricule','',"class='form-control' placeholder='matricule'")?>
+                                <?php echo form_error('s_matricule','<span class="text-danger">', '</span>'); ?>
                             </div>
 
                             <div class='form-group col-md-3'><label><?=$this->lang->line('identity_form_new_matricule')?></label> 
-                                <?=form_input('nouveau_matricule',set_value('nouveau_matricule'),"class='form-control' placeholder='nouveau_matricule'")?>
-                                <?php echo form_error('nouveau_matricule','<span class="text-danger">', '</span>'); ?>
+                                <?=form_input('s_nouveau_matricule','',"class='form-control' placeholder='nouveau_matricule'")?>
+                                <?php echo form_error('s_nouveau_matricule','<span class="text-danger">', '</span>'); ?>
                             </div>
 
                             <div class='form-group col-md-3'><label><?=$this->lang->line('identity_form_old_matricule')?></label>
-                                <?=form_input('ancien_matricule',set_value('ancien_matricule'),"class='form-control' placeholder='ancien_matricule'")?>
+                                <?=form_input('s_ancien_matricule','',"class='form-control' placeholder='ancien_matricule'")?>
                                 <?php echo form_error('ancien_matricule','<span class="text-danger">', '</span>'); ?>
                             </div>  
                             
@@ -46,158 +46,254 @@
                 <?=form_close()?>
                 <hr />
 
+                <?php 
+                    // echo "<pre>";
+                    // print_r($data);
+                    // echo "</pre>";
+                ?>
+
                 <?=form_open_multipart('gr/Fiche_identification/add')?>
 
                 <div class="col-md-12">
-                    <div class="col-md-8">
-                      <div class="row">
-                        <div class='form-group col-md-3'><label><?=$this->lang->line('identity_form_matricule')?></label>
-                            <?=form_input('matricule',set_value('matricule'),"class='form-control' placeholder='matricule' required='required'")?>
-                            <?php echo form_error('matricule','<span class="text-danger">', '</span>'); ?></div>
-
-                        <div class='form-group col-md-3'><label><?=$this->lang->line('identity_form_new_matricule')?></label> 
-                            <?=form_input('nouveau_matricule',set_value('nouveau_matricule'),"class='form-control' placeholder='nouveau_matricule' required='required'")?>
-                            <?php echo form_error('nouveau_matricule','<span class="text-danger">', '</span>'); ?></div>
-
-                        <div class='form-group col-md-3'><label><?=$this->lang->line('identity_form_old_matricule')?></label>
-                            <?=form_input('ancien_matricule',set_value('ancien_matricule'),"class='form-control' placeholder='ancien_matricule' required='required'")?>
-                            <?php echo form_error('ancien_matricule','<span class="text-danger">', '</span>'); ?></div>
-
-                        <div class='form-group col-md-3'><label><?=$this->lang->line('identity_form_category')?></label>
-                            <?=form_dropdown('id_categorie',$this->My_model->multi_dropdown('gr_categories',array("id_categorie","nom_categorie")),set_value('id_categorie') ,"class='select2 form-control' placeholder='id_categorie'")?>
-                            <?php echo form_error('id_categorie','<span class="text-danger">', '</span>'); ?></div>
-
-                        <div class='form-group col-md-3'><label><?=$this->lang->line('identity_form_nom')?></label>
-                            <?=form_input('nom',set_value('nom'),"class='form-control' placeholder='nom'  required='required'")?>
-                            <?php echo form_error('nom','<span class="text-danger">', '</span>'); ?></div>
-
-                        <div class='form-group col-md-3'><label><?=$this->lang->line('identity_form_prenom')?></label>
-                            <?=form_input('prenom',set_value('prenom'),"class='form-control' placeholder='prenom'  required='required'")?>
-                            <?php echo form_error('prenom','<span class="text-danger">', '</span>'); ?></div>
-
-                        <div class='form-group col-md-3'><label><?=$this->lang->line('identity_form_photo_passport')?></label>
-                            <?=form_upload('photo_psp',set_value('photo_psp'),"class='form-control' placeholder='photo_psp' ")?>
-                            <?php echo form_error('photo_psp','<span class="text-danger">', '</span>'); ?></div>
-
-                        <div class='form-group col-md-3'><label><?=$this->lang->line('identity_form_gerne')?></label>
-                            <?=form_dropdown('id_sexe',$this->My_model->multi_dropdown('gr_sexes',array("id_sexe","nom_sexe")),set_value('id_sexe'),"class='form-control select2' placeholder='id_sexe'")?>
-                            <?php echo form_error('id_sexe','<span class="text-danger">', '</span>'); ?></div>
-
-
-                        <div class='form-group col-md-3'><label><?=$this->lang->line('identity_form_ethnie')?></label>
-                            <?=form_dropdown('id_ethnie',$this->My_model->multi_dropdown('gr_ethnies', array("id_ethnie","nom_ethnie")),set_value('id_ethnie'),"class='form-control select2' placeholder='id_ethnie'")?>
-                            <?php echo form_error('id_ethnie','<span class="text-danger">', '</span>'); ?></div>
-
-                        <div class='form-group col-md-3'><label><?=$this->lang->line('identity_form_corps')?></label>
-                            <?=form_dropdown('id_corps_origine',$this->My_model->multi_dropdown('gr_corps_origine',array("id_corps_origine","nom_corps_origine")),set_value('id_corps_origine'),"class='form-control select2' placeholder='id_corps_origine'")?>
-                            <?php echo form_error('id_corps_origine','<span class="text-danger">', '</span>'); ?></div>
-
-                        <div class='form-group col-md-3'><label><?=$this->lang->line('identity_form_etat_civil')?></label>
-                            <?=form_dropdown('id_etat_civil',$this->My_model->multi_dropdown('gr_etat_civil',array("id_etat_civil","nom_etat_civil")),set_value('id_etat_civil'),"class='form-control select2' id='id_etat_civil' placeholder='id_etat_civil'")?>
-                            <?php echo form_error('id_etat_civil','<span class="text-danger">', '</span>'); ?></div>
-
-                        <div class='form-group col-md-3'><label><?=$this->lang->line('identity_form_nb_enfants')?></label>
-                            <?=form_input('nombre_enfant',set_value('nombre_enfant'),"class='form-control' placeholder='nombre_enfant' required='required'")?>
-                            <?php echo form_error('nombre_enfant','<span class="text-danger">', '</span>'); ?></div>
-
-
-                        <div class='form-group col-md-3' id='conjoin_salarie_div'>
-                            <label><?=$this->lang->line('identity_form_conjoint')?></label>
-                            <?=form_checkbox('conjoin_salarie',set_value('conjoin_salarie',"0"),"class='form-control' title='conjoin_salarie' required='required'")?>
-                            <?php echo form_error('conjoin_salarie','<span class="text-danger">', '</span>'); ?>
-                        </div>
-
-                        <div class='form-group col-md-3'>
-                            <label><?=$this->lang->line('identity_form_date_naissance')?></label>
-                            <div class="input-group date" id="inputdate" data-target-input="nearest">
-                                <?=form_input('date_naissance',set_value('date_naissance'),"class='form-control datetimepicker-input', id='inputdate' placeholder='date_naissance'")?>
-                                <div class="input-group-append" data-target="#inputdate" data-toggle="datetimepicker">
-                                    <div class="input-group-text"><i class="fa fa-calendar"></i></div>
-                                </div>
+                    <div class="row">
+                    <div class="col-md-9">
+                        <div class="row">
+                            <div class='form-group col-md-3'><label><?=$this->lang->line('identity_form_matricule')?></label><?php echo form_error('matricule'); ?>
+                                <?=form_input('matricule',set_value('matricule',$data->matricule),"class='form-control' placeholder='matricule'")?>
+                                <?php echo form_error('matricule','<span class="text-danger">', '</span>'); ?>
                             </div>
-                            <?php echo form_error('date_naissance','<span class="text-danger">', '</span>'); ?>
+                            <div class='form-group col-md-3'>
+                                <label><?=$this->lang->line('identity_form_new_matricule')?></label><?php echo form_error('nouveau_matricule'); ?>
+                                <?=form_input('nouveau_matricule',set_value('nouveau_matricule',$data->nouveau_matricule),"class='form-control' placeholder='nouveau_matricule'")?>
+                                <?php echo form_error('nouveau_matricule','<span class="text-danger">', '</span>'); ?>
+                            </div>
+                            <div class='form-group col-md-3'>
+                                <label><?=$this->lang->line('identity_form_old_matricule')?></label><?php echo form_error('ancien_matricule'); ?>
+                                <?=form_input('ancien_matricule',set_value('ancien_matricule',$data->ancien_matricule),"class='form-control' placeholder='ancien_matricule'")?>
+                                <?php echo form_error('ancien_matricule','<span class="text-danger">', '</span>'); ?>
+                            </div>
+
+                            <div class='form-group col-md-3'><label><?=$this->lang->line('identity_form_category')?></label>
+                                <?=form_dropdown('id_categorie',$this->My_model->multi_dropdown('gr_categories',array("id_categorie","nom_categorie")),set_value('id_categorie',$data->id_categorie) ,"class='form-control select2' placeholder='id_categorie'")?>
+                                <?php echo form_error('id_categorie','<span class="text-danger">', '</span>'); ?></div>
+
+                            <div class='form-group col-md-3'><label><?=$this->lang->line('identity_form_nom')?></label><?php echo form_error('nom'); ?>
+                                <?=form_input('nom',set_value('nom',$data->nom),"class='form-control' placeholder='nom'")?>
+                                <?php echo form_error('nom','<span class="text-danger">', '</span>'); ?>
+                            </div>
+                            <div class='form-group col-md-3'><label><?=$this->lang->line('identity_form_prenom')?></label><?php echo form_error('prenom'); ?>
+                                <?=form_input('prenom',set_value('prenom',$data->prenom),"class='form-control' placeholder='prenom'")?>
+                                <?php echo form_error('prenom','<span class="text-danger">', '</span>'); ?>
+                            </div>
+                            <div class='form-group col-md-3'><label><?=$this->lang->line('identity_form_photo_passport')?></label>
+                                <?=form_upload('photo_psp',set_value('photo_psp'),"class='form-control' placeholder='photo_psp'")?>
+                                <?php echo form_error('photo_psp','<span class="text-danger">', '</span>'); ?>
+                            </div>
+
+                            <div class='form-group col-md-3'><label><?=$this->lang->line('identity_form_gerne')?></label>
+                                <?=form_dropdown('id_sexe',$this->My_model->multi_dropdown('gr_sexes',array("id_sexe","nom_sexe")),set_value('id_sexe',$data->id_sexe),"class='form-control select2' placeholder='id_sexe'")?>
+                                <?php echo form_error('id_sexe','<span class="text-danger">', '</span>'); ?>
+                            </div>
+
+
+                            <div class='form-group col-md-3'><label><?=$this->lang->line('identity_form_ethnie')?></label>
+                                <?=form_dropdown('id_ethnie',$this->My_model->multi_dropdown('gr_ethnies', array("id_ethnie","nom_ethnie")),set_value('id_ethnie',$data->id_ethnie),"class='form-control select2' placeholder='id_ethnie'")?>
+                                <?php echo form_error('id_ethnie','<span class="text-danger">', '</span>'); ?></div>
+
+                            <div class='form-group col-md-3'><label><?=$this->lang->line('identity_form_corps')?></label>
+                                <?=form_dropdown('id_corps_origine',$this->My_model->multi_dropdown('gr_corps_origine',array("id_corps_origine","nom_corps_origine")),set_value('id_corps_origine',$data->id_corps_origine),"class='form-control select2' placeholder='id_corps_origine'")?>
+                                <?php echo form_error('id_corps_origine','<span class="text-danger">', '</span>'); ?></div>
+
+                            <div class='form-group col-md-3'><label><?=$this->lang->line('identity_form_etat_civil')?></label>
+                                <?=form_dropdown('id_etat_civil',$this->My_model->multi_dropdown('gr_etat_civil',array("id_etat_civil","nom_etat_civil")),set_value('id_etat_civil',$data->id_etat_civil),"class='form-control select2' id='id_etat_civil' placeholder='id_etat_civil'")?>
+                                <?php echo form_error('id_etat_civil','<span class="text-danger">', '</span>'); ?></div>
+
+                            <div class='form-group col-md-3'>
+                                <label><?=$this->lang->line('identity_form_nb_enfants')?></label><?php echo form_error('nombre_enfant'); ?>
+                                <?=form_input('nombre_enfant',set_value('nombre_enfant',$data->nombre_enfant),"class='form-control' placeholder='nombre_enfant'")?>
+                                <?php echo form_error('nombre_enfant','<span class="text-danger">', '</span>'); ?>
+                            </div>
+
+                            <div class='form-group col-md-3' id='conjoin_salarie_div'>
+                                <label><?=$this->lang->line('identity_form_conjoint')?></label>
+                                <?=form_checkbox('conjoin_salarie',set_value('conjoin_salarie',$data->conjoin_salarie),"class='form-control' title='conjoin_salarie' required='required'")?>
+                                <?php echo form_error('conjoin_salarie','<span class="text-danger">', '</span>'); ?>
+                            </div>
+
+                            <div class='form-group col-md-3'>
+                                <label><?=$this->lang->line('identity_form_date_naissance')?></label>
+                                <div class="input-group date" id="inputdate" data-target-input="nearest">
+                                    <?=form_input('date_naissance',set_value('date_naissance',$data->date_naissance),"class='form-control datetimepicker-input', id='inputdate' placeholder='date_naissance'")?>
+                                    <div class="input-group-append" data-target="#inputdate" data-toggle="datetimepicker">
+                                        <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                                    </div>
+                                </div>
+                                <?php echo form_error('date_naissance','<span class="text-danger">', '</span>'); ?>
+                            </div>
+
+                            <div class='form-group col-md-3'>
+                                <label><?=$this->lang->line('identity_form_annee_naissance')?></label><?php echo form_error('annee_naissance'); ?>
+                                <?=form_input('annee_naissance',set_value('annee_naissance',$data->annee_naissance),"class='form-control' placeholder='annee_naissance'")?>
+                                <?php echo form_error('annee_naissance','<span class="text-danger">', '</span>'); ?>
+                            </div>
+                            <div class='form-group col-md-3'>
+                                <label><?=$this->lang->line('identity_form_annee_pension')?></label><?php echo form_error('anne_pension_min'); ?>
+                                <?=form_input('anne_pension_min',set_value('anne_pension_min',$data->anne_pension_min),"class='form-control' placeholder='anne_pension_min'")?>
+                                <?php echo form_error('anne_pension_min','<span class="text-danger">', '</span>'); ?>
+                            </div>
+
+                            <div class='form-group col-md-3'>
+                                <label><?=$this->lang->line('identity_form_annee_pension_max')?></label><?php echo form_error('annee_pension_max'); ?>
+                                <?=form_input('annee_pension_max',set_value('annee_pension_max',$data->annee_pension_max),"class='form-control' placeholder='annee_pension_max'")?>
+                                <?php echo form_error('annee_pension_max','<span class="text-danger">', '</span>'); ?>
+                            </div>
+
+                            <div class='form-group col-md-3'><label><?=$this->lang->line('identity_form_pays_naissance')?></label>
+                                <?=form_dropdown('id_pays_naissance',$this->My_model->multi_dropdown('gr_pays',array("id_pays","nom_pays")),set_value('id_pays_naissance',$data->id_pays_naissance),"class='form-control select2' placeholder='id_pays_naissance'")?>
+                                <?php echo form_error('id_pays_naissance','<span class="text-danger">', '</span>'); ?></div>
+
+                            <div class='form-group col-md-3'><label><?=$this->lang->line('identity_form_ville_naissance')?></label>
+                                <?=form_input('ville_naissance',set_value('ville_naissance',$data->ville_naissance),"class='form-control' placeholder='ville_naissance'")?>
+                                <?php echo form_error('ville_naissance','<span class="text-danger">', '</span>'); ?></div>
+
+                            <div class='form-group col-md-3'>
+                                <label><?=$this->lang->line('identity_form_province')?></label>
+                                <?=form_dropdown('id_province',$this->My_model->multi_dropdown('gr_provinces',array('id_province','nom_province')),set_value('id_province', $data->id_province),"class='form-control select2' id='id_province' placeholder='Province'")?>
+                                <?php echo form_error('id_province','<span class="text-danger">', '</span>'); ?>
+                            </div>
+
+                            <div class='form-group col-md-3'>
+                                <label><?=$this->lang->line('identity_form_commune')?></label>
+                                <?=form_dropdown('id_commune',$this->My_model->multi_dropdown('gr_communes',array('id_commune','nom_commune')),set_value('id_commune', $data->id_commune),"class='form-control select2' id='id_commune' placeholder='Commune'")?>
+                                <?php echo form_error('id_commune','<span class="text-danger">', '</span>'); ?>
+                            </div>
+
+                            <div class='form-group col-md-3'><label><?=$this->lang->line('identity_form_colline')?></label>
+                                <?=form_dropdown('id_colline',$this->My_model->multi_dropdown('gr_collines',array('id_colline','nom_colline')),set_value('id_colline',$data->id_colline),"class='form-control select2' id='id_colline' placeholder='id_colline'")?>
+                                <?php echo form_error('id_colline','<span class="text-danger">', '</span>'); ?></div>
+
+                            <div class='form-group col-md-3'><label><?=$this->lang->line('identity_form_promotion')?></label>
+                                <?=form_dropdown('id_promotion',$this->My_model->multi_dropdown('gr_promotions',array("id_promotion","nom_promotion")),set_value('id_promotion',$data->id_promotion),"class='form-control select2' placeholder='id_promotion'")?>
+                                <?php echo form_error('id_promotion','<span class="text-danger">', '</span>'); ?></div>
+
+                            <div class='form-group col-md-3'><label><?=$this->lang->line('identity_form_nom_pere')?></label><?php echo form_error('noms_pere'); ?>
+                                <?=form_input('noms_pere',set_value('noms_pere',$data->noms_pere),"class='form-control' placeholder='noms_pere'")?>
+                                <?php echo form_error('noms_pere','<span class="text-danger">', '</span>'); ?>
+                            </div>
+
+                            <div class='form-group col-md-3'><label><?=$this->lang->line('identity_form_nom_mere')?></label><?php echo form_error('noms_mere'); ?>
+                                <?=form_input('noms_mere',set_value('noms_mere',$data->noms_mere),"class='form-control' placeholder='noms_mere'")?>
+                                <?php echo form_error('noms_mere','<span class="text-danger">', '</span>'); ?>
+                            </div>
+
+                            <div class='form-group col-md-3'><label><?=$this->lang->line('identity_form_inss')?></label>
+                                <?=form_input('numero_inss',set_value('numero_inss',$data->numero_inss),"class='form-control' placeholder='numero_inss'")?>
+                                <?php echo form_error('numero_inss','<span class="text-danger">', '</span>'); ?></div>
+
+                            <div class='form-group col-md-3'><label><?=$this->lang->line('identity_form_mfp')?></label>
+                                <?=form_input('numero_mfp',set_value('numero_mfp',$data->numero_mfp),"class='form-control' placeholder='numero_mfp'")?>
+                                <?php echo form_error('numero_mfp','<span class="text-danger">', '</span>'); ?></div>
+
+                            <div class='form-group col-md-3'><label><?=$this->lang->line('identity_form_psp')?></label>
+                                <?=form_input('numero_psp',set_value('numero_psp',$data->numero_psp),"class='form-control' placeholder='numero_psp'")?>
+                                <?php echo form_error('numero_psp','<span class="text-danger">', '</span>'); ?></div>
+
+                            <div class='form-group col-md-3'><label><?=$this->lang->line('identity_form_rel')?></label>
+                                <?=form_dropdown('id_religion',$this->My_model->multi_dropdown('gr_religions', array("id_religion","nom_religion")),set_value('id_religion',$data->id_religion),"class='form-control select2' placeholder='id_religion'")?>
+                                <?php echo form_error('id_religion','<span class="text-danger">', '</span>'); ?></div>
+
+                            <div class='form-group col-md-3'><label><?=$this->lang->line('identity_form_gp_sang')?></label>
+                                <?=form_dropdown('id_groupe_sanguin',$this->My_model->multi_dropdown('gr_groupes_sanguin',array("id_gpe_sanguin","nom_gpe_sanguin")),set_value('id_groupe_sanguin',$data->id_groupe_sanguin),"class='form-control select2' placeholder='id_groupe_sanguin'")?>
+                                <?php echo form_error('id_groupe_sanguin','<span class="text-danger">', '</span>'); ?>
+                            </div>
+
                         </div>
-
-                        <div class='form-group col-md-3'><label><?=$this->lang->line('identity_form_annee_naissance')?></label>
-                            <?=form_input('annee_naissance',set_value('annee_naissance'),"class='form-control' placeholder='annee_naissance'")?>
-                            <?php echo form_error('annee_naissance','<span class="text-danger">', '</span>'); ?></div>
-
-                        <div class='form-group col-md-3'><label><?=$this->lang->line('identity_form_annee_pension')?></label>
-                            <?=form_input('anne_pension_min',set_value('anne_pension_min'),"class='form-control' placeholder='anne_pension_min'")?>
-                            <?php echo form_error('anne_pension_min','<span class="text-danger">', '</span>'); ?></div>
-
-                        <div class='form-group col-md-3'><label><?=$this->lang->line('identity_form_annee_pension_max')?></label>
-                            <?=form_input('annee_pension_max',set_value('annee_pension_max'),"class='form-control' placeholder='annee_pension_max'")?>
-                            <?php echo form_error('annee_pension_max','<span class="text-danger">', '</span>'); ?></div>
-
-                        <div class='form-group col-md-3'>
-                            <label><?=$this->lang->line('identity_form_pays_naissance')?></label>
-                            <?=form_dropdown('id_pays_naissance',$this->My_model->multi_dropdown('gr_pays',array("id_pays","nom_pays")),set_value('id_pays_naissance'),"class='form-control select2' placeholder='id_pays_naissance'")?>
-                            <?php echo form_error('id_pays_naissance','<span class="text-danger">', '</span>'); ?></div>
-
-                        <div class='form-group col-md-3'><label><?=$this->lang->line('identity_form_ville_naissance')?></label>
-                            <?=form_input('ville_naissance',set_value('ville_naissance'),"class='form-control' placeholder='ville_naissance'")?>
-                            <?php echo form_error('ville_naissance','<span class="text-danger">', '</span>'); ?></div>
-
-                        <div class='form-group col-md-3'>
-                            <label><?=$this->lang->line('identity_form_province')?></label>
-                            <?=form_dropdown('id_province',$this->My_model->multi_dropdown('gr_provinces',array('id_province','nom_province')),set_value('id_province'),"class='form-control select2' id='id_province' placeholder='Province'")?>
-                            <?php echo form_error('id_province','<span class="text-danger">', '</span>'); ?>
+                        <div class='row'>
+                            <?=form_submit('',$this->lang->line('identity_form_save_btn'),'class="btn btn-primary-cust"')?>
                         </div>
-
-                        <div class='form-group col-md-3'>
-                            <label><?=$this->lang->line('identity_form_commune')?></label>
-                            <?=form_dropdown('id_commune',$this->My_model->multi_dropdown('gr_communes',array('id_commune','nom_commune')),set_value('id_commune'),"class='form-control select2' id='id_commune' placeholder='Commune'")?>
-                            <?php echo form_error('id_commune','<span class="text-danger">', '</span>'); ?>
-                        </div>
-
-                        <div class='form-group col-md-3'>
-                            <label><?=$this->lang->line('identity_form_colline')?></label>
-                            <?=form_dropdown('id_colline',$this->My_model->multi_dropdown('gr_collines',array('id_colline','nom_colline')),set_value('id_colline'),"class='form-control select2' id='id_colline' placeholder='id_colline'")?>
-                            <?php echo form_error('id_colline','<span class="text-danger">', '</span>'); ?>
-                        </div>
-
-                        <div class='form-group col-md-3'><label><?=$this->lang->line('identity_form_promotion')?></label>
-                            <?=form_dropdown('id_promotion',$this->My_model->multi_dropdown('gr_promotions',array("id_promotion","nom_promotion")),set_value('id_promotion'),"class='form-control select2' placeholder='id_promotion'")?>
-                            <?php echo form_error('id_promotion','<span class="text-danger">', '</span>'); ?></div>
-
-                        <div class='form-group col-md-3'><label><?=$this->lang->line('identity_form_nom_pere')?></label>
-                            <?=form_input('noms_pere',set_value('noms_pere'),"class='form-control' placeholder='noms_pere'")?>
-                            <?php echo form_error('noms_pere','<span class="text-danger">', '</span>'); ?></div>
-
-                        <div class='form-group col-md-3'><label><?=$this->lang->line('identity_form_nom_mere')?></label>
-                            <?=form_input('noms_mere',set_value('noms_mere'),"class='form-control' placeholder='noms_mere'")?>
-                            <?php echo form_error('noms_mere','<span class="text-danger">', '</span>'); ?></div>
-
-                        <div class='form-group col-md-3'><label><?=$this->lang->line('identity_form_inss')?></label>
-                            <?=form_input('numero_inss',set_value('numero_inss'),"class='form-control' placeholder='numero_inss'")?>
-                            <?php echo form_error('numero_inss','<span class="text-danger">', '</span>'); ?></div>
-
-                        <div class='form-group col-md-3'><label><?=$this->lang->line('identity_form_mfp')?></label>
-                            <?=form_input('numero_mfp',set_value('numero_mfp'),"class='form-control' placeholder='numero_mfp'")?>
-                            <?php echo form_error('numero_mfp','<span class="text-danger">', '</span>'); ?></div>
-
-                        <div class='form-group col-md-3'><label><?=$this->lang->line('identity_form_psp')?></label>
-                            <?=form_input('numero_psp',set_value('numero_psp'),"class='form-control' placeholder='numero_psp'")?>
-                            <?php echo form_error('numero_psp','<span class="text-danger">', '</span>'); ?></div>
-
-                        <div class='form-group col-md-3'><label><?=$this->lang->line('identity_form_rel')?></label>
-                            <?=form_dropdown('id_religion',$this->My_model->multi_dropdown('gr_religions', array("id_religion","nom_religion")),set_value('id_religion'),"class='form-control select2' placeholder='id_religion'")?>
-                            <?php echo form_error('id_religion','<span class="text-danger">', '</span>'); ?></div>
-
-                        <div class='form-group col-md-3'><label><?=$this->lang->line('identity_form_gp_sang')?></label>
-                            <?=form_dropdown('id_groupe_sanguin',$this->My_model->multi_dropdown('gr_groupes_sanguin',array("id_gpe_sanguin","nom_gpe_sanguin")),set_value('id_groupe_sanguin'),"class='form-control select2' placeholder='id_groupe_sanguin'")?>
-                            <?php echo form_error('id_groupe_sanguin','<span class="text-danger">', '</span>'); ?></div>
-
-                        <div class='form-group col-md-3'>
-                            <?=form_submit('',$this->lang->line('identity_form_save_btn'),'class="btn btn-sm btn-primary-cust" style="margin-top:35px"')?>
-                        </div>
-
-                      </div>
+                        <?=form_close()?> 
                     </div>
                     
-                    <div class="col-md-4">
+                    <div class="col-md-1"></div>
 
+                    <div class="col-md-2">
+                        <div class="row"> 
+
+                            <div class="img ">
+                                
+                                <img class="img-fluid mb-2" src="<?=base_url('uploads/photo_passport/')?><?=$data->photo_psp?>" alt="PHOTO PASSPORT"/>
+
+                                <?=form_open_multipart('gr/Fiche_identification/change_profile/'.$this->session->userdata('id_identification'))?>
+                                    <div class="row">Changer un photo de profil</div>
+                                    <div class="row">
+                                        <div class='form-group col-md-6'>
+                                            <?=form_upload('photo_psp',set_value('photo_psp'),"class='form-control' placeholder='photo_psp'")?>
+                                            <?php echo form_error('photo_psp','<span class="text-danger">', '</span>'); ?>
+                                        </div>
+
+                                        <div class='form-group col-md-6'>
+                                            <?=form_submit('','Enregistrer','class="btn btn-sm btn-primary-cust"')?>
+                                        </div>
+                                    </div>  
+                                <?=form_close()?>                                  
+                            </div>
+
+                            <table class='table table-condensed table-hover table-stripped'>
+                                    <?php 
+                                        if($this->session->flashdata('msg')){
+                                            echo $this->session->flashdata('msg');
+                                        }
+                                    ?>
+                                <?=form_open_multipart('gr/Fiche_identification/ajout_document/'.$this->session->userdata('id_identification'))?>
+                                    <div class="row" style="margin-top:10px">                                        
+                                        <legend>Documents</legend>
+                                        <?=form_dropdown('id_type_document',$this->My_model->multi_dropdown('gr_type_documents',array("id_type_document","nom_type_document")),set_value('id_type_document'),"class='form-control select2' placeholder='Document'")?>
+                                        <?php echo form_error('id_type_document','<span class="text-danger">', '</span>'); ?></div>
+                                    </div>
+                                    <br>
+
+                                    <div class='row'style="margin-top:10px">
+                                        <?=form_upload('photo_psp',set_value('photo_psp'),"class='form-control' placeholder='Scan'")?>
+                                        <?php echo form_error('photo_psp','<span class="text-danger">', '</span>'); ?>
+                                    </div>
+                                    <br>
+
+                                    <div class='row' style="margin-top:10px">
+                                        <?=form_submit('','Enregistrer','class="btn btn-sm btn-primary-cust"')?>
+                                    </div>
+                                <?=form_close()?>   
+
+                                <br>
+                                <thead>
+                                    <tr>
+                                        <th>#</th>
+                                        <th>Document</th>
+                                        <th>Voir</th>
+                                    </tr>
+                                </thead>
+
+                                <tbody>
+                                    
+                                    <?php 
+                                        $i = 1;
+                                        foreach ($documents as $document) {
+                                    ?>
+                                        <tr>
+                                            <td><?=$i?></td>
+                                            <td><?=$document->nom_type_document?></td>
+                                            <td><a href="<?=base_url().'uploads/document_joint/'.$document->fichier_joint?>" target="_blank"><i class="fas fa-eye"></i></a></td>
+                                        </tr>
+                                    <?php
+                                        $i ++;
+                                        } 
+                                    ?>
+                                
+                                    
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
                 </div>
 
             </div>

@@ -9,14 +9,14 @@ class Fiche_identification extends Admin_Controller{
 
 		public function index(){
 			$this->load->library( 'pagination' );
-			$config[ 'base_url' ]      = base_url( 'carriere/Fiche_identification/index' );
+			$config[ 'base_url' ]      = base_url('gr/Fiche_identification/index' );
 			$config[ 'per_page' ]      = 10;
 			$config[ 'num_links' ]     = 2;
 			$config[ 'total_rows' ] = $this->db->get( 'gr_fiche_identification' )->num_rows();
 			$this->pagination->initialize( $config );
 			$this->data[ 'listing' ] = true;
 			$this->data[ 'datas' ]   = $this->db->order_by( 'id_identification', 'DESC' )->get( 'gr_fiche_identification', $config[ 'per_page' ],$this->uri->segment( 4 ));
-			$this->data[ 'title' ] = $this->lang->line('identity_title');
+			$this->data[ 'title' ] = $this->lang->line('identity_title');			
 			//$this->data[ 'title_top_bar' ] = 'Liste des fiches';
 			$this->render_template('fiche_identification/index', $this->data);
 		}
@@ -65,7 +65,15 @@ class Fiche_identification extends Admin_Controller{
 
 			if($this->form_validation->run()){
 
-				$insert = $this->db->insert('gr_fiche_identification',$_POST);
+				if($id = $this->session->userdata('id_identification') > 0){
+					$this->db->where('id_identification',$id);		
+					$insert = $this->db->update('gr_fiche_identification',$_POST);
+
+				}else{
+
+					$insert = $this->db->insert('gr_fiche_identification',$_POST);
+				}
+
 
 				if(!empty($insert)){
 					$this->session->set_flashdata('msg','Entry added succesfuly');
@@ -74,8 +82,12 @@ class Fiche_identification extends Admin_Controller{
 				}
 			redirect(base_url('gr/Fiche_identification/index'));
 			}
+			$this->data['data'] = $this->db->get_where('gr_fiche_identification',array('id_identification'=>$this->session->userdata('id_identification')))->row();
+
 			$this->data['title_top_bar'] = $this->session->userdata('id_identification') > 0?get_db_soldat_titre($this->session->userdata('id_identification')):"";
 			$this->data[ 'title' ] = 'Fiche Identification';
+			$this->data['documents'] = $this->db->select('*')->where('id_identification',$this->session->userdata('id_identification'))->from('gr_documents_joints dc')->join('gr_type_documents td', 'dc.id_type_document=td.id_type_document')->get()->result();
+
 			$this->render_template('fiche_identification/add', $this->data);
 
 		}
@@ -218,7 +230,7 @@ class Fiche_identification extends Admin_Controller{
 			$insert = $this->db->update('gr_fiche_identification',$array);
 		}			
 		
-		redirect(base_url('gr/Fiche_identification/view/'.$id));
+		redirect(base_url('gr/Fiche_identification/add/'.$id));
 	}
 
 	public function ajout_document($id)
@@ -254,20 +266,30 @@ class Fiche_identification extends Admin_Controller{
 			}			
 		}		
 		
-		redirect(base_url('gr/Fiche_identification/view/'.$id));
+		redirect(base_url('gr/Fiche_identification/add/'.$id));
 	}
 
 	public function search(){
-		$this->form_validation->set_rules('matricule', 'Matricule', 'required');
-		// $this->form_validation->set_rules('nouveau_matricule', 'Nouveau_matricule', 'required');
-		// $this->form_validation->set_rules('ancien_matricule', 'Ancien_matricule', 'required');
+		$this->form_validation->set_rules('s_matricule', 'Matricule', 'required');
+		// $this->form_validation->set_rules('s_nouveau_matricule', 'Nouveau_matricule', 'required');
+		// $this->form_validation->set_rules('s_ancien_matricule', 'Ancien_matricule', 'required');
 
-		if($this->form_validation->run()){
-			$result = $this->db->where(['matricule'=>$this->input->post('matricule')])
-							   ->or_where(['nouveau_matricule'=>$this->input->post('nouveau_matricule')])
-							   ->or_where(['ancien_matricule'=>$this->input->post('ancien_matricule')])
-							   ->get('gr_fiche_identification')
-							   ->row();
+		if(!empty($this->input->post('s_matricule')) || !empty($this->input->post('s_nouveau_matricule')) || !empty($this->input->post('s_ancien_matricule'))){
+			$where = array();
+
+			if(!empty($this->input->post('s_matricule')))
+				$where = ['matricule'=>$this->input->post('s_matricule')];
+			
+			if(!empty($this->input->post('s_nouveau_matricule')))
+				$where = ['nouveau_matricule'=>$this->input->post('s_nouveau_matricule')];
+			
+			if(!empty($this->input->post('s_ancien_matricule')))
+				$where = ['ancien_matricule'=>$this->input->post('s_ancien_matricule')];
+			
+			
+			$result = $this->db->where($where)
+								->get('gr_fiche_identification')
+							   	->row();
 
 			if(!empty($result)){
 				$this->session->set_userdata(['id_identification'=>$result->id_identification]);

@@ -20,7 +20,7 @@
 
 		<div class="card-body">
 		    <div class="col-md-12">
-			 	<?=form_open('gr/Fiche_carriere/add')?>
+			 	<?=form_open('gr/Fiche_carrieres/add')?>
 				<div class="row mb-4">
 					<div class='form-group col-md-3'>
 						<label>Recensée</label>

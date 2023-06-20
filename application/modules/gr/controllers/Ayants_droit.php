@@ -5,11 +5,26 @@ class Ayants_droit extends Admin_Controller{
 		parent::__construct();
 		$this->data['page_title'] = 'Ayants_droit';
 		$this->data['js'] = base_url()."assets/js/pages/Ayants_droit.js";
+		$this->data['url_list'] = "";
+	}
+
+	public function index()
+	{
+		$config[ 'base_url' ]      = base_url('gr/Fiche_carrieres/index' );
+		$config[ 'per_page' ]      = 10;
+		$config[ 'num_links' ]     = 2;
+		$config[ 'total_rows' ] = $this->db->where(['id_identification'=>$this->session->userdata('id_identification')])->get( 'gr_ayants_droit' )->num_rows();
+		$this->pagination->initialize( $config );
+		
+		$this->data[ 'datas' ]   = $this->db->order_by('id_ayant_droit', 'DESC' )->where(['id_identification'=>$this->session->userdata('id_identification')])->get( 'gr_ayants_droit', $config[ 'per_page' ],$this->uri->segment( 4 ));
+		$this->data[ 'title' ] = $this->lang->line('identity_title');			
+		$this->data['title_top_bar'] = $this->session->userdata('id_identification') > 0?get_db_soldat_titre($this->session->userdata('id_identification')):"";
+		$this->render_template('ayants_droit/index', $this->data);
 	}
 		
 
 	public function add(){
-		$id_identification = !empty($this->uri->segment(4))?$this->uri->segment(4):$this->input->post('id_identification');
+		$id_identification = !empty($this->session->userdata('id_identification'))?$this->session->userdata('id_identification'):$this->input->post('id_identification');
 		$this->data['identification'] = $this->db->get_where('gr_fiche_identification',['id_identification'=>$id_identification])->row();
 
 		$this->form_validation->set_rules('id_categorie_ayant_droit', 'Id_categorie_ayant_droit', 'required|numeric');
@@ -37,12 +52,13 @@ class Ayants_droit extends Admin_Controller{
 		if($this->form_validation->run()){
 
 		$insert = $this->db->insert('gr_ayants_droit',$this->input->post());
-		if(!empty($insert)){
-			$this->session->set_flashdata('msg','<div class="text-success"> Un ayant droit '.$this->input->post('nom').' '.$this->input->post('prenom').' a été enregistré avec succès.</div>');
-		}else{
-			$this->session->set_flashdata('msg','<div class="text-danger">L\'enregistrement d\'un ayant droit '.$this->input->post('nom').' '.$this->input->post('prenom').' a échoué </div');
-		}
-			redirect(base_url('gr/Fiche_identification/view/'.$id_identification));
+			if(!empty($insert)){
+				$this->session->set_flashdata('msg','<div class="text-success"> Un ayant droit '.$this->input->post('nom').' '.$this->input->post('prenom').' a été enregistré avec succès.</div>');
+			}else{
+				$this->session->set_flashdata('msg','<div class="text-danger">L\'enregistrement d\'un ayant droit '.$this->input->post('nom').' '.$this->input->post('prenom').' a échoué </div');
+			}
+			
+			redirect(base_url('gr/Ayants_droit/index/'));
 		}
 
 		$this->data[ 'title' ] = 'Ayants_droit';
@@ -54,8 +70,8 @@ class Ayants_droit extends Admin_Controller{
 	}
 
 	public function edit(){
-		$id_identification = !empty($this->uri->segment(4))?$this->uri->segment(4):$this->input->post('id_identification');
-		$id = $this->uri->segment(5) > 0 ? $this->uri->segment(5) : $this->input->post('id_ayant_droit');
+		$id_identification = !empty($this->session->userdata('id_identification'))?$this->session->userdata('id_identification'):$this->input->post('id_identification');
+		$id = $this->uri->segment(4) > 0 ? $this->uri->segment(4) : $this->input->post('id_ayant_droit');
 		$this->data['data'] = $this->db->get_where('gr_ayants_droit',array('id_ayant_droit'=>$id))->row();
 		$this->data['identification'] = $this->db->get_where('gr_fiche_identification',['id_identification'=>$id_identification])->row();
 
@@ -85,12 +101,13 @@ class Ayants_droit extends Admin_Controller{
 		$this->db->where('id_ayant_droit',$id);
 		$insert = $this->db->update('gr_ayants_droit',$this->input->post());
 
-		if(!empty($insert)){
-			$this->session->set_flashdata('msg','<div class="text-success"> Un ayant droit '.$this->input->post('nom').' '.$this->input->post('prenom').' a été mis a jour avec succès.</div>');
-		}else{
-			$this->session->set_flashdata('msg','<div class="text-danger">La mis a jour d\'un ayant droit '.$this->input->post('nom').' '.$this->input->post('prenom').' a échoué </div');
-		}
-		redirect(base_url('gr/Fiche_identification/view/'.$id_identification));
+			if(!empty($insert)){
+				$this->session->set_flashdata('msg','<div class="text-success"> Un ayant droit '.$this->input->post('nom').' '.$this->input->post('prenom').' a été mis a jour avec succès.</div>');
+			}else{
+				$this->session->set_flashdata('msg','<div class="text-danger">La mis a jour d\'un ayant droit '.$this->input->post('nom').' '.$this->input->post('prenom').' a échoué </div');
+			}
+			
+			redirect(base_url('gr/Ayants_droit/index/'));
 		}
 		$this->data['title_top_bar'] = $this->session->userdata('id_identification') > 0?get_db_soldat_titre($this->session->userdata('id_identification')):"";
 		$this->data['id_identification'] = $id_identification;		
@@ -100,13 +117,13 @@ class Ayants_droit extends Admin_Controller{
 	}
 
 	public function delete(){
-		$id_identification = $this->uri->segment(4);
-		$id = $this->uri->segment(5);
+		$id_identification = $this->session->userdata('id_identification');
+		$id = $this->uri->segment(4);
 		$identification = get_db_occurency('gr_fiche_identification',  ['id_identification',$id_identification]);
 	
 		if($this->db->delete('gr_ayants_droit',array('id_ayant_droit'=>$id))){
 			$this->session->set_flashdata('msg','<div class="text-success">L\' ayant droit '.get_db_value("gr_ayants_droit","nom",array("id_ayant_droit",$id))." a été supprimé.</div>");
-			redirect(base_url('gr/Fiche_identification/view/'.$id_identification));
+			redirect(base_url('gr/Ayants_droit/index/'));
 		}
 	}
 }

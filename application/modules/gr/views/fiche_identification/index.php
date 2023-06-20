@@ -65,11 +65,11 @@
 
                                 <td><?=get_db_value("gr_promotions","nom_promotion",array("id_promotion",$data->id_promotion))?></td>
                                 <td><a
-                                        href='<?=base_url('gr/Fiche_identifications/view/'.$data->id_identification);?>'><span class="fa fa-eye"></span></a>
+                                        href='<?=base_url('gr/Fiche_identification/view/'.$data->id_identification);?>'><span class="fa fa-eye"></span></a>
                                     &nbsp; <a
-                                        href='<?=base_url('gr/Fiche_identifications/edit/'.$data->id_identification);?>'><span class="fa fa-edit"></span></a>
+                                        href='<?=base_url('gr/Fiche_identification/edit/'.$data->id_identification);?>'><span class="fa fa-edit"></span></a>
                                     &nbsp;<a
-                                        data-url='<?=base_url('gr/Fiche_identifications/delete/'.$data->id_identification);?>'
+                                        data-url='<?=base_url('gr/Fiche_identification/delete/'.$data->id_identification);?>'
                                         href='javascript:void(0)' class='delete'><span class="fa fa-trash text-danger"></span></a></td>
                             </tr>
                             <?php endforeach;?>

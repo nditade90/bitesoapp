@@ -7,7 +7,8 @@
 
         <div class="card card-info-cust card-outline card-tabs">
             <div class="card-header p-0 pt-1">
-
+                <h3 class="card-title text-bold"><?=$title?></h3>
+                
                 <span class="float-right">
                     <?php if($this->router->method !== 'view'){ ?>
                         <a href='<?=base_url('gr/Fiche_identification/add')?>' class="btn btn-info-cust btn-sm"><i
@@ -20,45 +21,7 @@
                         <span class="d-none d-sm-inline">&nbsp;Liste des Fiches</span>
                     </a>
                 </span>
-                <ul class="nav nav-tabs" id="custom-tabs-one-tab" role="tablist">
-                    <li class="nav-item">
-                        <a class="nav-link active" id="tab_identinfication-tab" data-toggle="pill"
-                            href="#tab_identinfication" role="tab" aria-controls="tab_identinfication"
-                            aria-selected="false">Identification</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" id="tab_ayant_droits-tab" data-toggle="pill" href="#tab_ayant_droits"
-                            role="tab" aria-controls="tab_ayant_droits" aria-selected="false">Ayants droits</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" id="tab_carriere-tab" data-toggle="pill" href="#tab_carriere" role="tab"
-                            aria-controls="tab_carriere" aria-selected="true">Carriere</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" id="tab_situations-tab" data-toggle="pill" href="#tab_situations" role="tab"
-                            aria-controls="tab_situations" aria-selected="false">Situations</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" id="tab_cotations-tab" data-toggle="pill" href="#tab_cotations" role="tab"
-                            aria-controls="tab_cotations" aria-selected="true">Cotations</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" id="tab_etudes_faites-tab" data-toggle="pill" href="#tab_etudes_faites"
-                            role="tab" aria-controls="tab_etudes_faites" aria-selected="false">Etudes faites</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" id="tab_formations-tab" data-toggle="pill" href="#tab_formations" role="tab"
-                            aria-controls="tab_formations" aria-selected="false">Formations & Stages</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" id="tab_hist_grades-tab" data-toggle="pill" href="#tab_hist_grades"
-                            role="tab" aria-controls="tab_hist_grades" aria-selected="false">Historique des grades</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" id="tab_mvts-tab" data-toggle="pill" href="#tab_mvts" role="tab"
-                            aria-controls="tab_mvts" aria-selected="false">Mouvements</a>
-                    </li>
-                </ul>
+                
             </div>
             <div class="card-body">
                 <div class="tab-content" id="custom-tabs-one-tabContent">
@@ -213,122 +176,7 @@
 								</table>
 							</div>
                         </div>
-
-
                     </div>
-                    <div class="tab-pane fade" id="tab_ayant_droits" role="tabpanel"
-                        aria-labelledby="tab_ayant_droits-tab">
-                        <?=render_fragment($viewDir."ayants_droits",get_db_values('gr_ayants_droit', ['id_ayant_droit','id_identification','id_categorie_ayant_droit','nom','prenoms','date_naissance','prise_en_charge'], ['id_identification',$data->id_identification]), $data->id_identification,"DONNEES AYANTS DROITS")?>
-                    </div>
-
-
-                    <div class="tab-pane fade" id="tab_carriere" role="tabpanel" aria-labelledby="tab_carriere-tab">
-                    <?=render_fragment($viewDir."carrieres",get_db_values('gr_fiche_carriere', ['id_fiche_carriere','id_departement','id_categorie','id_statut','id_fonction','salaire_base','id_niveau_formation'], ['id_identification',$data->id_identification]), $data->id_identification,"DONNEES CARRIERE")?>
-                    </div>
-
-                    <div class="tab-pane fade" id="tab_situations" role="tabpanel" aria-labelledby="tab_situations-tab">
-                    <?=render_fragment($viewDir."situations",get_db_values('gr_historique_situations', ['id_historique','id_situation','id_identification','date_debut','date_fin','observation'], ['id_identification',$data->id_identification]), $data->id_identification,"DONNEES HISTORIQUE DES SITUATIONS")?>
-                    </div>
-
-                    <div class="tab-pane fade" id="tab_cotations" role="tabpanel" aria-labelledby="tab_cotations-tab">
-                    <?=render_fragment($viewDir."cotations",get_db_values('mv_cotations', ['id_cotation','id_identification','id_type_cote','code','annee','points1', 'points2', 'note_obtenue'], ['id_identification',$data->id_identification]), $data->id_identification, "DONNEES DES COTATIONS")?>
-                    </div>
-
-                    <div class="tab-pane fade" id="tab_etudes_faites" role="tabpanel"
-                        aria-labelledby="tab_etudes_faites-tab">
-                        <?=render_fragment($viewDir."etudes",get_db_values('mv_etudes_faites', ['id_etudes','id_identification','id_type_etudes','etablissement','periode_etude','ref_equivalence', 'note_obtenue', 'date_obtention', 'id_pays '], ['id_identification',$data->id_identification]), $data->id_identification,"DONNEES SUR LES ETUDES FAITES")?>
-                    </div>
-
-                    <div class="tab-pane fade" id="tab_formations" role="tabpanel" aria-labelledby="tab_formations-tab">
-                         <?=render_fragment($viewDir."formations",get_db_values('mv_formations_stages', ['id_formation_stage','id_identification','id_stage','id_specialite','titre_obtenu','id_pays', 'date_debut', 'date_fin', 'nb_mois','montant_prime','ref_stage','note_obtenue','date_specialite','ref_specialite'], ['id_identification',$data->id_identification]), $data->id_identification, "DONNEES SUR LES FORMATIONS ET STAGES")?>
-                    </div>
-
-                    <div class="tab-pane fade" id="tab_hist_grades" role="tabpanel"
-                        aria-labelledby="tab_hist_grades-tab">
-                        <?=render_fragment($viewDir."grades",get_db_values('mv_avancement_grades', ['id_avancement_grade','id_identification', 'id_categorie', 'id_ancien_grade','id_nouveau_grade','date_avancement','ancien_salaire_base','nouveau_salaire_base','ref_avancement'], ['id_identification',$data->id_identification]), $data->id_identification ,"DONNEES SUR L'HISTORIQUE DES GRADES")?>
-                    </div> 
-                    
-
-                    <div class="tab-pane fade" id="tab_mvts" role="tabpanel" aria-labelledby="tab_mvts-tab">
-                        <div class="row">
-                            <div class="col-4 col-sm-2">
-                                <div class="nav flex-column nav-tabs h-100" id="vert-tabs-tab" role="tablist"
-                                    aria-orientation="vertical">
-                                    <a class="nav-link active" id="mutations-tab" data-toggle="pill"
-                                        href="#mutations" role="tab" aria-controls="mutations"
-                                        aria-selected="true">Mutations</a>
-                                    <a class="nav-link" id="actions_disciplinaires-tab" data-toggle="pill"
-                                        href="#actions_disciplinaires" role="tab" aria-controls="actions_disciplinaires"
-                                        aria-selected="false">Actions disciplinaires</a>
-                                    <a class="nav-link" id="dossiers_penals-tab" data-toggle="pill"
-                                        href="#dossiers_penals" role="tab" aria-controls="dossiers_penals"
-                                        aria-selected="false">Dossiers penals</a>
-                                    <a class="nav-link" id="absences-tab" data-toggle="pill"
-                                        href="#absences" role="tab" aria-controls="absences"
-                                        aria-selected="false">Absences</a>
-                                    <a class="nav-link" id="missions_renforts-tab" data-toggle="pill"
-                                        href="#missions_renforts" role="tab" aria-controls="missions_renforts"
-                                        aria-selected="true">Missions & Renforcements</a>
-                                    <a class="nav-link" id="distinctions-tab" data-toggle="pill"
-                                        href="#distinctions" role="tab" aria-controls="distinctions"
-                                        aria-selected="false">Distinctions honorifiques</a>
-                                    <a class="nav-link" id="accidents_roulage-tab" data-toggle="pill"
-                                        href="#accidents_roulage" role="tab" aria-controls="accidents_roulage"
-                                        aria-selected="false">Accidents de roulage</a>
-                                    <a class="nav-link" id="accidents_travail-tab" data-toggle="pill"
-                                        href="#accidents_travail" role="tab" aria-controls="accidents_travail"
-                                        aria-selected="false">Accidents de travail</a>
-                                    <a class="nav-link" id="exemptions_service-tab" data-toggle="pill"
-                                        href="#exemptions_service" role="tab" aria-controls="exemptions_service"
-                                        aria-selected="true">Exemptions de service</a>
-                                </div>
-                            </div>
-                            <div class="col-8 col-sm-10">
-                                <div class="tab-content" id="vert-tabs-tabContent">
-                                    <div class="tab-pane text-left fade active show" id="mutations" role="tabpanel"
-                                        aria-labelledby="mutations-tab">
-                                        <?=render_fragment($viewDir."mutations",get_db_values('mv_fiche_mutations', ['id_mutation','id_identification','date_mutation','ref_mutation','id_ancien_service','id_nouveau_service','id_ancienne_unite','id_nouvelle_unite','id_ancienne_fonction','id_nouvelle_fonction','observations','bp'], ['id_identification',$data->id_identification]), $data->id_identification,"DONNEES SUR LES MUTATIONS")?>
-                                    </div>
-                                    <div class="tab-pane text-left fade" id="actions_disciplinaires" role="tabpanel"
-                                        aria-labelledby="actions_disciplinaires-tab">  
-                                        <?=render_fragment($viewDir."actions_disciplinaires",get_db_values('mv_actions_disciplinaires', ['id_action_disciplinaire ','date_ouverture','id_type_punition','nb_jours_punition','date_cloture','ref_cloture','date_levee','autorite_decision','ref_levee','observation'], ['id_identification',$data->id_identification]), $data->id_identification,"ACTIONS DISCIPLINAIRES")?>
-                                    </div>
-                                    <div class="tab-pane text-left fade" id="dossiers_penals" role="tabpanel"
-                                        aria-labelledby="dossiers_penals-tab">
-                                        <?=render_fragment($viewDir."dossiers_penals",get_db_values('mv_dossiers_penals', ['id_dossier_penal','date_debut','date_fin','id_type_peine','juridiction','id_type_infraction','chef','nbre','id_unite_nbre'], ['id_identification',$data->id_identification]),$data->id_identification,"DOSSIERS PENALS")?>
-                                    </div>
-                                    <div class="tab-pane text-left fade" id="absences" role="tabpanel"
-                                        aria-labelledby="absences-tab"> 
-                                        <?=render_fragment($viewDir."absences",get_db_values('mv_absences', ['id_absence','id_identification','date_debut','date_fin','nb_jours','nb_heures','est_justifie','justification'], ['id_identification',$data->id_identification]), $data->id_identification,"ABSENCES")?>
-                                    </div>
-                                    <div class="tab-pane text-left fade" id="missions_renforts" role="tabpanel"
-                                        aria-labelledby="missions_renforts-tab"> 
-                                        <?=render_fragment($viewDir."missions_renforts",get_db_values('mv_renforcements', ['id_renforcement','id_type_renforcement','ref_renforcement','titre_obtenu','id_pays','date_depart','date_retour','nb_jours'], ['id_identification',$data->id_identification]),$data->id_identification,"MISSIONS & RENFORCEMENTS")?>
-                                    </div>
-                                    <div class="tab-pane text-left fade" id="distinctions" role="tabpanel"
-                                        aria-labelledby="distinctions-tab">
-                                        <?=render_fragment($viewDir."distinctions",get_db_values('mv_dictinctions_honorifiques', ['id_distinction','id_type_distiction ','date_distiction','ref_distiction','observations'], ['id_identification',$data->id_identification]),$data->id_identification,"DISTINCTIONS HONORIFIFIQUES")?>
-                                    </div>
-                                    <div class="tab-pane fade" id="accidents_roulage" role="tabpanel"
-                                        aria-labelledby="accidents_roulage-tab"> 
-                                        <?=render_fragment($viewDir."accidents_roulage",get_db_values('mv_accidents_roulage', ['id_accident','date_accident ','degat_charge','degat_cause','responsable','observation'], ['id_identification',$data->id_identification]), $data->id_identification,"ACCIDENTS DE ROULAGE")?>
-                                    </div>
-                                    <div class="tab-pane fade" id="accidents_travail" role="tabpanel"
-                                        aria-labelledby="accidents_travail-tab">
-                                        <?=render_fragment($viewDir."accidents_travail",get_db_values('mv_accidents_travail', ['id_accident','date_accident ','nature','decision'], ['id_identification',$data->id_identification]),$data->id_identification,"ACCIDENTS DE TRAVAIL")?>
-                                    </div>
-
-                                    <div class="tab-pane fade" id="exemptions_service" role="tabpanel"
-                                        aria-labelledby="exemptions_service-tab">
-                                        <?=render_fragment($viewDir."exemptions",get_db_values('mv_exemptions_service', ['id_exemption','annee ','date_debut','date_fin','nb_jours'], ['id_identification',$data->id_identification]),$data->id_identification,"EXEMPTIONS DE SERVICE")?>
-                                    </div>
-
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>
-
 
                 </div>
             </div>

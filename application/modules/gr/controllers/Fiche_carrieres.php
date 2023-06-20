@@ -5,12 +5,26 @@ class Fiche_carrieres extends Admin_Controller{
 	parent::__construct();
 	$this->data['page_title'] = 'Fiche_carriere';
 	$this->data['js'] = base_url()."assets/js/pages/Fiche_carriere.js";
+	$this->data['url_list'] = "";
 	// $this->load->model('Fiche_carriere_model');
 	}
 
+	public function index()
+	{
+		$config[ 'base_url' ]      = base_url('gr/Fiche_carrieres/index' );
+		$config[ 'per_page' ]      = 10;
+		$config[ 'num_links' ]     = 2;
+		$config[ 'total_rows' ] = $this->db->where(['id_identification'=>$this->session->userdata('id_identification')])->get( 'gr_fiche_carriere' )->num_rows();
+		$this->pagination->initialize( $config );
+		
+		$this->data[ 'datas' ]   = $this->db->order_by('id_fiche_carriere', 'DESC' )->where(['id_identification'=>$this->session->userdata('id_identification')])->get( 'gr_fiche_carriere', $config[ 'per_page' ],$this->uri->segment( 4 ));
+		$this->data[ 'title' ] = $this->lang->line('identity_title');			
+		$this->data['title_top_bar'] = $this->session->userdata('id_identification') > 0?get_db_soldat_titre($this->session->userdata('id_identification')):"";
+		$this->render_template('fiche_carriere/index', $this->data);
+	}
 
 	public function add(){
-		$id_identification = !empty($this->uri->segment(4))?$this->uri->segment(4):$this->input->post('id_identification');
+		$id_identification = !empty($this->session->userdata('id_identification'))?$this->session->userdata('id_identification'):$this->input->post('id_identification');
 		
 		$carriere = $this->db->where(array('id_identification'=>$id_identification))->order_by('id_fiche_carriere ','DESC')->get('gr_fiche_carriere')->row();	
 		if($carriere){
@@ -52,11 +66,6 @@ class Fiche_carrieres extends Admin_Controller{
 		// }
 
 		if($this->form_validation->run()){
-
-			// echo "<pre>";
-			// print_r($this->input->post());
-			// echo "</pre>";
-
 			$insert = $this->db->insert('gr_fiche_carriere',$this->input->post());
 
 			if(!empty($insert)){
@@ -64,7 +73,7 @@ class Fiche_carrieres extends Admin_Controller{
 			}else{
 				$this->session->set_flashdata('msg','<div class="text-danger">L\'enregistrement de la fiche de carriere de '.get_db_value("gr_fiche_identification","nom",array("id_identification",$id_identification)).' n\'a pas ete enregistre.</div>');
 			}
-			redirect(base_url('gr/Fiche_identification/view/'.$id_identification));
+			redirect(base_url('gr/Fiche_carrieres/index/'));
 		}
 
 		$this->data[ 'title' ] = 'Gestion de carriere';
@@ -75,8 +84,8 @@ class Fiche_carrieres extends Admin_Controller{
 
 
 	public function edit(){
-		$id_identification = !empty($this->uri->segment(4))?$this->uri->segment(4):$this->input->post('id_identification');
-		$id = $this->uri->segment(5) > 0 ? $this->uri->segment(5):$this->input->post('id_fiche_carriere');
+		$id_identification = !empty($this->session->userdata('id_identification'))?$this->session->userdata('id_identification'):$this->input->post('id_identification');
+		$id = $this->uri->segment(4) > 0 ? $this->uri->segment(4):$this->input->post('id_fiche_carriere');
 		
 		$carriere = $this->db->get_where('gr_fiche_carriere',array('id_fiche_carriere'=>$id))->row();		
 		$this->data['identif'] = $this->db->get_where('gr_fiche_identification',array('id_identification'=>$carriere->id_identification))->row();
@@ -121,7 +130,7 @@ class Fiche_carrieres extends Admin_Controller{
 				$this->session->set_flashdata('msg','<div class="text-danger">L\'enregistrement de la fiche de carriere de '.get_db_value("gr_fiche_identification","nom",array("id_identification",$id_identification)).' n\'a pas ete enregistre.</div>');
 			}
 
-			redirect(base_url('gr/Fiche_identification/view/'.$id_identification));
+			redirect(base_url('gr/Fiche_carrieres/index/'));
 		}
 
 		$this->data['id_identification'] = $id_identification;
@@ -132,13 +141,13 @@ class Fiche_carrieres extends Admin_Controller{
 	}
 
 	public function delete(){
-		$id_identification = $this->uri->segment(4);
-		$id = $this->uri->segment(5);
+		$id_identification = $this->session->userdata('id_identification');
+		$id = $this->uri->segment(4);
 		$identification = get_db_occurency('gr_fiche_identification',  ['id_identification',$id_identification]);
 
 		if($this->db->delete('gr_fiche_carriere',array('id_fiche_carriere'=>$id))){
 			$this->session->set_flashdata('msg','<div class="text-success">Une fiche des carrieres de '.get_db_value("gr_fiche_identification","nom",array("id_identification",$id_identification)).' a été supprimé avec succès.</div>');
-			redirect(base_url('gr/Fiche_identification/view/'.$id_identification));
+			redirect(base_url('gr/Fiche_carrieres/index/'));
 		}
 	}
 
