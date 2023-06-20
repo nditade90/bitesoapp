@@ -82,7 +82,12 @@ class Fiche_identification extends Admin_Controller{
 				}
 			redirect(base_url('gr/Fiche_identification/index'));
 			}
-			$this->data['data'] = $this->db->get_where('gr_fiche_identification',array('id_identification'=>$this->session->userdata('id_identification')))->row();
+
+			$this->data['data'] = $this->My_model->empty_one('gr_fiche_identification');
+
+			if($this->session->userdata('id_identification')){
+				$this->data['data'] = $this->db->get_where('gr_fiche_identification',array('id_identification'=>$this->session->userdata('id_identification')))->row();
+			}
 
 			$this->data['title_top_bar'] = $this->session->userdata('id_identification') > 0?get_db_soldat_titre($this->session->userdata('id_identification')):"";
 			$this->data[ 'title' ] = 'Fiche Identification';
