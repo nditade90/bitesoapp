@@ -109,18 +109,7 @@
                 <a id="dropdownSubMenu1" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link dropdown-toggle">
                 <i class="fas fa-cog"></i>Parmetrages</a>
                 <ul aria-labelledby="dropdownSubMenu1" class="dropdown-menu border-0 shadow">
-                    <li><a href="<?=base_url().'gr/Categories'?>" class="dropdown-item"><?=$this->lang->line('app_menu_renseignement_cat')?></a></li>
-                    <li><a href="<?=base_url().'gr/Sous_categories'?>" class="dropdown-item"><?=$this->lang->line('app_menu_renseignement_undcat')?></a></li>
-                    <li><a href="<?=base_url().'gr/Categorie_ayant_droits'?>" class="dropdown-item"><?=$this->lang->line('app_menu_renseignement_catdrt')?></a></li>
-                    <li><a href="<?=base_url().'gr/situations'?>" class="dropdown-item"><?=$this->lang->line('app_menu_renseignement_sts')?></a></li>
-                    <li><a href="<?=base_url().'gr/Promotions'?>" class="dropdown-item"><?=$this->lang->line('app_menu_renseignement_promo')?></a></li>
-                    <li><a href="<?=base_url().'gr/Type_documents'?>" class="dropdown-item"><?=$this->lang->line('app_menu_renseignement_tpd')?></a></li>             
-                    <li><a href="<?=base_url().'gr/Groupes_sanguin'?>" class="dropdown-item"><?=$this->lang->line('app_menu_renseignement_gs')?></a></li>             
-                    <li><a href="<?=base_url().'gr/Departements'?>" class="dropdown-item"><?=$this->lang->line('app_menu_renseignement_dpt')?></a></li>             
-                    <li><a href="<?=base_url().'gr/Services'?>" class="dropdown-item"><?=$this->lang->line('app_menu_renseignement_srv')?></a></li>             
-                    <li><a href="<?=base_url().'gr/Unites'?>" class="dropdown-item"><?=$this->lang->line('app_menu_renseignement_unt')?></a></li>             
                     
-                    <li class="dropdown-divider"></li>
 
                     <li class="dropdown-submenu dropdown-hover">
                       <a id="dropdownSubMenu2" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="dropdown-item dropdown-toggle">Donnees</a>
@@ -158,6 +147,20 @@
                         <li><a href="<?=base_url().'mouvement/Types_sortie_service'?>" class="dropdown-item"><?=$this->lang->line('app_menu_mvmnt_tpss')?></a></li>             
                       </ul>
                     </li>
+                    
+                    <li class="dropdown-divider"></li>
+
+                    <li><a href="<?=base_url().'gr/Categories'?>" class="dropdown-item"><?=$this->lang->line('app_menu_renseignement_cat')?></a></li>
+                    <li><a href="<?=base_url().'gr/Sous_categories'?>" class="dropdown-item"><?=$this->lang->line('app_menu_renseignement_undcat')?></a></li>
+                    <li><a href="<?=base_url().'gr/Categorie_ayant_droits'?>" class="dropdown-item"><?=$this->lang->line('app_menu_renseignement_catdrt')?></a></li>
+                    <li><a href="<?=base_url().'gr/situations'?>" class="dropdown-item"><?=$this->lang->line('app_menu_renseignement_sts')?></a></li>
+                    <li><a href="<?=base_url().'gr/Promotions'?>" class="dropdown-item"><?=$this->lang->line('app_menu_renseignement_promo')?></a></li>
+                    <li><a href="<?=base_url().'gr/Type_documents'?>" class="dropdown-item"><?=$this->lang->line('app_menu_renseignement_tpd')?></a></li>             
+                    <li><a href="<?=base_url().'gr/Groupes_sanguin'?>" class="dropdown-item"><?=$this->lang->line('app_menu_renseignement_gs')?></a></li>             
+                    <li><a href="<?=base_url().'gr/Departements'?>" class="dropdown-item"><?=$this->lang->line('app_menu_renseignement_dpt')?></a></li>             
+                    <li><a href="<?=base_url().'gr/Services'?>" class="dropdown-item"><?=$this->lang->line('app_menu_renseignement_srv')?></a></li>             
+                    <li><a href="<?=base_url().'gr/Unites'?>" class="dropdown-item"><?=$this->lang->line('app_menu_renseignement_unt')?></a></li>             
+                                       
                   </ul>
             </li>            
 
