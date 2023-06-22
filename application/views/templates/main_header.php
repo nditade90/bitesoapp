@@ -130,6 +130,13 @@
                         <li><a href="<?=base_url().'datas/Sexes'?>" class="dropdown-item"><?=$this->lang->line('app_menu_renseignement_sx')?></a></li>
                         <li><a href="<?=base_url().'datas/Etat_civil'?>" class="dropdown-item"><?=$this->lang->line('app_menu_renseignement_matri')?></a></li>
                         <li><a href="<?=base_url().'datas/Ethnies'?>" class="dropdown-item"><?=$this->lang->line('app_menu_renseignement_eth')?></a></li>
+                        <li><a href="<?=base_url().'gr/Fonctions/index'?>" class="dropdown-item">Fonction</a></li>
+                        <li><a href="<?=base_url().'gr/Cellules/index'?>" class="dropdown-item">Cellules</a></li>
+                        <li><a href="<?=base_url().'gr/Grades'?>" class="dropdown-item">Grades</a></li>
+                        <li><a href="<?=base_url().'gr/Type_armes'?>" class="dropdown-item">Type d'armes</a></li>
+                        <li><a href="<?=base_url().'gr/Type_specialites'?>" class="dropdown-item">Type de spécialité</a></li>
+                        <li><a href="<?=base_url().'gr/Type_diplome'?>" class="dropdown-item">Type de diplôme</a></li>
+                        <li><a href="<?=base_url().'datas/Categories_cellules/index'?>" class="dropdown-item">Catégorie des cellules</a></li>
                       
                       </ul>
                     </li>
