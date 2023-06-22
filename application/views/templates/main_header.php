@@ -122,9 +122,9 @@
                         <li><a href="<?=base_url().'gr/Fonctions/index'?>" class="dropdown-item">Fonction</a></li>
                         <li><a href="<?=base_url().'gr/Cellules/index'?>" class="dropdown-item">Cellules</a></li>
                         <li><a href="<?=base_url().'gr/Grades'?>" class="dropdown-item">Grades</a></li>
-                        <li><a href="<?=base_url().'gr/Type_armes'?>" class="dropdown-item">Type d'armes</a></li>
-                        <li><a href="<?=base_url().'gr/Type_specialites'?>" class="dropdown-item">Type de spécialité</a></li>
-                        <li><a href="<?=base_url().'gr/Type_diplome'?>" class="dropdown-item">Type de diplôme</a></li>
+                        <li><a href="<?=base_url().'datas/Type_armes'?>" class="dropdown-item">Type d'armes</a></li>
+                        <li><a href="<?=base_url().'datas/Type_specialites'?>" class="dropdown-item">Type de spécialité</a></li>
+                        <li><a href="<?=base_url().'datas/Type_diplome'?>" class="dropdown-item">Type de diplôme</a></li>
                         <li><a href="<?=base_url().'datas/Categories_cellules/index'?>" class="dropdown-item">Catégorie des cellules</a></li>
                       
                       </ul>
