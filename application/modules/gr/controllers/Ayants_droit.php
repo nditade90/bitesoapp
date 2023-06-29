@@ -39,11 +39,11 @@ class Ayants_droit extends Admin_Controller{
 		}
 		
 
-		if($this->data['identification']->id_etat_civil == 3){
+		if($id_identification > 0 && $this->data['identification']->id_etat_civil == 3){
 			$this->form_validation->set_rules('date_divorce', 'Date_divorce', 'required');
 		}
 
-		if($this->data['identification']->id_etat_civil == 3){
+		if($id_identification > 0 && $this->data['identification']->id_etat_civil == 3){
 			$this->form_validation->set_rules('date_deces', 'Date_deces', 'required');
 			$this->form_validation->set_rules('ref_cert_deces', 'Ref_cert_deces', 'required');
 		}

@@ -122,6 +122,9 @@
                         <li><a href="<?=base_url().'gr/Fonctions/index'?>" class="dropdown-item">Fonction</a></li>
                         <li><a href="<?=base_url().'datas/Cellules/index'?>" class="dropdown-item">Cellules</a></li>
                         <li><a href="<?=base_url().'gr/Grades'?>" class="dropdown-item">Grades</a></li>
+                        <li><a href="<?=base_url().'datas/Etablissements/add'?>" class="dropdown-item">Établissement </a></li>
+                        <li><a href="<?=base_url().'datas/Types_conges'?>" class="dropdown-item">Type de conges</a></li>
+                        <li><a href="<?=base_url().'datas/Type_stages'?>" class="dropdown-item">Type de stages</a></li>
                         <li><a href="<?=base_url().'datas/Type_armes'?>" class="dropdown-item">Type d'armes</a></li>
                         <li><a href="<?=base_url().'datas/Type_specialites'?>" class="dropdown-item">Type de spécialité</a></li>
                         <li><a href="<?=base_url().'datas/Type_diplome'?>" class="dropdown-item">Type de diplôme</a></li>
@@ -136,8 +139,7 @@
                       <a id="dropdownSubMenu2" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="dropdown-item dropdown-toggle">Mouvements</a>
                       <ul aria-labelledby="dropdownSubMenu2" class="dropdown-menu border-0 shadow">
                         <li><a href="<?=base_url().'mouvement/Type_distiction_honorifiques'?>" class="dropdown-item"><?=$this->lang->line('app_menu_mvmnt_disthon')?></a></li>             
-                        <li><a href="<?=base_url().'mouvement/Types_conges'?>" class="dropdown-item"><?=$this->lang->line('app_menu_mvmnt_tpcong')?></a></li>             
-                        <li><a href="<?=base_url().'mouvement/Types_cote'?>" class="dropdown-item"><?=$this->lang->line('app_menu_mvmnt_tpct')?></a></li>             
+                       <li><a href="<?=base_url().'mouvement/Types_cote'?>" class="dropdown-item"><?=$this->lang->line('app_menu_mvmnt_tpct')?></a></li>             
                         <li><a href="<?=base_url().'mouvement/Types_punition'?>" class="dropdown-item"><?=$this->lang->line('app_menu_mvmnt_tppnt')?></a></li>             
                         <li><a href="<?=base_url().'mouvement/Types_etudes'?>" class="dropdown-item"><?=$this->lang->line('app_menu_mvmnt_tppet')?></a></li>             
                         <li><a href="<?=base_url().'mouvement/Types_infraction'?>" class="dropdown-item"><?=$this->lang->line('app_menu_mvmnt_tpinfra')?></a></li>             

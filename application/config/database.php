@@ -100,4 +100,7 @@ $db['default'] = array(
 	'save_queries' => TRUE
 );
 
+
+//Le 28 Juin sur type de stages
+
 // $db['default']['dsn'] = 'mysqli://root:tiger@kubernetes.docker.internal:3366/inkware_biteso?charset=utf8&DBCollat=utf8_general_ci';

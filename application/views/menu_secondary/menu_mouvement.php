@@ -46,17 +46,17 @@
         <span class="d-none d-sm-inline">&nbsp;Renforcements</span>
     </a>
 
-    <a class="btn btn-<?=$this->router->class == "Renforcements"?"primary-cust":"";?> btn-sm" href="<?=base_url('mouvement/Renforcements/add')?>">
+    <a class="btn btn-<?=$this->router->class == "Missions"?"primary-cust":"";?> btn-sm" href="<?=base_url('mouvement/Missions/add')?>">
         <i class="fa fa-user-nurse"></i>
         <span class="d-none d-sm-inline">&nbsp;Missions</span>
     </a>
 
-    <a class="btn btn-<?=$this->router->class == "Renforcements"?"primary-cust":"";?> btn-sm" href="<?=base_url('mouvement/Renforcements/add')?>">
+    <a class="btn btn-<?=$this->router->class == "Entrees_en_service"?"primary-cust":"";?> btn-sm" href="<?=base_url('mouvement/Entrees_en_service/add')?>">
         <i class="fa fa-user-nurse"></i>
         <span class="d-none d-sm-inline">&nbsp;Ent. services</span>
     </a>
 
-    <a class="btn btn-<?=$this->router->class == "Renforcements"?"primary-cust":"";?> btn-sm" href="<?=base_url('mouvement/Renforcements/add')?>">
+    <a class="btn btn-<?=$this->router->class == "Sorties_service"?"primary-cust":"";?> btn-sm" href="<?=base_url('mouvement/Sorties_service/add')?>">
         <i class="fa fa-user-nurse"></i>
         <span class="d-none d-sm-inline">&nbsp;Srt. services</span>
     </a>

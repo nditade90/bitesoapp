@@ -1,0 +1,12 @@
+
+		<?php
+
+		class Entrees_en_service_model extends CI_Model {
+
+			function __construct() {
+				parent::__construct();
+			}
+
+
+		}
+			
