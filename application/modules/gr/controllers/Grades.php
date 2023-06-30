@@ -4,6 +4,7 @@ class Grades extends Admin_Controller{
 	public function __construct(){
 	parent::__construct();
 	$this->data['page_title'] = 'Grades';
+	$this->data['url_list'] = "";
 	// $this->load->model('Grades_model');
 	}
 	public function index(){

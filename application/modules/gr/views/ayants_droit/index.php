@@ -8,7 +8,7 @@
 				<h3 class="card-title text-uppercase">Ayants droits</h3>
 
 				<span class="float-right"> 
-					<a class='btn btn-info-cust btn-sm' href="<?php echo base_url('gr/Ayants_droit/add')?>"><i class='fa fa-file'></i>
+					<a class='btn btn-sm' href="<?php echo base_url('gr/Ayants_droit/add')?>"><i class='fa fa-file'></i>
 						<span class='d-none d-sm-inline'>&nbsp;Nouveau</span>
 					</a> 
 					<a class='btn btn-primary-cust btn-sm' href="<?php echo base_url('gr/Ayants_droit/index')?>"><i class='fa fa-list'></i>

@@ -4,6 +4,7 @@ class Groupes_sanguin extends Admin_Controller{
 	public function __construct(){
 	parent::__construct();
 	$this->data['page_title'] = 'Groupes_sanguin';
+	$this->data['url_list'] = "";
 	// $this->load->model('Groupes_sanguin_model');
 	}
 	public function index(){

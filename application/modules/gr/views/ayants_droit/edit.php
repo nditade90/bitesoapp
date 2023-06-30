@@ -18,112 +18,146 @@
 				</div>
 					
 			<div class="card-body">
+				<?=form_open_multipart('gr/Fiche_identification/search')?>
+					<div class="col-md-12">
+						<div class="row">                        
+							<div class='form-group col-md-3'><label><?=$this->lang->line('identity_form_matricule')?></label>
+								<?=form_input('s_matricule','',"class='form-control' placeholder='matricule'")?>
+								<?php echo form_error('s_matricule','<span class="text-danger">', '</span>'); ?>
+							</div>
+
+							<div class='form-group col-md-3'><label><?=$this->lang->line('identity_form_new_matricule')?></label> 
+								<?=form_input('s_nouveau_matricule','',"class='form-control' placeholder='nouveau_matricule'")?>
+								<?php echo form_error('s_nouveau_matricule','<span class="text-danger">', '</span>'); ?>
+							</div>
+
+							<div class='form-group col-md-3'><label><?=$this->lang->line('identity_form_old_matricule')?></label>
+								<?=form_input('s_ancien_matricule','',"class='form-control' placeholder='ancien_matricule'")?>
+								<?php echo form_error('ancien_matricule','<span class="text-danger">', '</span>'); ?>
+							</div>  
+							
+							<div class='form-group col-md-3'>
+								<?=form_submit('',"Chercher",'class="btn btn-sm btn-primary-cust" style="margin-top:35px"')?>
+							</div>                      
+						</div>
+					</div>
+				<?=form_close()?>
+				<hr />
+
+
 			<?=form_open('gr/Ayants_droit/edit/',NULL, ['id_ayant_droit'=>$data->id_ayant_droit])?>
-
-
-			<div class="row">
-			<input type="hidden" name="id_identification" value="<?=$id_identification?>">
+			<div class="col-md-12">	
+				<div class="row">
+					<input type="hidden" name="id_identification" value="<?=$id_identification?>">
 				
-			<div class='col-md-3'>
-				<label>Categorie</label>
-				<?php echo form_error('id_categorie_ayant_droit'); ?>
-				<?=form_dropdown('id_categorie_ayant_droit',$this->My_model->multi_dropdown('gr_categorie_ayant_droits', ['id_categorie_ayant_droit','nom_categorie']),set_value('id_categorie_ayant_droit,',$data->id_categorie_ayant_droit),"class='form-control select2' id='id_categorie_ayant_droit' placeholder='id_categorie_ayant_droit'")?>
-				<?php echo form_error('id_categorie_ayant_droit','<div class="text-danger">', '</div>'); ?>
-			</div>
-
-			<div class='col-md-3'>
-				<label>Nom</label>
-				<?php echo form_error('nom'); ?>
-				<?=form_input('nom',set_value('nom',$data->nom),"class='form-control' placeholder='nom'")?>
-				<?php echo form_error('nom','<div class="text-danger">', '</div>'); ?>
-			</div>
-
-			<div class='col-md-3'>
-				<label>Prenom</label>
-				<?php echo form_error('prenoms'); ?>
-				<?=form_input('prenoms',set_value('prenoms',$data->prenoms),"class='form-control' placeholder='prenoms'")?>
-				<?php echo form_error('prenoms','<div class="text-danger">', '</div>'); ?>
-			</div>
-
-			<div class='col-md-3'>
-				<label>Date de naissance</label>
-
-				<div class="input-group date" id="inputdate" data-target-input="nearest">
-					<?=form_input('date_naissance',set_value('date_naissance', $data->date_naissance),"class='form-control datetimepicker-input', id='inputdate' placeholder='date_naissance'")?>
-					<div class="input-group-append" data-target="#inputdate" data-toggle="datetimepicker">
-						<div class="input-group-text"><i class="fa fa-calendar"></i></div>
-					</div>
-				</div>
-				<?php echo form_error('date_naissance','<span class="text-danger">', '</span>'); ?>
-			</div>
-
-			<div class='col-md-3'>
-				<label>Ref. de l'extrait de naissance</label>
-				<?php echo form_error('ref_extrait_naissance'); ?>
-				<?=form_input('ref_extrait_naissance',set_value('ref_extrait_naissance',$data->ref_extrait_naissance),"class='form-control' placeholder='ref_extrait_naissance'")?>
-				<?php echo form_error('ref_extrait_naissance','<div class="text-danger">', '</div>'); ?>
-			</div>
-
-			<div class='col-md-3' id='date_marriage_div'>
-				<label>Date de marriage</label>
-
-				<div class="input-group date" id="inputdate" data-target-input="nearest">
-					<?=form_input('date_marriage',set_value('date_marriage',$data->date_marriage),"class='form-control datetimepicker-input', id='date_marriage' placeholder='date_marriage'")?>
-					<div class="input-group-append" data-target="#inputdate" data-toggle="datetimepicker">
-						<div class="input-group-text"><i class="fa fa-calendar"></i></div>
-					</div>
-				</div>
-				<?php echo form_error('date_marriage','<span class="text-danger">', '</span>'); ?>
-
-			</div>
-
-			<div class='col-md-3' id='ref_extrait_marriage_div'>
-				<label>Ref. de l'extrait de marriage</label>
-				<?php echo form_error('ref_extrait_marriage'); ?>
-				<?=form_input('ref_extrait_marriage',set_value('ref_extrait_marriage',$data->ref_extrait_marriage),"class='form-control' placeholder='ref_extrait_marriage'")?>
-				<?php echo form_error('ref_extrait_marriage','<div class="text-danger">', '</div>'); ?></div>
-
-			<?php if($identification->id_etat_civil == 3){ ?>
-				<div class='col-md-3'><label>Date de divorce</label>
-
-				<div class="input-group date" id="inputdate" data-target-input="nearest">
-					<?=form_input('date_divorce',set_value('date_divorce',$data->date_divorce),"class='form-control datetimepicker-input', id='date_divorce' placeholder='date_marriage'")?>
-					<div class="input-group-append" data-target="#inputdate" data-toggle="datetimepicker">
-						<div class="input-group-text"><i class="fa fa-calendar"></i></div>
-					</div>
-				</div>
-				<?php echo form_error('date_divorce','<span class="text-danger">', '</span>'); ?>
-
-				</div>
-			<?php } ?>
-
-			<?php if($identification->id_etat_civil == 6){ ?>
-				<div class='col-md-3'>
-					<label>Date de deces</label><?php echo form_error('date_deces'); ?>
-
-					<div class="input-group date" id="inputdate" data-target-input="nearest">
-					<?=form_input('date_deces',set_value('date_deces',$data->date_deces),"class='form-control datetimepicker-input', id='date_deces' placeholder='date_deces'")?>
-					<div class="input-group-append" data-target="#inputdate" data-toggle="datetimepicker">
-						<div class="input-group-text"><i class="fa fa-calendar"></i></div>
+					<div class='col-md-3'>
+						<label>Categorie</label>
+						<?php echo form_error('id_categorie_ayant_droit'); ?>
+						<?=form_dropdown('id_categorie_ayant_droit',$this->My_model->multi_dropdown('gr_categorie_ayant_droits', ['id_categorie_ayant_droit','nom_categorie']),set_value('id_categorie_ayant_droit,',$data->id_categorie_ayant_droit),"class='form-control select2' id='id_categorie_ayant_droit' placeholder='id_categorie_ayant_droit'")?>
+						<?php echo form_error('id_categorie_ayant_droit','<div class="text-danger">', '</div>'); ?>
 					</div>
 
-					<?php echo form_error('date_deces','<span class="text-danger">', '</span>'); ?>
+					<div class='col-md-3'>
+						<label>Nom</label>
+						<?php echo form_error('nom'); ?>
+						<?=form_input('nom',set_value('nom',$data->nom),"class='form-control' placeholder='nom'")?>
+						<?php echo form_error('nom','<div class="text-danger">', '</div>'); ?>
+					</div>
 
+					<div class='col-md-3'>
+						<label>Prenom</label>
+						<?php echo form_error('prenoms'); ?>
+						<?=form_input('prenoms',set_value('prenoms',$data->prenoms),"class='form-control' placeholder='prenoms'")?>
+						<?php echo form_error('prenoms','<div class="text-danger">', '</div>'); ?>
+					</div>
+
+					<div class='col-md-3'>
+						<label>Date de naissance</label>
+
+						<div class="input-group date" id="date_naissance" data-target-input="nearest">
+							<?=form_input('date_naissance',set_value('date_naissance', $data->date_naissance),"class='form-control datetimepicker-input', id='date_naissance' placeholder='date_naissance'")?>
+							<div class="input-group-append" data-target="#date_naissance" data-toggle="datetimepicker">
+								<div class="input-group-text"><i class="fa fa-calendar"></i></div>
+							</div>
+						</div>
+						<?php echo form_error('date_naissance','<span class="text-danger">', '</span>'); ?>
+					</div>
+
+					<div class='col-md-3'>
+						<label>Ref. de l'extrait de naissance</label>
+						<?php echo form_error('ref_extrait_naissance'); ?>
+						<?=form_input('ref_extrait_naissance',set_value('ref_extrait_naissance',$data->ref_extrait_naissance),"class='form-control' placeholder='ref_extrait_naissance'")?>
+						<?php echo form_error('ref_extrait_naissance','<div class="text-danger">', '</div>'); ?>
+					</div>
+
+					<div class='col-md-3' id='date_marriage_div'>
+						<label>Date de marriage</label>
+
+						<div class="input-group date" id="date_marriage" data-target-input="nearest">
+							<?=form_input('date_marriage',set_value('date_marriage',$data->date_marriage),"class='form-control datetimepicker-input', id='date_marriage' placeholder='date_marriage'")?>
+							<div class="input-group-append" data-target="#date_marriage" data-toggle="datetimepicker">
+								<div class="input-group-text"><i class="fa fa-calendar"></i></div>
+							</div>
+						</div>
+						<?php echo form_error('date_marriage','<span class="text-danger">', '</span>'); ?>
+
+					</div>
+
+					<div class='col-md-3' id='ref_extrait_marriage_div'>
+						<label>Ref. de l'extrait de marriage</label>
+						<?php echo form_error('ref_extrait_marriage'); ?>
+						<?=form_input('ref_extrait_marriage',set_value('ref_extrait_marriage',$data->ref_extrait_marriage),"class='form-control' placeholder='ref_extrait_marriage'")?>
+						<?php echo form_error('ref_extrait_marriage','<div class="text-danger">', '</div>'); ?>
+					</div>
+
+					<?php if($identification->id_etat_civil == 3){ ?>
+						<div class='col-md-3'><label>Date de divorce</label>
+
+						<div class="input-group date" id="date_divorce" data-target-input="nearest">
+							<?=form_input('date_divorce',set_value('date_divorce',$data->date_divorce),"class='form-control datetimepicker-input', id='date_divorce' placeholder='date_marriage'")?>
+							<div class="input-group-append" data-target="#date_divorce" data-toggle="datetimepicker">
+								<div class="input-group-text"><i class="fa fa-calendar"></i></div>
+							</div>
+						</div>
+						<?php echo form_error('date_divorce','<span class="text-danger">', '</span>'); ?>
+
+						</div>
+					<?php } ?>
+
+					<?php if($identification->id_etat_civil == 6){ ?>
+						<div class='col-md-3'>
+							<label>Date de deces</label><?php echo form_error('date_deces'); ?>
+
+							<div class="input-group date" id="inputdate" data-target-input="nearest">
+							<?=form_input('date_deces',set_value('date_deces',$data->date_deces),"class='form-control datetimepicker-input', id='date_deces' placeholder='date_deces'")?>
+							<div class="input-group-append" data-target="#inputdate" data-toggle="datetimepicker">
+								<div class="input-group-text"><i class="fa fa-calendar"></i></div>
+							</div>
+
+							<?php echo form_error('date_deces','<span class="text-danger">', '</span>'); ?>
+
+						</div>
+					<?php } ?>
+
+					<?php if($identification->id_etat_civil == 6){ ?>
+						<div class='col-md-3'>
+							<label>Ref. de certificat de deces</label><?php echo form_error('ref_cert_deces'); ?>
+							<?=form_input('ref_cert_deces',set_value('ref_cert_deces',$data->ref_cert_deces),"class='form-control' placeholder='ref_cert_deces'")?>
+							<?php echo form_error('ref_cert_deces','<div class="text-danger">', '</div>'); ?>
+						</div>
+					<?php } ?>
+
+					<div class='col-md-3'>
+						<label>Prise en charge</label>
+						<?=form_input('prise_en_charge',set_value('prise_en_charge',$data->prise_en_charge),"class='form-control' placeholder='prise_en_charge'")?>
+						<?php echo form_error('prise_en_charge','<div class="text-danger">', '</div>'); ?>
+					</div>
+	  	 		
+					<div class='row' style="margin:6px">
+						<?=form_submit('','Enregistrer les changements','class="btn btn-primary-cust"')?><?=form_close()?>
+					</div>
 				</div>
-			<?php } ?>
-
-			<?php if($identification->id_etat_civil == 6){ ?>
-				<div class='col-md-3'>
-					<label>Ref. de certificat de deces</label><?php echo form_error('ref_cert_deces'); ?>
-					<?=form_input('ref_cert_deces',set_value('ref_cert_deces',$data->ref_cert_deces),"class='form-control' placeholder='ref_cert_deces'")?>
-					<?php echo form_error('ref_cert_deces','<div class="text-danger">', '</div>'); ?>
-				</div>
-			<?php } ?>
-
-			<div class='col-md-3'><label>Prise en charge</label><?php echo form_error('prise_en_charge'); ?>
-			<?=form_input('prise_en_charge',set_value('prise_en_charge',$data->prise_en_charge),"class='form-control' placeholder='prise_en_charge'")?>
-						<?php echo form_error('prise_en_charge','<div class="text-danger">', '</div>'); ?></div>
-	   </div>
-		<div class='row' style="margin:6px">
-			<?=form_submit('','Enregistrer les changements','class="btn btn-primary-cust"')?><?=form_close()?>
-		</div></section></div>
+			</div>
+		<?=form_close()?>
+	</section>
+</div>

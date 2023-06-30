@@ -4,6 +4,7 @@ class Categories extends Admin_Controller{
 	public function __construct(){
 	parent::__construct();
 	$this->data['page_title'] = 'Categories';
+	$this->data['url_list'] = "";
 	// $this->load->model('Categories_model');
 	}
 	public function index(){

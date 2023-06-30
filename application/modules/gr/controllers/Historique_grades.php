@@ -4,7 +4,8 @@ class Historique_grades extends Admin_Controller{
 	public function __construct(){
 	parent::__construct();
 	$this->data['page_title'] = 'Historique_grades';
-	$this->load->model('Historique_grades_model');
+	$this->data['url_list'] = "";
+	// $this->load->model('Historique_grades_model');
 	}
 
 		public function index(){

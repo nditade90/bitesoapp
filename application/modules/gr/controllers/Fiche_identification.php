@@ -5,6 +5,7 @@ class Fiche_identification extends Admin_Controller{
 			parent::__construct();
 			$this->data['page_title'] = $this->lang->line('identity_title');
 			$this->data['js'] = base_url()."assets/js/pages/Fiche_identification.js";
+			$this->data['url_list'] = "";
 		}
 
 		public function index(){
@@ -304,7 +305,8 @@ class Fiche_identification extends Admin_Controller{
 			
 		}
 
-		redirect(base_url('gr/Fiche_identification/add'));
+		$targetUrl = isset($_SERVER['HTTP_REFERER'])?$_SERVER['HTTP_REFERER'] :base_url()."gr/Fiche_identification/add";  
+		redirect($targetUrl);
 	}
 
 	

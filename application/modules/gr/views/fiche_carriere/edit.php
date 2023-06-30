@@ -17,10 +17,36 @@
 				</span>
 			</div>
 		<div class="card-body">
-		    <div class="col-md-12">
-		 	 	<?=form_open('gr/Fiche_carrieres/edit', null, ['id_fiche_carriere'=>$data->id_fiche_carriere])?>
-				<div class="row mb-4">
-					<div class='form-group col-md-3'>
+			<?=form_open_multipart('gr/Fiche_identification/search')?>
+				<div class="col-md-12">
+					<div class="row">                        
+						<div class='col-md-3'><label><?=$this->lang->line('identity_form_matricule')?></label>
+							<?=form_input('s_matricule','',"class='form-control' placeholder='matricule'")?>
+							<?php echo form_error('s_matricule','<span class="text-danger">', '</span>'); ?>
+						</div>
+
+						<div class='col-md-3'><label><?=$this->lang->line('identity_form_new_matricule')?></label> 
+							<?=form_input('s_nouveau_matricule','',"class='form-control' placeholder='nouveau_matricule'")?>
+							<?php echo form_error('s_nouveau_matricule','<span class="text-danger">', '</span>'); ?>
+						</div>
+
+						<div class='col-md-3'><label><?=$this->lang->line('identity_form_old_matricule')?></label>
+							<?=form_input('s_ancien_matricule','',"class='form-control' placeholder='ancien_matricule'")?>
+							<?php echo form_error('ancien_matricule','<span class="text-danger">', '</span>'); ?>
+						</div>  
+						
+						<div class='col-md-3'>
+							<?=form_submit('',"Chercher",'class="btn btn-sm btn-primary-cust" style="margin-top:35px"')?>
+						</div>                      
+					</div>
+				</div>
+			<?=form_close()?>
+			<hr />
+
+			<?=form_open('gr/Fiche_carrieres/edit', null, ['id_fiche_carriere'=>$data->id_fiche_carriere])?>
+		    <div class="col-md-12">		 	 	
+				<div class="row">
+					<div class='col-md-3'>
 						<label>Recensée</label>
 						<?php 
 						$data_est_recense =[
@@ -34,35 +60,33 @@
 					</div>
 				</div>
 
-				<div class="row mb-4">
-					<div class='form-group col-md-3'>
+				<div class="row">
+					<div class='col-md-3'>
 						<input type="hidden" name="id_identification" value="<?=$id_identification?>">
 						<label>Niveau de formation</label>
 						<?=form_dropdown('id_niveau_formation',$this->My_model->multi_dropdown('gr_niveaux_formation',['id_niveau_formation','nom_niveau_formation']),set_value('id_niveau_formation', $data->id_niveau_formation),"class='form-control select2', id='id_niveau_formation' ,placeholder='id_niveau_formation'")?>
 						<?php echo form_error('id_niveau_formation','<span class="text-danger">', '</span>'); ?>
 					</div>
 
-					<div class='form-group col-md-3' id="niveau_autre">
+					<div class='col-md-3' id="niveau_autre">
 						<label>Autre niveau</label>
 						<?=form_input('niveau_autre',set_value('niveau_autre', $data->niveau_autre),"class='form-control', id='niveau_autre'  ,placeholder='niveau_autre'")?>
 						<?php echo form_error('niveau_autre','<span class="text-danger">', '</span>'); ?>
 					</div>
 
-					<div class='form-group col-md-3'><label>Departement</label>
+					<div class='col-md-3'><label>Departement</label>
 					<?=form_dropdown('id_departement',$this->My_model->multi_dropdown('gr_departements',['id_departement','nom_departement']),set_value('id_departement', $data->id_departement),"class='form-control select2' ,placeholder='id_departement'")?>
 					<?php echo form_error('id_departement','<span class="text-danger">', '</span>'); ?></div>
 				
-					<div class='form-group col-md-3'><label>Service</label>
+					<div class='col-md-3'><label>Service</label>
 					<?=form_dropdown('id_service',$this->My_model->multi_dropdown('gr_services',['id_service','nom_service']),set_value('id_service', $data->id_service),"class='form-control select2' ,placeholder='id_service'")?>
 					<?php echo form_error('id_service','<span class="text-danger">', '</span>'); ?></div>
 				
-					<div class='form-group col-md-3'><label>Unite</label>
+					<div class='col-md-3'><label>Unite</label>
 					<?=form_dropdown('id_unite',$this->My_model->multi_dropdown('gr_unites',['id_unite','nom_unite']),set_value('id_unite', $data->id_unite),"class='form-control select2' ,placeholder='id_unite'")?>
 					<?php echo form_error('id_unite','<span class="text-danger">', '</span>'); ?></div>
-				</div>
 				
-				<div class="row mb-4">
-					<div class='form-group col-md-3'><label>Categorie</label>
+					<div class='col-md-3'><label>Categorie</label>
 					<?php 
 					  $js_categorie = array(
 						'id'       => 'id_categorie',
@@ -72,21 +96,19 @@
 					<?=form_dropdown('id_categorie',$this->My_model->multi_dropdown('gr_categories',['id_categorie','nom_categorie']), set_value('id_categorie',$data->id_categorie), $js_categorie)?>
 					<?php echo form_error('id_categorie','<span class="text-danger">', '</span>'); ?></div>
 
-					<div class='form-group col-md-3' ><label>Sous categorie</label>
+					<div class='col-md-3' ><label>Sous categorie</label>
 					<?=form_dropdown('id_sous_categorie',$this->My_model->multi_dropdown('gr_sous_categories',['id_sous_categorie','nom_sous_categorie']),set_value('id_sous_categorie', $data->id_sous_categorie),"class='form-control select2', id='id_sous_categorie'")?>
 					<?php echo form_error('id_sous_categorie','<span class="text-danger">', '</span>'); ?></div>
 
-					<div class='form-group col-md-3'><label>Statut</label>
+					<div class='col-md-3'><label>Statut</label>
 					<?=form_dropdown('id_statut',$this->My_model->multi_dropdown('gr_statuts',['id_statut','nom_statut']),set_value('id_statut', $data->id_statut),"class='form-control select2' ,placeholder='id_statut'")?>
 					<?php echo form_error('id_statut','<span class="text-danger">', '</span>'); ?></div>
 
-					<div class='form-group col-md-3'><label>Fonction</label>
+					<div class='col-md-3'><label>Fonction</label>
 					<?=form_dropdown('id_fonction',$this->My_model->multi_dropdown('gr_fonctions',['id_fonction','nom_fonction']),set_value('id_fonction', $data->id_fonction),"class='form-control select2' ,placeholder='id_fonction'")?>
 					<?php echo form_error('id_fonction','<span class="text-danger">', '</span>'); ?></div>
-				</div>
-
-				<div class="row mb-4">
-					<div class='form-group col-md-3'>
+				
+					<div class='col-md-3'>
 						<label>Est candidat ?</label> <br />
 					<?php 
 					  $data_candidat =[
@@ -98,11 +120,11 @@
 					<?= form_checkbox($data_candidat);?> Oui
 					<?php echo form_error('est_candidat','<span class="text-danger">', '</span>'); ?></div>
 
-					<div class='form-group col-md-3'><label>Indemnite de risque</label>
+					<div class='col-md-3'><label>Indemnite de risque</label>
 					<?=form_input('code_indemnite_risque',set_value('code_indemnite_risque', $data->code_indemnite_risque),"class='form-control' ,placeholder='code_indemnite_risque'")?>
 					<?php echo form_error('code_indemnite_risque','<span class="text-danger">', '</span>'); ?></div>
 
-					<div class='form-group col-md-3'>
+					<div class='col-md-3'>
 						<label>Est handicappe ?</label><br />
 					<?php 
 					  $data_handicape =[
@@ -114,7 +136,7 @@
 					<?= form_checkbox($data_handicape);?> Oui
 					<?php echo form_error('est_handicappe','<span class="text-danger">', '</span>'); ?></div>
 
-					<div class='form-group col-md-3'>
+					<div class='col-md-3'>
 						<label>Utilise MFP ?</label> <br />
 						<?php 
 						$data_use_mfp =[
@@ -127,16 +149,12 @@
 						<?php echo form_error('utilise_mfp','<span class="text-danger">', '</span>'); ?>
 					</div>
 
-				</div>
-
-
-				<div class='row mb-4'>
-					<div class='form-group col-md-3'><label>Grade </label>
+					<div class='col-md-3'><label>Grade </label>
 						<?=form_dropdown('id_grade',$this->My_model->multi_dropdown('gr_grades',['id_grade','nom_grade']),set_value('id_grade',  $data->id_grade),"class='form-control select2' ,placeholder='Grade'")?>
 						<?php echo form_error('id_grade','<span class="text-danger">', '</span>'); ?>
 					</div>
 
-					<div class='form-group col-md-3'>
+					<div class='col-md-3'>
 						<label>Obtenu le </label>
 
 						<div class="input-group date" id="grade_obtenu_date" data-target-input="nearest">
@@ -149,7 +167,7 @@
 						<?php echo form_error('grade_obtenu_date','<span class="text-danger">', '</span>'); ?>
 					</div>
 
-					<div class='form-group col-md-3'>
+					<div class='col-md-3'>
 						<label>Date d'embauche</label>
 
 						<div class="input-group date" id="inputdate" data-target-input="nearest">
@@ -162,44 +180,42 @@
 						
 					</div>
 
-					<div class='form-group col-md-3'>
+					<div class='col-md-3'>
 						<label>Prime sante</label>
 						<?=form_input('prime_sante',set_value('prime_sante', $data->prime_sante),"class='form-control' ,placeholder='prime_sante'")?>
 						<?php echo form_error('prime_sante','<span class="text-danger">', '</span>'); ?>
 					</div>					
-				</div>
-
-				<div class='row mb-4'>					
-					<div class='form-group col-md-3'>
+								
+					<div class='col-md-3'>
 						<label>Salaire de base</label>
 						<?=form_input('salaire_base',set_value('salaire_base', $data->salaire_base),"class='form-control' ,placeholder='salaire_base'")?>
 						<?php echo form_error('salaire_base','<span class="text-danger">', '</span>'); ?>
 					</div>
 
-					<div class='form-group col-md-3'>
+					<div class='col-md-3'>
 						<label>Specialite</label>
 						<?=form_dropdown('id_specialite',$this->My_model->multi_dropdown('gr_specialites', ['id_specialite','nom_specialite']),set_value('id_specialite', $data->id_specialite),"class='form-control select2' ,placeholder='id_specialite'")?>
 						<?php echo form_error('id_specialite','<span class="text-danger">', '</span>'); ?>
 					</div>
 
-					<div class='form-group col-md-3'>
+					<div class='col-md-3'>
 						<label>Avancement de grade</label>
 						<?=form_input('ref_avancement_grade',set_value('ref_avancement_grade', $data->ref_avancement_grade),"class='form-control' ,placeholder='ref_avancement_grade'")?>
 						<?php echo form_error('ref_avancement_grade','<span class="text-danger">', '</span>'); ?>
 					</div>
 
-					<div class='form-group col-md-3'>
+					<div class='col-md-3'>
 						<label>Reference de l'affectation</label>
 						<?=form_input('ref_affectation',set_value('ref_affectation', $data->ref_affectation),"class='form-control' ,placeholder='ref_affectation'")?>
 						<?php echo form_error('ref_affectation','<span class="text-danger">', '</span>'); ?>
+					</div>				
+
+					<div class='row' style="margin:6px">
+						<?=form_submit('','Enregistrer les modifications','class="btn btn-sm btn-primary-cust"')?>
 					</div>
 				</div>
-
-				<div class='row' style="margin:6px">
-					<?=form_submit('','Enregistrer les modifications','class="btn btn-sm btn-primary-cust"')?>
-				</div>
-				</div>
 			</div>
+			<?=form_close()?>
 	    </div>
       </div>
     </section>

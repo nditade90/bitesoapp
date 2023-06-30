@@ -4,6 +4,7 @@ class Historique_situations extends Admin_Controller{
 	public function __construct(){
 		parent::__construct();
 		$this->data['page_title'] = 'Historique_situations';
+		$this->data['url_list'] = "";
 	}
 
 	public function add(){

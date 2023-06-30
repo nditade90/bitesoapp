@@ -4,6 +4,7 @@ class Situations extends Admin_Controller{
 	public function __construct(){
 	parent::__construct();
 	$this->data['page_title'] = 'Situations';
+	$this->data['url_list'] = "";
 	// $this->load->model('Situations_model');
 	}
 	public function index(){

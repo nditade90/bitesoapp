@@ -4,6 +4,7 @@ class Promotions extends Admin_Controller{
 	public function __construct(){
 	parent::__construct();
 	$this->data['page_title'] = 'Promotions';
+	$this->data['url_list'] = "";
 	// $this->load->model('Promotions_model');
 	}
 	public function index(){

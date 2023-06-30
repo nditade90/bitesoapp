@@ -83,6 +83,9 @@
         format:'YYYY-MM-DD'
   });
   
+  $('#date_naissance').datetimepicker({
+        format:'YYYY-MM-DD'
+  });
 
   var url = '<?php echo base_url();?>';
 

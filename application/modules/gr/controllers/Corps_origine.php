@@ -4,6 +4,7 @@ class Corps_origine extends Admin_Controller{
 	public function __construct(){
 	parent::__construct();
 	$this->data['page_title'] = 'Corps_origine';
+	$this->data['url_list'] = "";
 	// $this->load->model('Corps_origine_model');
 	}
 	public function index(){

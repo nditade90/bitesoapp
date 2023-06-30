@@ -4,6 +4,7 @@ class Categorie_ayant_droits extends Admin_Controller{
 	public function __construct(){
 	parent::__construct();
 	$this->data['page_title'] = 'Categorie_ayant_droits';
+	$this->data['url_list'] = "";
 	// $this->load->model('Categorie_ayant_droits_model');
 	}
 	public function index(){
