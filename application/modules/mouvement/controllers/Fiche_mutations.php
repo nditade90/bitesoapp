@@ -5,15 +5,35 @@ class Fiche_mutations extends Admin_Controller{
 	parent::__construct();
 	$this->data['page_title'] = 'Fiche_mutations';
 	$this->data['js'] = base_url()."assets/js/pages/Fiche_mutations.js";
+	$this->data['url_list'] = "";
+
 	}
 
+	public function index(){
+		$id_identification = !empty($this->session->userdata('id_identification'))?$this->session->userdata('id_identification'):$this->input->post('id_identification');
+
+		$this->load->library( 'pagination' );
+		$config[ 'base_url' ]      = base_url( 'mouvement/Fiche_mutations/index' );
+		$config[ 'per_page' ]      = 10;
+		$config[ 'num_links' ]     = 2;
+		$config[ 'total_rows' ] = $this->db->where(['id_identification'=>$id_identification])->get('mv_fiche_mutations')->num_rows();
+		$this->pagination->initialize( $config );
+		$this->data[ 'listing' ] = true;
+		$this->data[ 'datas' ]   = $this->db->where(['id_identification'=>$id_identification])->order_by( 'id_mutation', 'DESC' )->get('mv_fiche_mutations', $config[ 'per_page' ],$this->uri->segment( 4 ))->result();
+		$this->data[ 'title' ] = 'Etudes faites';
+		$this->data['sort'] = '';
+		$this->data['title_top_bar'] = $this->session->userdata('id_identification') > 0?get_db_soldat_titre($this->session->userdata('id_identification')):"";
+		$this->data['id_identification'] = $id_identification;
+		$this->render_template('/index', $this->data);
+
+	}	
 
 		public function add(){
 
-		    $id_identification = !empty($this->uri->segment(4))?$this->uri->segment(4):$this->input->post('id_identification');
+			$id_identification = !empty($this->session->userdata('id_identification'))?$this->session->userdata('id_identification'):$this->input->post('id_identification');
 			$mutation = $this->db->where(array('id_identification'=>$id_identification))->order_by('id_mutation ','DESC')->get('mv_fiche_mutations')->row();	
 
-			$this->data['mutation'] = new stdClass();
+			$this->data['mutation'] = $this->My_model->empty_one('mv_fiche_mutations');
 			if(!empty($mutation)){
 				$this->data['mutation']  = $mutation;
 			}
@@ -38,7 +58,7 @@ class Fiche_mutations extends Admin_Controller{
 				}else{
 					$this->session->set_flashdata('msg','<div class="text-danger">L\'enregistrement de la mutation  a échoué </div');
 				}
-				redirect(base_url('gr/Fiche_identification/view/'.$id_identification));
+				redirect(base_url('mouvement/Fiche_mutations/index'));
 			}
 			$this->data[ 'title' ] = 'Fiche_mutations';
 			$this->data['title_top_bar'] = $this->session->userdata('id_identification') > 0?get_db_soldat_titre($this->session->userdata('id_identification')):"";
@@ -56,8 +76,8 @@ class Fiche_mutations extends Admin_Controller{
 		}
 
 		public function edit(){
-			$id_identification = !empty($this->uri->segment(4))?$this->uri->segment(4):$this->input->post('id_identification');
-			$id = $this->uri->segment(5) > 0 ? $this->uri->segment(5) : $this->input->post('id_mutation');
+			$id_identification = !empty($this->session->userdata('id_identification'))?$this->session->userdata('id_identification'):$this->input->post('id_identification');
+			$id = $this->uri->segment(4) > 0 ? $this->uri->segment(4) : $this->input->post('id_mutation');
 			$this->data['data'] = $this->db->get_where('mv_fiche_mutations',array('id_mutation'=>$id))->row();
 
 			$this->form_validation->set_rules('id_identification', 'Id_identification', 'required|numeric');
@@ -81,7 +101,7 @@ class Fiche_mutations extends Admin_Controller{
 					}else{
 						$this->session->set_flashdata('msg','<div class="text-danger">La mis a jour de la mutation a échoué </div');
 					}
-					redirect(base_url('gr/Fiche_identification/view/'.$id_identification));
+					redirect(base_url('mouvement/Fiche_mutations/index'));
 				}
 			$this->data[ 'title' ] = 'Edit Fiche_mutations';
 			$this->data['title_top_bar'] = $this->session->userdata('id_identification') > 0?get_db_soldat_titre($this->session->userdata('id_identification')):"";
@@ -91,12 +111,12 @@ class Fiche_mutations extends Admin_Controller{
 		}
 
 		public function delete(){
-			$id_identification = $this->uri->segment(4);
-			$id = $this->uri->segment(5);
+			$id_identification = !empty($this->session->userdata('id_identification'))?$this->session->userdata('id_identification'):$this->input->post('id_identification');
+			$id = $this->uri->segment(4);
 			
 			if($this->db->delete('mv_fiche_mutations',array('id_mutation'=>$id))){
-				$this->session->set_flashdata('msg','Entry deleted succesfuly');
-				redirect(base_url('gr/Fiche_identification/view/'.$id_identification));
+				$this->session->set_flashdata('msg','<div class="text-success"> La mutation été enregistré.</div>');
+				redirect(base_url('mouvement/Fiche_mutations/index'));
 			}
 		}
 

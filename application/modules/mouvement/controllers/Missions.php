@@ -5,6 +5,7 @@ class Missions extends Admin_Controller{
 	parent::__construct();
 	$this->data['page_title'] = 'Missions';
 	// $this->load->model('Missions_model');
+	$this->data['url_list'] = "";
 	}
 
 		public function index(){
@@ -12,10 +13,10 @@ class Missions extends Admin_Controller{
 			$config[ 'base_url' ]      = base_url( 'mouvement/Missions/index' );
 			$config[ 'per_page' ]      = 10;
 			$config[ 'num_links' ]     = 2;
-			$config[ 'total_rows' ] = $this->db->get( 'mv_missions' )->num_rows();
+			$config[ 'total_rows' ] = $this->db->where(['id_identification'=>$id_identification])->get( 'mv_missions' )->num_rows();
 			$this->pagination->initialize( $config );
 			$this->data[ 'listing' ] = true;
-			$this->data[ 'datas' ]   = $this->db->order_by( 'id_mission', 'DESC' )->get( 'mv_missions', $config[ 'per_page' ],$this->uri->segment( 4 ))->result();
+			$this->data[ 'datas' ]   = $this->db->where(['id_identification'=>$id_identification])->order_by( 'id_mission', 'DESC' )->get( 'mv_missions', $config[ 'per_page' ],$this->uri->segment( 4 ))->result();
 			$this->data[ 'title' ] = 'Missions';
 			$this->data['sort'] = '';
 			$this->render_template('missions/index', $this->data);

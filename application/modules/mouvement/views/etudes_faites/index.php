@@ -18,6 +18,11 @@
 			</div>
 
 		<div class="card-body">
+            <?php 
+                if($this->session->flashdata('msg')){
+                    echo $this->session->flashdata('msg');
+                }
+            ?>
             <table class='table table-condensed table-hover table-stripped'>
                 <thead>
                     <tr>

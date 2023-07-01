@@ -12,10 +12,10 @@ class Entrees_en_service extends Admin_Controller{
 			$config[ 'base_url' ]      = base_url( 'mouvement/Entrees_en_service/index' );
 			$config[ 'per_page' ]      = 10;
 			$config[ 'num_links' ]     = 2;
-			$config[ 'total_rows' ] = $this->db->get( 'mv_entrees_en_service' )->num_rows();
+			$config[ 'total_rows' ] = $this->db->where(['id_identification'=>$id_identification])->get( 'mv_entrees_en_service' )->num_rows();
 			$this->pagination->initialize( $config );
 			$this->data[ 'listing' ] = true;
-			$this->data[ 'datas' ]   = $this->db->order_by( 'id_entree_service', 'DESC' )->get( 'mv_entrees_en_service', $config[ 'per_page' ],$this->uri->segment( 4 ))->result();
+			$this->data[ 'datas' ]   = $this->db->where(['id_identification'=>$id_identification])->order_by( 'id_entree_service', 'DESC' )->get( 'mv_entrees_en_service', $config[ 'per_page' ],$this->uri->segment( 4 ))->result();
 			$this->data[ 'title' ] = 'Entrees_en_service';
 			$this->data['sort'] = '';
 			$this->data['title_top_bar'] = $this->session->userdata('id_identification') > 0?get_db_soldat_titre($this->session->userdata('id_identification')):"";

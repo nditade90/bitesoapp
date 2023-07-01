@@ -5,13 +5,32 @@ class Renforcements extends Admin_Controller{
 		parent::__construct();
 		$this->data['page_title'] = 'Renforcements';
 		$this->data['js'] = base_url()."assets/js/pages/Renforcements.js";
-	}
+		$this->data['url_list'] = "";
 
+	}
+		public function index(){
+			$id_identification = !empty($this->session->userdata('id_identification'))?$this->session->userdata('id_identification'):$this->input->post('id_identification');
+
+			$this->load->library( 'pagination' );
+			$config[ 'base_url' ]      = base_url( 'mouvement/Renforcements/index' );
+			$config[ 'per_page' ]      = 10;
+			$config[ 'num_links' ]     = 2;
+			$config[ 'total_rows' ] = $this->db->where(['id_identification'=>$id_identification])->get('mv_renforcements')->num_rows();
+			$this->pagination->initialize( $config );
+			$this->data[ 'listing' ] = true;
+			$this->data[ 'datas' ]   = $this->db->where(['id_identification'=>$id_identification])->order_by('id_renforcement', 'DESC' )->get('mv_renforcements', $config[ 'per_page' ],$this->uri->segment( 4 ))->result();
+			$this->data[ 'title' ] = 'Dossiers penals';
+			$this->data['sort'] = '';
+			$this->data['title_top_bar'] = $this->session->userdata('id_identification') > 0?get_db_soldat_titre($this->session->userdata('id_identification')):"";
+			$this->data['id_identification'] = $id_identification;
+			$this->render_template('renforcements/index', $this->data);
+		}
 		
 
 		public function add(){
 
-		$id_identification = !empty($this->uri->segment(4))?$this->uri->segment(4):$this->input->post('id_identification');			$this->form_validation->set_rules('id_identification', 'Id_identification', 'required|numeric');
+			$id_identification = !empty($this->session->userdata('id_identification'))?$this->session->userdata('id_identification'):$this->input->post('id_identification');
+			$this->form_validation->set_rules('id_identification', 'Id_identification', 'required|numeric');
 			$this->form_validation->set_rules('id_type_renforcement', 'Id_type_renforcement', 'required|numeric');
 			$this->form_validation->set_rules('ref_renforcement', 'Ref_renforcement', 'required');
 			$this->form_validation->set_rules('titre_obtenu', 'Titre_obtenu', 'required');
@@ -28,7 +47,7 @@ class Renforcements extends Admin_Controller{
 				}else{
 					$this->session->set_flashdata('msg','<div class="text-danger">L\'enregistrement du renforcement a échoué </div');
 				}
-				redirect(base_url('gr/Fiche_identification/view/'.$id_identification));
+				redirect(base_url('mouvement/Renforcements/index'));
 
 			}
 			$this->data[ 'title' ] = 'Renforcements';
@@ -40,8 +59,9 @@ class Renforcements extends Admin_Controller{
 
 
 		public function edit(){
-			$id_identification = !empty($this->uri->segment(4))?$this->uri->segment(4):$this->input->post('id_identification');
-			$id = $this->uri->segment(5) > 0 ? $this->uri->segment(5) : $this->input->post('id_renforcement');
+			$id_identification = !empty($this->session->userdata('id_identification'))?$this->session->userdata('id_identification'):$this->input->post('id_identification');
+
+			$id = $this->uri->segment(4) > 0 ? $this->uri->segment(4) : $this->input->post('id_renforcement');
 			$this->data['data'] = $this->db->get_where('mv_renforcements',array('id_renforcement'=>$id))->row();
 
 			$this->form_validation->set_rules('id_identification', 'Id_identification', 'required|numeric');
@@ -62,7 +82,7 @@ class Renforcements extends Admin_Controller{
 					}else{
 						$this->session->set_flashdata('msg','<div class="text-danger">La mis a jour du renforcement a échoué </div');
 					}
-					redirect(base_url('gr/Fiche_identification/view/'.$id_identification));
+					redirect(base_url('mouvement/Renforcements/index'));
 
 				}
 			$this->data[ 'title' ] = 'Edit Renforcements';
@@ -73,12 +93,13 @@ class Renforcements extends Admin_Controller{
 		}
 
 		public function delete($id){
-			$id_identification = $this->uri->segment(4);
-			$id = $this->uri->segment(5);
+			$id_identification = !empty($this->session->userdata('id_identification'))?$this->session->userdata('id_identification'):$this->input->post('id_identification');
+
+			$id = $this->uri->segment(4);
 
 			if($this->db->delete('mv_renforcements',array('id_renforcement'=>$id))){
-				$this->session->set_flashdata('msg','Entry deleted succesfuly');
-				redirect(base_url('gr/Fiche_identification/view/'.$id_identification));
+				$this->session->set_flashdata('msg','<div class="text-success"> Le renforcement a été supprimé</div>');
+				redirect(base_url('mouvement/Renforcements/index'));
 
 			}
 		}
