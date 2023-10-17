@@ -1,13 +1,17 @@
 <?php if (!defined('BASEPATH')) exit('No direct script access allowed');
 class Entrees_en_service extends Admin_Controller{
 
-	public function __construct(){
-	parent::__construct();
-	$this->data['page_title'] = 'Entrees_en_service';
-	// $this->load->model('Entrees_en_service_model');
-	}
+		public function __construct(){
+
+			parent::__construct();
+			$this->data['page_title'] = 'Entrees_en_service';
+			// $this->load->model('Entrees_en_service_model');
+			$this->data['url_list'] = "";
+		}
 
 		public function index(){
+			$id_identification = !empty($this->session->userdata('id_identification'))?$this->session->userdata('id_identification'):$this->input->post('id_identification');
+
 			$this->load->library( 'pagination' );
 			$config[ 'base_url' ]      = base_url( 'mouvement/Entrees_en_service/index' );
 			$config[ 'per_page' ]      = 10;
@@ -91,7 +95,7 @@ class Entrees_en_service extends Admin_Controller{
 
 			if($this->db->delete('mv_entrees_en_service',array('id_entree_service'=>$id))){
 				$this->session->set_flashdata('msg','<div class="text-success"> L\'entrée en service a été supprimée.</div>');
-				redirect(base_url('mouvement/Entrees_en_service/add'));
+				redirect(base_url('mouvement/Entrees_en_service/index'));
 			}
 		}
 }

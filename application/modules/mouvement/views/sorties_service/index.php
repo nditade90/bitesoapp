@@ -15,7 +15,7 @@
 		<div class="card-body">
 				<input type="hidden" id="sort" name="sort" value="<?= $sort?>"> 
 		<?php echo $this->session->flashdata('msg');?>
-		<h3 class="card-title text-bold"> Sorties_service</h3><br>
+		<h3 class="card-title text-bold">Sorties du service</h3><br>
 
 <?php echo form_label('','hidden')?>
 	<table class='table table-striped table-bordered'>

@@ -1,14 +1,16 @@
 <?php if (!defined('BASEPATH')) exit('No direct script access allowed');
 class Missions extends Admin_Controller{
 
-	public function __construct(){
-	parent::__construct();
-	$this->data['page_title'] = 'Missions';
-	// $this->load->model('Missions_model');
-	$this->data['url_list'] = "";
-	}
+		public function __construct(){
+			parent::__construct();
+			$this->data['page_title'] = 'Missions';
+			// $this->load->model('Missions_model');
+			$this->data['url_list'] = "";
+		}
 
 		public function index(){
+			$id_identification = !empty($this->session->userdata('id_identification'))?$this->session->userdata('id_identification'):$this->input->post('id_identification');
+
 			$this->load->library( 'pagination' );
 			$config[ 'base_url' ]      = base_url( 'mouvement/Missions/index' );
 			$config[ 'per_page' ]      = 10;

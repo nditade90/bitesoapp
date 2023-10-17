@@ -7,14 +7,16 @@ class Sorties_service extends Admin_Controller{
 	}
 
 		public function index(){
+			$id_identification = !empty($this->session->userdata('id_identification'))?$this->session->userdata('id_identification'):$this->input->post('id_identification');
+
 			$this->load->library( 'pagination' );
 			$config[ 'base_url' ]      = base_url( 'mouvement/Sorties_service/index' );
 			$config[ 'per_page' ]      = 10;
 			$config[ 'num_links' ]     = 2;
-			$config[ 'total_rows' ] = $this->db->get( 'mv_sorties_service' )->num_rows();
+			$config[ 'total_rows' ] = $this->db->where(['id_identification'=>$id_identification])->get( 'mv_sorties_service' )->num_rows();
 			$this->pagination->initialize( $config );
 			$this->data[ 'listing' ] = true;
-			$this->data[ 'datas' ]   = $this->db->order_by( 'id_sortie', 'DESC' )->get( 'mv_sorties_service', $config[ 'per_page' ],$this->uri->segment( 4 ))->result();
+			$this->data[ 'datas' ]   = $this->db->where(['id_identification'=>$id_identification])->order_by( 'id_sortie', 'DESC' )->get( 'mv_sorties_service', $config[ 'per_page' ],$this->uri->segment( 4 ))->result();
 			$this->data[ 'title' ] = 'Sorties_service';
 			$this->data['sort'] = '';
 			$this->render_template('sorties_service/index', $this->data);
@@ -90,7 +92,7 @@ class Sorties_service extends Admin_Controller{
 
 		public function delete($id){
 			if($this->db->delete('mv_sorties_service',array('id_sortie'=>$id))){
-				$this->session->set_flashdata('msg','La sortie de service a été supprimée');
+				$this->session->set_flashdata('msg',"<div class='text-success'>La sortie de service a été supprimée</div>");
 				redirect(base_url('mouvement/Sorties_service/index'));
 			}
 		}

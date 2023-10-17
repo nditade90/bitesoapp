@@ -41,7 +41,7 @@
 				<?=form_close()?>
 				<hr />
 
-		<?=form_open('mouvement/Missions/add')?>
+			<?=form_open('mouvement/Missions/add')?>
 		
 
 
